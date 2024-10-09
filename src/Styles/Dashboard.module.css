@@ -1,0 +1,280 @@
+.dashboardContainer {
+    display: flex;
+    
+}
+
+.content {
+    flex: 1;
+    margin-left: 250px; /* Sidebar expanded width */
+    transition: margin-left 0.3s ease;
+    padding: 20px;
+}
+
+.collapsed {
+    margin-left: 80px; /* Sidebar collapsed width */
+}
+
+.firstContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.dashboardCard {
+    flex: 1 1 calc(25% - 20px); /* Four cards per row */
+    min-width: 250px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.dashboardCard:hover {
+    transform: translateY(-5px);
+}
+
+.monthlyMembers {
+    flex: 1 1 calc(100%); /* Full width for the bar graph */
+    padding: 20px;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+h3 {
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+p {
+    font-size: 2.5em;
+    margin: 10px 0;
+}
+
+small {
+    color: #777;
+}
+
+.avatars {
+    margin-top: 10px;
+}
+
+.letters {
+    margin-top: 10px;
+}
+
+.letters span {
+    display: inline-block;
+    margin: 5px;
+    font-size: 1.2em;
+    background-color: #f0f0f0;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+}
+
+.chart {
+    margin-top: 20px;
+    height: 300px;
+}
+
+@media screen and (max-width: 768px) {
+    .dashboardCard {
+        flex: 1 1 calc(50% - 20px); /* Two cards per row on medium screens */
+    }
+
+    .monthlyMembers {
+        flex: 1 1 100%; /* Full width for the bar graph */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .dashboardCard {
+        flex: 1 1 calc(100% - 20px); /* One card per row on small screens */
+    }
+}
+
+.firstRow {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    max-height: 25rem;
+}
+
+.firstDiv {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    flex-grow: 1;
+}
+
+.activeUsers,
+.userList {
+    min-width: 260px;
+    max-height: 200px;
+    background: url('../../public/World.png') no-repeat center center;
+    background-size: 95% auto;
+    background-color: rgba(0, 173, 255, 0.15);
+    color: black;
+}
+
+.chatRequest,
+.leadsEnquiry {
+    min-width: 260px;
+    max-height: 200px;
+    background: url('../../public/World.png') no-repeat center center;
+    background-size: 95% auto;
+    background-color: rgb(15, 154, 108);
+    color: white;
+}
+.chatRequest{
+    background-image: none;
+    background: var(--rn-53-themes-net-linear-alice-blue-zircon, linear-gradient(113deg, #F1F8FF 0%, #FDFEFF 100%));
+}
+.userList{
+    background-color: #00B77C;
+}
+.leadsEnquiry{
+    background-color: rgba(125, 131, 135, 0.81);
+}
+
+/* Ensuring icons follow the text color */
+.dashboardCard svg {
+    color: inherit;
+}
+/* Hide Bootstrap dropdown arrow */
+.dropdown-toggle::after {
+    display: none !important; /* Forcefully hide the dropdown arrow */
+}
+
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+*/
+
+  
+  .activeUsers h2,
+  .chatRequest h2,
+  .userList h2,
+  .leadsEnquiry h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .activeUsers p,
+  .chatRequest p,
+  .userList p,
+  .leadsEnquiry p {
+    font-size: 1rem;
+    color: #666;
+  }
+  
+  .number {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .avatars {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+    max-width: 100%;
+  }
+  
+  .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Hide avatars after 8th child */
+  .avatars > .avatar:nth-child(n+8) {
+    display: none;
+  }
+  
+  /* Remaining avatars counter */
+  .remainingAvatars {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #ccc;
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+  }
+  
+  /* Leads Section */
+  .leads {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 10px;
+    max-width: 100%;
+  }
+  
+  .leadCircle {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    color: #333;
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+  
+  /* Hide inquiries after 8th child */
+  .leads > .leadCircle:nth-child(n+6) {
+    display: none;
+  }
+  
+  /* Remaining inquiries counter */
+  .remainingLeads {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #ccc;
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+  }
+  
+  
+  
+  .activeUsers h4,
+  .userList h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #999;
+    margin-bottom: 5px;
+  }
+  .userList h2,.userList p,.userList h4{
+    color: white;
+  }
+  .chatRequest h2{
+    color: black;
+  }
+  

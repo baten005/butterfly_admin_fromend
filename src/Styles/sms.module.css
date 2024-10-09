@@ -1,0 +1,129 @@
+.content {
+    flex: 1;
+    margin-left: 250px; 
+    transition: margin-left 0.3s ease;
+    padding: 20px;
+}
+
+.collapsed {
+    margin-left: 80px; 
+}
+
+.smsContainer {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    width: 60%;
+    margin: auto;
+  }
+  
+  /* Send SMS Section */
+  .sendSmsSection, .aiInputSection {
+    background-color: #353252;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    color: white;
+  }
+  
+  .sendSmsSection h3, .aiInputSection h3 {
+    margin-bottom: 10px;
+  }
+  
+  .smsForm, .aiForm {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .inputGroup {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .inputGroup input {
+    width: 70%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+  }
+  
+  .inputGroup span {
+    color: white;
+  }
+  
+  textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+  }
+  
+  /* AI Input Section */
+  .aiForm input {
+    width: 70%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+  }
+  
+  .excelBtn {
+    background-color: #000;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .excelBtn input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
+  
+  .aiForm p {
+    margin-top: 10px;
+    color: white;
+    font-size: 14px;
+  }
+  
+  /* Group Table */
+  .groupTableContainer {
+    padding: 10px;
+  }
+  
+  .groupTable {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .groupTable th, .groupTable td {
+    padding: 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  .groupTable th {
+    background-color: #f2f2f2;
+  }
+  
+  .groupTable td {
+    background-color: #f9f9f9;
+  }
+  
+  .download {
+    color: orange;
+    cursor: pointer;
+  }
+  
+  .delete {
+    color: red;
+    cursor: pointer;
+  }
+  

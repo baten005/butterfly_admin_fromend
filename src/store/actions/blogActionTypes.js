@@ -1,0 +1,3 @@
+export const BLOGS_REQUEST = 'BLOGS_REQUEST';
+export const BLOGS_SUCCESS = 'BLOGS_SUCCESS';
+export const BLOGS_FAIL = 'BLOGS_FAIL';

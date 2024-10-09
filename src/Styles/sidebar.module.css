@@ -1,0 +1,114 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f9fa;
+  height: fit-content;
+  position: fixed;
+  transition: width 0.3s;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.nav-pills {
+  padding-left: 0;
+}
+.collapsed {
+  width: 50px;
+}
+
+.sidebarHeader {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.menu-icon {
+  margin-right: 10px;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  padding: 10px;
+}
+
+.nav-link span {
+  margin-left: 10px;
+  transition: opacity 0s;
+}
+
+.collapsed .nav-link span {
+  opacity: 0;
+  visibility: hidden;
+}
+.nav-item {
+  text-align: left;
+}
+a {
+  text-align: left;
+  color: black;
+
+  font-family: Inter;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 19.5px;
+}
+h3 {
+  text-align: left;
+  padding: 8px 16px;
+  margin-bottom: 0;
+  color: var(--rn-53-themes-net-endeavour, #005aaa);
+
+  font-family: Inter;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 26px;
+}
+hr {
+  width: 80%;
+  margin-bottom: 5px;
+  margin-top: 0;
+}
+ul {
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+span {
+  font-family: Inter;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 19.5px;
+  margin-left: 15px;
+}
+svg {
+}
+.nav-link.active {
+  background-color: #e9ecef;
+}
+span.active {
+  color: white;
+}
+
+
+.sidebar::-webkit-scrollbar {
+  width: 3px; /* Adjust the width to make the scrollbar thinner */
+  height: 10px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: transparent; /* Background of the track */
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.3); /* Color of the scrollbar thumb */
+  border-radius: 10px; /* Rounded corners for the thumb */
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.5); /* Color on hover */
+}

@@ -1,0 +1,214 @@
+.content {
+    flex: 1;
+    margin-left: 250px; 
+    transition: margin-left 0.3s ease;
+    padding: 20px;
+}
+
+.collapsed {
+    margin-left: 80px; 
+}
+
+.permissionFormContainer {
+    display: flex;
+    background-color: #333;
+    color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 250px 50px #172b85;
+    max-width: 900px;
+    margin: 30px auto;
+    border: 1px solid #555;
+    text-align: left;
+  }
+  
+  .permissionAccount {
+    margin-bottom: 50px;
+  }
+  
+  .permissionAccount label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 18px;
+  }
+  
+  .permissionAccount input {
+    width: 387px;
+    height: 25px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .createButton {
+    margin-left: 10px;
+    background: #d89c00;
+    color: #fff;
+    border: none;
+    width: 96px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 4px 0px #00000040;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    align-items: center;
+  }
+  
+  .createButton:hover {
+    background-color: #8e850b;
+  }
+  
+  .permissionsTypeContainer {
+    padding: 10px;
+    margin-right: 50px;
+  }
+  
+  .permissionsTypeContainer,
+  .permissionsTypeContainer p {
+    margin-bottom: 20px;
+    margin-top: 5px;
+    color: #000000;
+    font-weight: 700;
+    background: #d9d9d9;
+  }
+  
+  .permissionsCategory {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .permissionsCategory p {
+    font-weight: 400;
+    background: #ffffff;
+    color: #000000;
+    padding: 3px 10px;
+    border-radius: 15px;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  .permissionsCategory p:hover {
+    background-color: #ffffff;
+  }
+  
+  .permissionsCategory p.selected {
+    background: #1f72cd;
+    color: #000000;
+  }
+  
+  .updateButton {
+    font-weight: 700;
+    background: #ffba08;
+    color: #000000;
+    border: none;
+    padding: 8px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .updBtnContainer {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-around;
+    margin-right: 50px;
+  }
+  
+  .updateButton:hover {
+    background-color: #c7bd4c;
+  }
+  
+  .permissionRightDiv {
+    text-align: left;
+    background: #d9d9d9;
+    width: 377px;
+    height: 350px;
+    border-radius: 15px;
+    padding: 10px;
+  }
+  
+  .permRight {
+    margin-top: 50px;
+    text-align: center;
+    font-weight: 700;
+  }
+  
+  .permissionRightDiv .card-name {
+    color: #f0f0f0;
+    flex-grow: 1;
+    text-align: start;
+  }
+  
+  .permissionRightDiv .card-icon {
+    margin-left: 10px;
+  }
+  
+  .permissionRightDiv {
+    overflow-y: auto;
+    max-height: calc(100vh - 200px);
+    scrollbar-width: thin;
+    scrollbar-color: teal #f0f0f0;
+  }
+  
+  .permissionRightDiv::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  .permissionRightDiv::-webkit-scrollbar-track {
+    background: #f0f0f0;
+  }
+  
+  .permissionRightDiv::-webkit-scrollbar-thumb {
+    background-color: #bbc3e3;
+    border-radius: 10px;
+    border: 2px solid #f0f0f0;
+  }
+  
+  .adminList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .pCard {
+    display: flex;
+    background-color: #555;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease; /* Smooth transition for hover */
+  }
+  
+  .pCard:hover {
+    background-color: #2d2929;
+  }
+  
+  .pCard.selectedAdmin,
+  .pCard.p-card {
+    background-color: rgb(180, 17, 17);
+    color: white;
+  }
+  
+  .pCard.selectedAdmin:hover,
+  .pCard.p-card:hover {
+    background-color: rgb(180, 17, 17);
+    color: white; 
+    cursor: default; 
+    
+  }
+  
+  
+  .notificationMessage {
+    color: rgb(14, 161, 14);
+    font-weight: bold;
+    margin-top: 20px;
+    margin-left: 20px;
+  }
+  
