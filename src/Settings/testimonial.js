@@ -58,7 +58,7 @@ function Testimonial({ collapsed, testimonials, dispatch }) {
         <div className={styles.cardListContainer}>
           <div className={styles.testimonialList}>
             {testimonials.map((testimonial, index) => (
-              <><TestimonialCard key={index} {...testimonial} /><br/><br/><br/></>
+              <div key={index}><TestimonialCard key={index} {...testimonial} /><br/><br/><br/></div>
             ))}
           </div>
         </div>

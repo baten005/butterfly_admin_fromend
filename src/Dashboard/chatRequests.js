@@ -83,7 +83,7 @@ function ChatRequests({ collapsed }) {
               <div style={{...styles1.cell,justifyContent:'start'}}>
                 <img
                   style={styles1.personImage}
-                  src={"https://backend.butterfly.hurairaconsultancy.com" + profile.user_one.paths[0]}
+                  src={"https://backend.butterfly.hurairaconsultancy.com/" + profile.user_one.paths[0]}
                   alt={profile.user_one.userId}
                 />
                 <div>
@@ -135,7 +135,7 @@ function ChatRequests({ collapsed }) {
               <div style={styles1.cell}>
                 <img
                   style={styles1.personImage}
-                  src={"https://backend.butterfly.hurairaconsultancy.com" + profile.user_two.paths[0]}
+                  src={"https://backend.butterfly.hurairaconsultancy.com/" + profile.user_two.paths[0]}
                   alt={profile.user_two.userId}
                 />
                 <div>

@@ -116,6 +116,10 @@
   .groupTable td {
     background-color: #f9f9f9;
   }
+  .add {
+    color: rgb(8, 159, 114);
+    cursor: pointer;
+  }
   
   .download {
     color: orange;
