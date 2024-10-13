@@ -1,3 +1,8 @@
+*{
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter';
+}
 .App {
   text-align: center;
 }
@@ -28,6 +33,19 @@
   color: #61dafb;
 }
 
+h1, h2, h3, h4, h5, h6 ,a, p, span ,div{
+  font-size: inherit;
+  font-weight: normal;
+  margin: 0;
+  padding: 0;
+  line-height: inherit;
+  color: inherit;
+}
+.active{
+  color: var(--rn-53-themes-net-blue-ribbon, #0A56E5) !important;
+  border-radius: 30px !important;
+  background: var(--rn-53-themes-net-zircon, #e0ebff) !important;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

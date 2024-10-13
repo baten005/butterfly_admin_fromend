@@ -8,10 +8,20 @@
   height: 100vh;
   overflow-y: auto;
 }
-
+.menu_text_arrow_container{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.arrow{
+  width: 12px;
+ 
+}
 .nav-pills {
   padding-left: 0;
+  
 }
+
 .collapsed {
   width: 50px;
 }
@@ -33,10 +43,7 @@
   padding: 10px;
 }
 
-.nav-link span {
-  margin-left: 10px;
-  transition: opacity 0s;
-}
+
 
 .collapsed .nav-link span {
   opacity: 0;
@@ -77,7 +84,7 @@ ul {
   margin-right: 30px;
 }
 
-span {
+.navText{
   font-family: Inter;
   font-size: 13px;
   font-style: normal;
@@ -85,10 +92,10 @@ span {
   line-height: 19.5px;
   margin-left: 15px;
 }
-svg {
-}
-.nav-link.active {
-  background-color: #e9ecef;
+
+.sidebar .nav-link.active {
+  border-radius: 30px !important;
+background: var(--rn-53-themes-net-zircon, #EEF4FF) !important;
 }
 span.active {
   color: white;

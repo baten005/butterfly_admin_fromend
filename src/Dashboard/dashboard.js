@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { connect, useDispatch } from "react-redux";
 import Sidebar from "../Components/sidebar";
 import styles from "../Styles/Dashboard.module.css";
 import { fetchProfileData } from "../store/actions/dashboardActions";
-import { FaEllipsisH, FaPaperPlane } from "react-icons/fa";
+import { FaEllipsisH } from "react-icons/fa";
 import { Bar } from "react-chartjs-2";
 import { Dropdown } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
@@ -28,6 +28,13 @@ ChartJS.register(
   Tooltip,
   Legend
 );
+
+const formatDate = (dateString) => {
+  const options = { day: 'numeric', month: 'short', year: 'numeric' };
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-GB', options); // 'en-GB' for day-month-year format
+};
+
 
 const Dashboard = ({ collapsed, data, profile }) => {
   const dispatch = useDispatch();
@@ -90,7 +97,7 @@ const Dashboard = ({ collapsed, data, profile }) => {
     <div className={styles.dashboardContainer}>
       <Sidebar />
       <div className={`${styles.content} ${collapsed ? styles.collapsed : ""}`}>
-        <h1>Admin Dashboard</h1>
+        <h1 className={styles.maintitle}>Admin Dashboard</h1>
         <hr style={{ width: "100%" }} />
         <br />
 
@@ -100,11 +107,18 @@ const Dashboard = ({ collapsed, data, profile }) => {
             <div className={styles.firstDiv}>
               {/* Currently Active Users */}
               <div className={`${styles.dashboardCard} ${styles.activeUsers}`}>
-                <h4>LIVE VISITORS</h4>
-                <h2>Currently Active Users</h2>
-                <p className={styles.number}>7</p>
-                <p>Currently 7 visitors survey in your website including you</p>
-              </div>
+                  <div className={styles.liveIndicatorContainer}>
+                    <h4>LIVE VISITORS</h4>
+                    <div className={styles.liveIndicator}>
+                      <div className={styles.slidingBar}></div>
+                    </div>
+                  </div>
+                  <h2>Currently Active Users</h2>
+                  <p className={styles.number}>7</p>
+                  <p className={styles.cardBottomText}>
+                    Currently 7 visitors survey in your website including you
+                  </p>
+                </div>
 
               <Link
                 to="/chat-requests"
@@ -139,7 +153,7 @@ const Dashboard = ({ collapsed, data, profile }) => {
                 <h4>ALL USERS</h4>
                 <h2>User List</h2>
                 <p className={styles.number}>69</p>
-                <p>List off all the users</p>
+                <p className={styles.cardBottomText}>List of all the users</p>
               </div>
 
               {/* Leads & Enquiry */}
@@ -148,16 +162,16 @@ const Dashboard = ({ collapsed, data, profile }) => {
                 <p className={styles.number}>28</p>
                 <div className={styles.leads}>
                   {/* Display first 8 inquiries */}
-                  <span className={styles.leadCircle}>A</span>
-                  <span className={styles.leadCircle}>J</span>
-                  <span className={styles.leadCircle}>B</span>
-                  <span className={styles.leadCircle}>E</span>
-                  <span className={styles.leadCircle}>B</span>
-                  <span className={styles.leadCircle}>U</span>
-                  <span className={styles.leadCircle}>M</span>
-                  <span className={styles.leadCircle}>X</span>
+                  <div className={styles.leadCircle}>A</div>
+                  <div className={styles.leadCircle}>J</div>
+                  <div className={styles.leadCircle}>B</div>
+                  <div className={styles.leadCircle}>E</div>
+                  <div className={styles.leadCircle}>B</div>
+                  <div className={styles.leadCircle}>U</div>
+                  <div className={styles.leadCircle}>M</div>
+                  <div className={styles.leadCircle}>X</div>
                   {/* Display "+X" for remaining inquiries */}
-                  <span className={styles.remainingLeads}>+5</span>
+                  <div className={styles.remainingLeads}>+5</div>
                 </div>
               </div>
             </div>
@@ -173,53 +187,75 @@ const Dashboard = ({ collapsed, data, profile }) => {
         </div>
 
         <br />
-        <h2 style={{ textAlign: "left", fontSize: "25px" }}>Active matches</h2>
-        <p style={{ textAlign: "left", fontSize: "15px" }}>Ongoing match</p>
+        <h2 className={styles.activeMatchTitle}>Active matches</h2>
+        <p className={styles.activeMatchSubtitle}>Ongoing match</p>
         {profile.map((profile, index) => {
           return (
-            <div style={styles1.row} key={index}>
-              <div style={styles1.cell}>{profile.id}</div>
-              <div style={styles1.cell}>
-                <img
-                  style={styles1.personImage}
-                  src={"https://backend.butterfly.hurairaconsultancy.com/" + profile.image1}
-                  alt="Profile"
-                />
-                <div>
-                  <div>{profile.name}</div>
-                  <div>{profile.email}</div>
-                </div>
-              </div>
-              <div style={styles1.cell}>{profile.phone}</div>
-              <div style={styles1.cell}>{profile.date}</div>
-              <div style={styles1.cell}>
-                <span style={{ ...styles1.status(profile.status) }}>
-                  {profile.status}
-                </span>
-              </div>
-              <FaPaperPlane
-                color="red"
-                style={{ marginRight: "30px", marginLeft: "20px" }}
+            <div className={styles.row} key={index}>
+            <div className={styles.idCell}>{profile.id}</div>
+            <div className={styles.imageCell}>
+              <img
+                className={styles.personImage}
+                src={"https://backend.butterfly.hurairaconsultancy.com/" + profile.image1}
+                alt="Profile"
               />
-              <div style={styles1.cell}>
-                <img
-                  style={styles1.personImage}
-                  src={"https://backend.butterfly.hurairaconsultancy.com/" + profile.image2}
-                  alt="Match"
-                />
-                <div>
-                  <div>{profile.matchName}</div>
-                  <div>{profile.matchEmail}</div>
-                </div>
-              </div>
-              <div style={styles1.cell}>{profile.matchPhone}</div>
-              <div style={styles1.cell}>{profile.matchDate}</div>
-              <div style={styles1.cell}>
-                <span style={{ ...styles1.status(profile.matchStatus) }}>
-                  {profile.matchStatus}
-                </span>
-              </div>
-              <div style={styles1.cell}>{profile.days}</div>
+            </div>
+          
+            <div className={styles.infoCell}>
+              <div className={styles.name}>{profile.name}</div>
+              <div className={styles.email}>{profile.email}</div>
+            </div>
+          
+            <div className={styles.phoneCell}>{profile.phone}</div>
+            <div className={styles.dateCell}>{formatDate(profile.date)}</div>
+
+            <div className={styles.statusCell}>
+              <span
+                className={styles.status}
+                style={{
+                  color: getStatusColor(profile.status),
+                  background: getStatusBackground(profile.status),
+                }}
+              >
+                {formatStatus(profile.status)}
+              </span>
+            </div>
+
+            <div className={styles.iconCell}>
+              <img src={`${process.env.PUBLIC_URL}/send.svg`} style={{ cursor: "pointer" }} alt="send" />
+            </div>
+          
+            <div className={styles.imageCell}>
+              <img
+                className={styles.personImage}
+                src={"https://backend.butterfly.hurairaconsultancy.com/" + profile.image2}
+                alt="Match"
+              />
+            </div>
+            
+            <div className={styles.matchInfoCell}>
+              <div className={styles.name}>{profile.matchName}</div>
+              <div className={styles.email}>{profile.matchEmail}</div>
+            </div>
+          
+            <div className={styles.phoneCell}>{profile.matchPhone}</div>
+            <div className={styles.dateCell}>{formatDate(profile.matchDate)}</div>
+            <div className={styles.statusCell}>
+              <span
+                className={styles.status}
+                style={{
+                  color: getStatusColor(profile.matchStatus),
+                  background: getStatusBackground(profile.matchStatus),
+                }}
+              >
+                {formatStatus(profile.matchStatus)}
+              </span>
+            </div>
+
+
+          
+            <div className={styles.daysCell}>{profile.days}</div>
+
               <div style={styles1.cell1}>
                 {/* Dropdown for options */}
                 <Dropdown>
@@ -270,25 +306,6 @@ const mapStateToProps = (state) => ({
 });
 
 const styles1 = {
-  row: {
-    display: "flex",
-    padding: "10px",
-    borderBottom: "1px solid #ccc",
-    alignItems: "center",
-  },
-  cell: {
-    flex: 1,
-    padding: "5px",
-    display: "flex",
-    alignItems: "center",
-  },
-  personImage: {
-    marginRight: "10px",
-    width: "40px",
-    height: "40px",
-    borderRadius: "5px",
-    objectFit: "cover",
-  },
   cell1: {
     height: "30px",
     width: "30px",
@@ -297,26 +314,56 @@ const styles1 = {
     border: "solid 1px",
     position: "relative",
   },
-  status: (status) => ({
-    padding: "5px 10px",
-    borderRadius: "20px",
-    color: "#fff",
-    marginLeft: "0",
-    backgroundColor: userStatusColor(status),
-  }),
+
+};
+const formatStatus = (status) => {
+  // Normalize the status to lowercase for comparison
+  const normalizedStatus = status.toLowerCase();
+
+  // Map statuses to their display values
+  switch (normalizedStatus) {
+    case 'unmarried':
+      return 'Single';
+    case 'single':
+      return 'Single';
+    case 'married':
+      return 'Married';
+    case 'gold':
+      return 'Gold';
+    default:
+      return status.charAt(0).toUpperCase() + status.slice(1); // Capitalize first letter for any other statuses
+  }
 };
 
-function userStatusColor(status) {
-  switch (status) {
-    case "Single":
-      return "#36C3FF";
-    case "Married":
-      return "#5A72FF";
-    case "Gold":
-      return "#FFC107";
+const getStatusColor = (status) => {
+  const normalizedStatus = status.toLowerCase();
+  switch (normalizedStatus) {
+    case 'unmarried':
+      return 'var(--rn-53-themes-net-malachite, #17C653)';
+    case 'single':
+      return 'var(--rn-53-themes-net-malachite, #17C653)';
+    case 'married':
+      return '#FFECEC';
+    case 'gold':
+      return '#000';
     default:
-      return "#ccc";
+      return '#000'; // Default text color if none of the conditions match
   }
-}
+};
+
+const getStatusBackground = (status) => {
+  const normalizedStatus = status.toLowerCase();
+  switch (normalizedStatus) {
+    case 'unmarried':
+      return 'var(--rn-53-themes-net-hint-of-green, #DFFFEA)';
+    case 'married':
+      return '#4452FF';
+    case 'gold':
+      return '#FFDFA7';
+    default:
+      return '#fff'; // Default background color if none of the conditions match
+  }
+};
+
 
 export default connect(mapStateToProps)(Dashboard);
