@@ -9,3 +9,129 @@
     margin-left: 80px; 
 }
 
+/*----------------------------- active users----------------- */
+
+.activeMatchTitle{
+    color: var(--rn-53-themes-net-bright-gray, #3F4452);
+    font-family: Inter;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 21.6px; 
+    text-align: left;
+    padding-bottom: 5px;
+  }
+  .activeMatchSubtitle{
+    color: var(--rn-53-themes-net-boulder, #747474);
+      font-family: Inter;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 21px; 
+      text-align: left;
+  }
+.row {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .cell {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .idCell {
+    flex: 1 0 30px;
+    text-align: center;
+    color: var(--rn-53-themes-net-dusty-gray, #979797);
+    font-family: Inter;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 19.5px; 
+  }
+  
+  .imageCell {
+    flex: 1 0 50px;
+  }
+  
+  .personImage {
+    width: 50px;
+    height: 50px;
+    max-width: 50px;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+  
+  .infoCell, .matchInfoCell {
+    flex: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 20px;
+  }
+  
+  .name {
+    color: var(--rn-53-themes-net-mine-shaft, #333);
+    font-family: Inter;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 18px; 
+  }
+  
+  .email {
+    color: var(--rn-53-themes-net-dusty-gray, #979797);
+    font-family: Inter;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 19.5px; /* 150% */
+  }
+  
+  .phoneCell, .dateCell, .daysCell {
+    color: var(--rn-53-themes-net-dusty-gray, #979797);
+    word-break: break-all;
+    font-family: Inter;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 19.5px;
+    padding: 10px;
+  
+  }
+  
+  .statusCell {
+    flex: 1 0 80px;
+    text-align: center;
+  }
+  
+  .status {
+    padding: 4.25px 6px;
+    border-radius: 5px;
+    font-size: 12px;
+    display: inline-block;
+  }
+  
+  
+  .single {
+    background-color: #d4edda;
+    color: #155724;
+  }
+  
+  .married {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+  
+  .iconCell {
+    flex: 1 0 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  

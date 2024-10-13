@@ -24,7 +24,7 @@ function User({ collapsed, activeUsers, expiredUsers }) {
 
   useEffect(() => {
     dispatch(fetchUsers());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     const filteredActive = activeUsers.filter(
@@ -154,13 +154,13 @@ function User({ collapsed, activeUsers, expiredUsers }) {
             placeholder="Search Here"
             aria-label="Search Here"
             aria-describedby="basic-addon1"
-            style={{ width: "80%", padding: "15px", background: "#E3E3E3" }}
+            style={{ width: "90%", padding: "15px", background: "#E3E3E3", borderRadius: "10px" }}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
 
           <button
-            style={{ float: "inline-start" }}
+            style={{ float: "inline-start" , width: "118px", height: "43px" , background: "#3F3D56" , borderRadius : "10px", fontFamily: "Poppins",marginLeft: "5px", marginBottom: "5px"}}
             onClick={() => handleModalOpen()}
           >
             Add User
@@ -367,7 +367,7 @@ function User({ collapsed, activeUsers, expiredUsers }) {
         </Modal.Header>
         <Modal.Body >
         {/* Search bar */}
-        <a style={{color:'white',textDecoration:'none'}} href="https://user.butterfly.hurairaconsultancy.com/createCV"><button style={{marginBottom:'10px'}}>Create CV</button></a>
+        <a style={{color:'white',textDecoration:'none' }} href="https://user.butterfly.hurairaconsultancy.com/createCV"><button style={{marginBottom:'10px', width: "118px", height: "43px" , background: "#3F3D56" , borderRadius : "10px", fontFamily: "Poppins"}}>Create CV</button></a>
          <br/>
         <input
           type="text"
@@ -538,6 +538,7 @@ const styles1 = {
     textOverflow: "ellipsis",
     overflow: "hidden",
     whiteSpace: "nowrap",
+    marginLeft: "0",
   },
   td: {
     padding: "12px",
@@ -552,11 +553,7 @@ const styles1 = {
     borderRadius: "5px",
     objectFit: "cover",
   },
-  email: {
-    color: "#999",
-    fontSize: "12px",
-    marginLeft: "0",
-  },
+
   modal: {
     minWidth: '1500px', 
   },

@@ -2,12 +2,19 @@ import React, { useState, useEffect } from "react";
 import { connect, useDispatch, useSelector } from "react-redux";
 import Sidebar from "../Components/sidebar";
 import styles from "../Styles/matching.module.css";
-import { FaPlay, FaEllipsisH, FaRegPaperPlane } from "react-icons/fa";
+import { FaEllipsisH} from "react-icons/fa";
 import { fetchMatchingUsers } from "../store/actions/matchingActions";
 import { fetchProfileData } from "../store/actions/dashboardActions";
 import { Dropdown,Modal } from "react-bootstrap";
 import { ToastContainer, toast } from 'react-toastify';
 import axiosInstance from "../AxiosInstance/axiosinstance";
+
+const formatDate = (dateString) => {
+  const options = { day: 'numeric', month: 'short', year: 'numeric' };
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-GB', options); // 'en-GB' for day-month-year format
+};
+
 
 function Matching({ collapsed, profile, male, female }) {
   const dispatch = useDispatch();
@@ -111,86 +118,113 @@ function Matching({ collapsed, profile, male, female }) {
         </div>
         <br />
         <br />
-        <h2 style={{ textAlign: "left", fontSize: "25px" }}>Active matches</h2>
-        <p style={{ textAlign: "left", fontSize: "15px" }}>Ongoing match</p>
-
+        <h2 className={styles.activeMatchTitle}>Active matches</h2>
+        <p className={styles.activeMatchSubtitle}>Ongoing match</p>
         {/* Display Filtered Profile Matches */}
         {filteredProfiles.length > 0 ? (
           filteredProfiles.map((profile, index) => (
-            <div style={styles1.row} key={index}>
-              <div style={styles1.cell}>{profile.id}</div>
-              <div style={styles1.cell}>
-                <img
-                  style={styles1.personImage}
-                  src={"https://backend.butterfly.hurairaconsultancy.com/" + profile.image1}
-                />
-                <div>
-                  <div>{profile.name}</div>
-                  <div>{profile.email}</div>
-                </div>
-              </div>
-              <div style={styles1.cell}>{profile.phone}</div>
-              <div style={styles1.cell}>{profile.date}</div>
-              <div style={styles1.cell}>
-                <span style={{ ...styles1.status(profile.status) }}>
-                  {profile.status}
-                </span>
-              </div>
-              <FaRegPaperPlane
-                color="red"
-                style={{ marginRight: "30px", marginLeft: "20px" }}
+            <div className={styles.row} key={index}>
+            <div className={styles.idCell}>{profile.id}</div>
+            <div className={styles.imageCell}>
+              <img
+                className={styles.personImage}
+                src={"https://backend.butterfly.hurairaconsultancy.com/" + profile.image1}
+                alt="Profile"
               />
-              <div style={styles1.cell}>
-                <img
-                  style={styles1.personImage}
-                  src={"https://backend.butterfly.hurairaconsultancy.com/" + profile.image2}
-                />
-                <div>
-                  <div>{profile.matchName}</div>
-                  <div>{profile.matchEmail}</div>
-                </div>
-              </div>
-              <div style={styles1.cell}>{profile.matchPhone}</div>
-              <div style={styles1.cell}>{profile.matchDate}</div>
-              <div style={styles1.cell}>
-                <span style={{ ...styles1.status(profile.matchStatus) }}>
-                  {profile.matchStatus}
-                </span>
-              </div>
-              <div style={styles1.cell}>{profile.days}</div>
+            </div>
+          
+            <div className={styles.infoCell}>
+              <div className={styles.name}>{profile.name}</div>
+              <div className={styles.email}>{profile.email}</div>
+            </div>
+          
+            <div className={styles.phoneCell}>{profile.phone}</div>
+            <div className={styles.dateCell}>{formatDate(profile.date)}</div>
+
+            <div className={styles.statusCell}>
+              <span
+                className={styles.status}
+                style={{
+                  color: getStatusColor(profile.status),
+                  background: getStatusBackground(profile.status),
+                }}
+              >
+                {formatStatus(profile.status)}
+              </span>
+            </div>
+
+            <div className={styles.iconCell}>
+              <img src={`${process.env.PUBLIC_URL}/send.svg`} style={{ cursor: "pointer" }} alt="send" />
+            </div>
+          
+            <div className={styles.imageCell}>
+              <img
+                className={styles.personImage}
+                src={"https://backend.butterfly.hurairaconsultancy.com/" + profile.image2}
+                alt="Match"
+              />
+            </div>
+            
+            <div className={styles.matchInfoCell}>
+              <div className={styles.name}>{profile.matchName}</div>
+              <div className={styles.email}>{profile.matchEmail}</div>
+            </div>
+          
+            <div className={styles.phoneCell}>{profile.matchPhone}</div>
+            <div className={styles.dateCell}>{formatDate(profile.matchDate)}</div>
+            <div className={styles.statusCell}>
+              <span
+                className={styles.status}
+                style={{
+                  color: getStatusColor(profile.matchStatus),
+                  background: getStatusBackground(profile.matchStatus),
+                }}
+              >
+                {formatStatus(profile.matchStatus)}
+              </span>
+            </div>
+
+
+          
+            <div className={styles.daysCell}>{profile.days}</div>
+
               <div style={styles1.cell1}>
-              <Dropdown>
+                {/* Dropdown for options */}
+                <Dropdown>
                   <Dropdown.Toggle
                     variant="button"
                     style={{
                       padding: 0,
                       cursor: "pointer",
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      height: '40px', 
-                      width: '40px',  
-                      borderRadius: '50%', 
-                      border: '1px solid rgba(0,0,0,.4)', 
-                      backgroundColor: 'white', 
-                      margin:'-5px'
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      height: "40px",
+                      width: "40px",
+                      borderRadius: "50%",
+                      border: "1px solid rgba(0,0,0,.4)",
+                      backgroundColor: "white",
+                      margin: "-5px",
                     }}
                   >
                     <FaEllipsisH color="rgba(0,0,0,.5)" />
                   </Dropdown.Toggle>
 
-                  <Dropdown.Menu style={{left:'-80px'}}>
-                    <Dropdown.Item onClick={() => handleCancelMatch(profile.id)} style={{ color: 'red',fontSize:'18px'}}>
+                  <Dropdown.Menu style={{ left: "-80px" }}>
+                    <Dropdown.Item
+                      onClick={() => handleCancelMatch(profile.id)}
+                      style={{ color: "red", fontSize: "18px" }}
+                    >
                       Cancel Match
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
               </div>
             </div>
-          ))
-        ) : (
-          <p>No matching profiles found</p>
-        )}
+        ))
+      ) : (
+        <p>No matching profiles found</p>
+      )}
 
         <br />
         <br />
@@ -236,11 +270,17 @@ function Matching({ collapsed, profile, male, female }) {
                           <span style={styles1.email}>{user.email}</span>
                         </div>
                       </td>
-                      <td style={styles1.td}>{user.date}</td>
+                      <td className={styles.dateCell}>{formatDate(user.date)}</td>
                       <td>
-                        <span style={{ ...styles1.status(user.status) }}>
-                          {user.status}
-                        </span>
+                        <span
+                            className={styles.status}
+                            style={{
+                              color: getStatusColor(user.status),
+                              background: getStatusBackground(user.status),
+                            }}
+                          >
+                            {formatStatus(user.status)}
+                          </span>
                       </td>
                       <td style={styles1.td}>
                       <Dropdown>
@@ -317,11 +357,17 @@ function Matching({ collapsed, profile, male, female }) {
                           <span style={styles1.email}>{user.email}</span>
                         </div>
                       </td>
-                      <td style={styles1.td}>{user.date}</td>
+                      <td className={styles.dateCell} >{formatDate(user.date)}</td>
                       <td>
-                        <span style={{ ...styles1.status(user.status) }}>
-                          {user.status}
-                        </span>
+                        <span
+                            className={styles.status}
+                            style={{
+                              color: getStatusColor(user.status),
+                              background: getStatusBackground(user.status),
+                            }}
+                          >
+                            {formatStatus(user.status)}
+                          </span>
                       </td>
                       <td style={styles1.td}>
                       <Dropdown>
@@ -408,33 +454,7 @@ const styles1 = {
     justifyContent: "center",
   },
 
-  row: {
-    display: "flex",
-    padding: "10px",
-    borderBottom: "1px solid #ccc",
-    alignItems: "center",
-  },
-  cell: {
-    flex: 1,
-    padding: "5px",
-    display: "flex",
-    alignItems: "center",
-  },
-  personImage: {
-    marginRight: "10px",
-    width: "40px",
-    height: "40px",
-    borderRadius: "5px",
-    objectFit: "cover",
-  },
-  cell1: {
-    height: "30px",
-    width: "30px",
 
-    borderRadius: "60px",
-    borderColor: "rgba(0,0,0,.4)",
-    border: "solid 1px",
-  },
   table: {
     width: "60%",
     borderCollapse: "collapse",
@@ -464,15 +484,9 @@ const styles1 = {
     borderRadius: "5px",
     objectFit: "cover",
   },
-  email: {
-    color: "#999",
-    fontSize: "12px",
-    marginLeft: "0",
-  },
   nameEmailContainer: {
     display: "flex",
     flexDirection: "column",
-    width: "15rem",
     whiteSpace: "nowrap",
     overflow: "hidden",
     textOverflow: "ellipsis",
@@ -494,27 +508,58 @@ const styles1 = {
     padding: "10px",
     border: "solid 1px rgba(0,0,0,.9)",
     borderRadius: "5px",
+    width: "50%",
   },
-  status: (status) => ({
-    padding: "5px 10px",
-    borderRadius: "20px",
-    color: "#fff",
-    marginLeft: "0",
-    backgroundColor: userStatusColor(status),
-  }),
 };
 
-function userStatusColor(status) {
-  switch (status) {
-    case "Single":
-      return "#36C3FF";
-    case "Married":
-      return "#5A72FF";
-    case "Gold":
-      return "#FFC107";
+const formatStatus = (status) => {
+  // Normalize the status to lowercase for comparison
+  const normalizedStatus = status.toLowerCase();
+
+  // Map statuses to their display values
+  switch (normalizedStatus) {
+    case 'unmarried':
+      return 'Single';
+    case 'single':
+      return 'Single';
+    case 'married':
+      return 'Married';
+    case 'gold':
+      return 'Gold';
     default:
-      return "#ccc";
+      return status.charAt(0).toUpperCase() + status.slice(1); // Capitalize first letter for any other statuses
   }
-}
+};
+
+const getStatusColor = (status) => {
+  const normalizedStatus = status.toLowerCase();
+  switch (normalizedStatus) {
+    case 'unmarried':
+      return 'var(--rn-53-themes-net-malachite, #17C653)';
+    case 'single':
+      return 'var(--rn-53-themes-net-malachite, #17C653)';
+    case 'married':
+      return '#FFECEC';
+    case 'gold':
+      return '#000';
+    default:
+      return '#000'; // Default text color if none of the conditions match
+  }
+};
+
+const getStatusBackground = (status) => {
+  const normalizedStatus = status.toLowerCase();
+  switch (normalizedStatus) {
+    case 'unmarried':
+      return 'var(--rn-53-themes-net-hint-of-green, #DFFFEA)';
+    case 'married':
+      return '#4452FF';
+    case 'gold':
+      return '#FFDFA7';
+    default:
+      return '#fff'; // Default background color if none of the conditions match
+  }
+};
+
 
 export default connect(mapStateToProps)(Matching);

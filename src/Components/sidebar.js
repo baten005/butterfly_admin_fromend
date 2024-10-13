@@ -6,9 +6,7 @@ import {
   FaHome,
   FaSignOutAlt,
   FaBlog,
-  FaDrawPolygon,
   FaCog,
-  FaBox,
   FaEnvelope,
   FaEye,
   FaUser,
@@ -18,8 +16,8 @@ import { SiPolygon } from "react-icons/si";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "../Styles/sidebar.module.css";
 import { toggleSidebar } from "../store/actions/sidebarActions"; // Import action
-import SuccessList from "../Settings/successList";
 import { logout } from "../store/actions/authActions";
+
 
 const Sidebar = ({
   collapsed,
@@ -63,7 +61,7 @@ const Sidebar = ({
         <button
           className="btn btn-link"
           onClick={toggleSidebar}
-          style={{ marginLeft: collapsed ? "12px" : "10px" }}
+          style={{ marginLeft: collapsed ? "12px" : "10px" , color: "black"}}
         >
           <FaBars />
         </button>
@@ -79,7 +77,7 @@ const Sidebar = ({
               style={style1.kala}
             >
               <FaTachometerAlt className="menu-icon" />
-              {!collapsed && <span>Dashboard</span>}
+              {!collapsed && <span className={styles.navText}>Dashboard</span>}
             </Link>
           </li>
         }
@@ -91,7 +89,10 @@ const Sidebar = ({
               style={style1.kala}
             >
               <FaUser className="menu-icon" />
-              {!collapsed && <span>Users</span>}
+              <div className={styles.menu_text_arrow_container}>
+                  {!collapsed && <span className={styles.navText}>Users</span>}
+                  <img src={`${process.env.PUBLIC_URL}/right_arrow.svg`} className={styles.arrow} alt=">"></img>
+              </div>
             </Link>
           </li>
         )}
@@ -103,7 +104,10 @@ const Sidebar = ({
               style={style1.kala}
             >
               <SiPolygon className="menu-icon" />
-              {!collapsed && <span>Matching</span>}
+              <div className={styles.menu_text_arrow_container}>
+                  {!collapsed && <span className={styles.navText}>Matching</span>}
+                  <img src={`${process.env.PUBLIC_URL}/right_arrow.svg`} className={styles.arrow} alt=">"></img>
+              </div>
             </Link>
           </li>
         )}
@@ -146,7 +150,7 @@ const Sidebar = ({
               style={style1.kala}
             >
               <FaHome className="menu-icon" />
-              {!collapsed && <span>Homepage Image</span>}
+              {!collapsed && <span className={styles.navText}>Homepage Image</span>}
             </Link>
           </li>
         )}
@@ -160,7 +164,7 @@ const Sidebar = ({
               style={style1.kala}
             >
               <FaCog className="menu-icon" />
-              {!collapsed && <span>Social Links</span>}
+              {!collapsed && <span className={styles.navText}>Social Links</span>}
             </Link>
           </li>
         )}
@@ -174,7 +178,7 @@ const Sidebar = ({
               style={style1.kala}
             >
               <FaCog className="menu-icon" />
-              {!collapsed && <span>Testimonial</span>}
+              {!collapsed && <span className={styles.navText}>Testimonial</span>}
             </Link>
           </li>
         )}
@@ -188,7 +192,7 @@ const Sidebar = ({
               style={style1.kala}
             >
               <FaCog className="menu-icon" />
-              {!collapsed && <span>Success List</span>}
+              {!collapsed && <span className={styles.navText}>Success List</span>}
             </Link>
           </li>
         )}
@@ -210,7 +214,7 @@ const Sidebar = ({
               style={style1.kala}
             >
               <FaEnvelope className="menu-icon" />
-              {!collapsed && <span>Sms</span>}
+              {!collapsed && <span className={styles.navText}>Sms</span>}
             </Link>
           </li>
         )}
@@ -223,7 +227,7 @@ const Sidebar = ({
               style={style1.kala}
             >
               <FaBlog className="menu-icon" />
-              {!collapsed && <span>Blogs</span>}
+              {!collapsed && <span className={styles.navText}>Blogs</span>}
             </Link>
           </li>
         )}
@@ -245,7 +249,7 @@ const Sidebar = ({
               style={style1.kala}
             >
               <FaEye className="menu-icon" />
-              {!collapsed && <span>Report</span>}
+              {!collapsed && <span className={styles.navText}>Report</span>}
             </Link>
           </li>
         )}
@@ -257,7 +261,7 @@ const Sidebar = ({
               style={style1.kala}
             >
               <FaEye className="menu-icon" />
-              {!collapsed && <span>Admin</span>}
+              {!collapsed && <span className={styles.navText}>Admin</span>}
             </Link>
           </li>
         )}
@@ -275,7 +279,7 @@ const Sidebar = ({
           onClick={handleLogout}
         >
           <FaSignOutAlt className="menu-icon" />
-          {!collapsed && <span>Logout</span>}
+          {!collapsed && <span className={styles.navText}>Logout</span>}
         </li>
         <br />
         <br />
@@ -302,5 +306,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);
 const style1 = {
   kala: {
     color: "black",
+    display: "flex",
   },
 };
