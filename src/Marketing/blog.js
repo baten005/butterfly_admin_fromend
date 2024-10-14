@@ -47,7 +47,7 @@ function Blog({ collapsed }) {
           {blogs.map((blog) => (
             <div key={blog.id} className={styles.blogCard}>
               <img src={blog.image} alt={blog.title} className={styles.blogImage} />
-              <h3>{blog.title}</h3>
+              <h3 className={styles.title}>{blog.title}</h3>
               <p className={styles.details}>{blog.details}</p>
               <button onClick={() => handleEditBlog(blog)} className={styles.editButton}>
                 Edit
