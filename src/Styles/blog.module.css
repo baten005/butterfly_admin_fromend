@@ -18,11 +18,12 @@
   }
   
   .addButton {
-    background-color: #ff4081;
+    background-color:#322c8d;
     color: white;
     padding: 10px;
     border: none;
     cursor: pointer;
+    font-family: Poppins;
   }
   
   .blogList {
@@ -41,13 +42,18 @@
     width: 100%;
     height: auto;
   }
-  
+  .details{
+    text-align: left;
+  }
   .editButton {
-    background-color: #3f51b5;
+    background-color: #253488;
     color: white;
-    padding: 10px;
+    padding: 10px 30px;
     border: none;
     cursor: pointer;
+    border-radius: 5px;
+    font-family: Poppins;
+    margin-top: 20px;
   }
   
   /* BlogModal.module.css */
@@ -59,9 +65,8 @@
   }
   
   button {
-    margin-top: 10px;
     padding: 10px;
-    background-color: #6200ea;
+    background: #3F3D56;
     color: white;
     border: none;
     cursor: pointer;

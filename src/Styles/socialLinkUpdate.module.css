@@ -3,8 +3,31 @@
     margin-left: 250px; 
     transition: margin-left 0.3s ease;
     padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
 }
 
 .collapsed {
     margin-left: 80px; 
+}
+.Title{
+    color: #000;
+    font-family: Poppins;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 21px; /* 105% */
+    text-align: left;
+    margin-bottom: 5px;
+}
+.subTitle{
+    color: #000;
+    font-family: Poppins;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 21px; /* 175% */
+    text-align: left;
 }

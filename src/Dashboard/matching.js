@@ -111,7 +111,7 @@ function Matching({ collapsed, profile, male, female }) {
             placeholder="Search Here"
             aria-label="Search Here"
             aria-describedby="basic-addon1"
-            style={{ width: "80%", padding: "15px", background: "#E3E3E3" }}
+            style={{ width: "80%", padding: "15px", background: "#E3E3E3", borderRadius: "10px" }}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
@@ -196,15 +196,15 @@ function Matching({ collapsed, profile, male, female }) {
                     style={{
                       padding: 0,
                       cursor: "pointer",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      height: "40px",
-                      width: "40px",
-                      borderRadius: "50%",
-                      border: "1px solid rgba(0,0,0,.4)",
-                      backgroundColor: "white",
-                      margin: "-5px",
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      height: '30px', 
+                      width: '30px',  
+                      borderRadius: '50%', 
+                      border: "1px solid var(--rn-53-themes-net-silver, #C3C3C3)",
+                      backgroundColor: 'white', 
+                      margin:'-5px'
                     }}
                   >
                     <FaEllipsisH color="rgba(0,0,0,.5)" />
@@ -229,13 +229,8 @@ function Matching({ collapsed, profile, male, female }) {
         <br />
         <br />
         <div style={styles1.matchContainer}>
-          <div
-            className={{
-              ...styles1.activeMembersContainer,
-              border: "solid 1px rgba(0,0,0,.2)",
-            }}
-          >
-            <h2 style={{ textAlign: "left", fontSize: "25px" }}>Male</h2>
+          <div style={styles1.activeMembersContainer}>
+            <h2 style={{ textAlign: "left", fontSize: "25px" , marginBottom: "10px"}}>Male</h2>
             <p style={{ textAlign: "left", fontSize: "15px" }}>
               Unmatched Profile will be sorted first
             </p>
@@ -292,10 +287,10 @@ function Matching({ collapsed, profile, male, female }) {
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      height: '40px', 
-                      width: '40px',  
+                      height: '30px', 
+                      width: '30px',  
                       borderRadius: '50%', 
-                      border: '1px solid rgba(0,0,0,.4)', 
+                      border: "1px solid var(--rn-53-themes-net-silver, #C3C3C3)",
                       backgroundColor: 'white', 
                       margin:'-5px'
                     }}
@@ -321,8 +316,8 @@ function Matching({ collapsed, profile, male, female }) {
 
           <br />
 
-          <div className={styles1.activeMembersContainer}>
-            <h2 style={{ textAlign: "left", fontSize: "25px" }}>Female</h2>
+          <div style={styles1.activeMembersContainer}>
+            <h2 style={{ textAlign: "left", fontSize: "25px" , marginBottom: "10px"}}>Female</h2>
             <p style={{ textAlign: "left", fontSize: "15px" }}>
               Unmatched Profile will be sorted first
             </p>
@@ -379,10 +374,10 @@ function Matching({ collapsed, profile, male, female }) {
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      height: '40px', 
-                      width: '40px',  
+                      height: '30px', 
+                      width: '30px',  
                       borderRadius: '50%', 
-                      border: '1px solid rgba(0,0,0,.4)', 
+                      border: "1px solid var(--rn-53-themes-net-silver, #C3C3C3)",
                       backgroundColor: 'white', 
                       margin:'-5px'
                     }}
@@ -445,18 +440,17 @@ const mapStateToProps = (state) => ({
   female: state.matching.female,
 });
 const styles1 = {
-  modalUser:{
-   
-  },
+
   matchContainer: {
     display: "flex",
     textAlign: "center",
     justifyContent: "center",
+    gap: "10px",
   },
 
 
   table: {
-    width: "60%",
+    width: "100%",
     borderCollapse: "collapse",
     marginTop: "20px",
   },
@@ -473,14 +467,14 @@ const styles1 = {
   },
   td: {
     padding: "12px",
-    fontSize: "14px",
+    fontSize: "13px",
     color: "#333",
     verticalAlign: "left",
     textAlign: "left",
   },
   images: {
-    width: "40px",
-    height: "40px",
+    width: "50px",
+    height: "50px",
     borderRadius: "5px",
     objectFit: "cover",
   },
@@ -492,23 +486,21 @@ const styles1 = {
     textOverflow: "ellipsis",
   },
   name: {
-    fontSize: "14px",
-    fontWeight: "bold",
+    fontSize: "15px",
+    fontWeight: "500",
     overflow: "hidden",
     textOverflow: "ellipsis",
   },
   email: {
+    fontWeight: "500",
     color: "#999",
-    fontSize: "12px",
+    fontSize: "13px",
     marginLeft: "0",
     overflow: "hidden",
     textOverflow: "ellipsis",
   },
   activeMembersContainer: {
-    padding: "10px",
-    border: "solid 1px rgba(0,0,0,.9)",
-    borderRadius: "5px",
-    width: "50%",
+    width: "100%",
   },
 };
 

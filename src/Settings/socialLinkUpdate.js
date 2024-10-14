@@ -29,10 +29,8 @@ const styles1 = {
     gap: "20px",
     padding: "20px",
     backgroundColor: "#E9E6E8",
-    boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
     padding: "40px",
-
-    borderRadius: "15px",
+    borderRadius: "10px",
   },
   inputWrapper: {
     display: "flex",
@@ -44,16 +42,18 @@ const styles1 = {
     fontSize: "16px",
     width: "100%",
     maxWidth: "500px",
-    borderRadius: "8px",
+    borderRadius: "5px",
     border: "1px solid #C5C5C5",
   },
   button: {
-    padding: "10px 20px",
-    backgroundColor: "#4E4B5C",
+    padding: "10px 40px",
+    backgroundColor: "#3F3D56",
     color: "#fff",
     border: "none",
     cursor: "pointer",
-    borderRadius: "8px",
+    borderRadius: "5px",
+    fontFamily: "Poppins",
+    fontSize: "14px",
   },
   contactItem: {
     display: "flex",
@@ -156,8 +156,11 @@ function SocialLinkUpdate({
       <div className={`${styles.content} ${collapsed ? styles.collapsed : ""}`}>
         <div style={styles1.container}>
           <section style={styles1.section}>
-            <h1>Company Details</h1>
-
+            <div>
+              <h1 className={styles.Title}>Company Details</h1>
+              <p className={styles.subTitle}>Tap on the icon to change the field, updating blank will be remove the icon from the homepage</p>
+            </div>
+    
             <div
               style={renderContactStyle("Telephone")}
               onClick={() => handleIconClick("contactItem", "Telephone")}
@@ -257,7 +260,11 @@ function SocialLinkUpdate({
           <br />
           <br />
           <section style={styles1.section}>
-            <h1>Founder Social</h1>
+            <div>
+              <h1 className={styles.Title}>Founder Social</h1>
+              <p className={styles.subTitle}>Tap on the icon to change the social link, updating blank will be remove the icon from the homepage</p>
+            </div>
+    
             <div style={{ display: "flex" }}>
               <div
                 style={renderIconStyle("Facebook", "founderSocial")}

@@ -182,11 +182,13 @@ const style1 = {
     margin: "auto",
     padding: "20px 0px",
     textAlign: "left",
+    borderRadius: "10px",
   },
   formDiv1: {
     width: "70%",
     margin: "auto",
     position: "relative",
+    borderRadius: "10px",
   },
   formDiv2: {
     width: "100%",
@@ -195,7 +197,7 @@ const style1 = {
     padding: "20px 20px",
     textAlign: "left",
     border: "none",
-    borderRadius: "5px",
+    borderRadius: "10px",
     minHeight: "200px",
   },
   lvl: {
@@ -220,7 +222,7 @@ const style1 = {
   },
   updateButton: {
     marginTop: "10px",
-    background: "#007bff",
+    background: "#3F3D56",
     color: "white",
     border: "none",
     borderRadius: "5px",

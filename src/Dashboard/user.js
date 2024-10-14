@@ -26,6 +26,12 @@ function User({ collapsed, activeUsers, expiredUsers }) {
     dispatch(fetchUsers());
   }, [dispatch]);
 
+  const formatDate = (dateString) => {
+    const options = { day: 'numeric', month: 'short', year: 'numeric' };
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-GB', options); // 'en-GB' for day-month-year format
+  };
+  
   useEffect(() => {
     const filteredActive = activeUsers.filter(
       (user) =>
@@ -160,7 +166,7 @@ function User({ collapsed, activeUsers, expiredUsers }) {
           />
 
           <button
-            style={{ float: "inline-start" , width: "118px", height: "43px" , background: "#3F3D56" , borderRadius : "10px", fontFamily: "Poppins",marginLeft: "5px", marginBottom: "5px"}}
+            style={{ float: "inline-start" , width: "118px", height: "43px" , background: "#3F3D56" , borderRadius : "10px", fontFamily: "Poppins",marginLeft: "5px", marginBottom: "5px", marginTop: "20px"}}
             onClick={() => handleModalOpen()}
           >
             Add User
@@ -206,12 +212,18 @@ function User({ collapsed, activeUsers, expiredUsers }) {
                       <span style={styles1.email}>{user.email}</span>
                     </div>
                   </td>
-                  <td style={styles1.td}>{user.date}</td>
-                  <td>
-                    <span style={{ ...styles1.status(user.status) }}>
-                      {user.status}
-                    </span>
-                  </td>
+            <td className={styles.dateCell}>{formatDate(user.date)}</td>
+            <td className={styles.statusCell}>
+              <span
+                className={styles.status}
+                style={{
+                  color: getStatusColor(user.status),
+                  background: getStatusBackground(user.status),
+                }}
+              >
+                {formatStatus(user.status)}
+              </span>
+            </td>
                   <td style={styles1.td}>
                     <Dropdown>
                       <Dropdown.Toggle
@@ -219,15 +231,15 @@ function User({ collapsed, activeUsers, expiredUsers }) {
                         style={{
                           padding: 0,
                           cursor: "pointer",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          height: "40px",
-                          width: "40px",
-                          borderRadius: "50%",
-                          border: "1px solid rgba(0,0,0,.4)",
-                          backgroundColor: "white",
-                          margin: "-5px",
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          height: '30px', 
+                          width: '30px',  
+                          borderRadius: '50%', 
+                          border: "1px solid var(--rn-53-themes-net-silver, #C3C3C3)",
+                          backgroundColor: 'white', 
+                          margin:'-5px'
                         }}
                       >
                         <FaEllipsisH color="rgba(0,0,0,.5)" />
@@ -295,10 +307,16 @@ function User({ collapsed, activeUsers, expiredUsers }) {
                       <span style={styles1.email}>{user.email}</span>
                     </div>
                   </td>
-                  <td style={styles1.td}>{user.date}</td>
-                  <td>
-                    <span style={{ ...styles1.status(user.status) }}>
-                      {user.status}
+                  <td className={styles.dateCell}>{formatDate(user.date)}</td>
+                  <td className={styles.statusCell}>
+                    <span
+                      className={styles.status}
+                      style={{
+                        color: getStatusColor(user.status),
+                        background: getStatusBackground(user.status),
+                      }}
+                    >
+                      {formatStatus(user.status)}
                     </span>
                   </td>
                   <td style={styles1.td}>
@@ -308,15 +326,15 @@ function User({ collapsed, activeUsers, expiredUsers }) {
                         style={{
                           padding: 0,
                           cursor: "pointer",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          height: "40px",
-                          width: "40px",
-                          borderRadius: "50%",
-                          border: "1px solid rgba(0,0,0,.4)",
-                          backgroundColor: "white",
-                          margin: "-5px",
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          height: '30px', 
+                          width: '30px',  
+                          borderRadius: '50%', 
+                          border: "1px solid var(--rn-53-themes-net-silver, #C3C3C3)",
+                          backgroundColor: 'white', 
+                          margin:'-5px'
                         }}
                       >
                         <FaEllipsisH color="rgba(0,0,0,.5)" />
@@ -400,11 +418,12 @@ function User({ collapsed, activeUsers, expiredUsers }) {
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      height: '40px', 
-                      width: '40px',  
+                      height: '30px', 
+                      width: '30px',  
                       borderRadius: '50%', 
-                      border: '1px solid rgba(0,0,0,.4)', 
+                      border: "1px solid var(--rn-53-themes-net-silver, #C3C3C3)",
                       backgroundColor: 'white', 
+                      margin:'-5px'
                       
                     }}
                   >
@@ -526,30 +545,33 @@ const styles1 = {
     textOverflow: "ellipsis",
   },
   name: {
-    fontSize: "14px",
-    color: "#333",
+    fontSize: "15px",
+    color: "var(--rn-53-themes-net-mine-shaft, #333)",
     textOverflow: "ellipsis",
     overflow: "hidden",
     whiteSpace: "nowrap",
+    fontWeight: "500",
   },
   email: {
-    color: "#999",
-    fontSize: "12px",
+    color: "var(--rn-53-themes-net-dusty-gray, #979797)",
+    fontSize: "13px",
     textOverflow: "ellipsis",
     overflow: "hidden",
     whiteSpace: "nowrap",
     marginLeft: "0",
+    whiteSpace: "nowrap",
+    fontWeight: "500",
   },
   td: {
     padding: "12px",
-    fontSize: "14px",
+    fontSize: "15px",
     color: "#333",
     verticalAlign: "left",
     textAlign: "left",
   },
   images: {
-    width: "40px",
-    height: "40px",
+    width: "50px",
+    height: "50px",
     borderRadius: "5px",
     objectFit: "cover",
   },
@@ -608,26 +630,57 @@ const styles1 = {
     textAlign: 'center',
     width: '100%',
   },
-  status: (status) => ({
-    padding: "5px 10px",
-    borderRadius: "20px",
-    color: "#fff",
-    marginLeft: "0",
-    backgroundColor: userStatusColor(status),
-  }),
+
 };
 
-function userStatusColor(status) {
-  switch (status) {
-    case "Single":
-      return "#36C3FF";
-    case "Married":
-      return "#5A72FF";
-    case "Gold":
-      return "#FFC107";
+
+const formatStatus = (status) => {
+  // Normalize the status to lowercase for comparison
+  const normalizedStatus = status.toLowerCase();
+
+  // Map statuses to their display values
+  switch (normalizedStatus) {
+    case 'unmarried':
+      return 'Single';
+    case 'single':
+      return 'Single';
+    case 'married':
+      return 'Married';
+    case 'gold':
+      return 'Gold';
     default:
-      return "#ccc";
+      return status.charAt(0).toUpperCase() + status.slice(1); // Capitalize first letter for any other statuses
   }
-}
+};
+
+const getStatusColor = (status) => {
+  const normalizedStatus = status.toLowerCase();
+  switch (normalizedStatus) {
+    case 'unmarried':
+      return 'var(--rn-53-themes-net-malachite, #17C653)';
+    case 'single':
+      return 'var(--rn-53-themes-net-malachite, #17C653)';
+    case 'married':
+      return '#FFECEC';
+    case 'gold':
+      return '#000';
+    default:
+      return '#000'; // Default text color if none of the conditions match
+  }
+};
+
+const getStatusBackground = (status) => {
+  const normalizedStatus = status.toLowerCase();
+  switch (normalizedStatus) {
+    case 'unmarried':
+      return 'var(--rn-53-themes-net-hint-of-green, #DFFFEA)';
+    case 'married':
+      return '#4452FF';
+    case 'gold':
+      return '#FFDFA7';
+    default:
+      return '#fff'; // Default background color if none of the conditions match
+  }
+};
 
 export default connect(mapStateToProps)(User);

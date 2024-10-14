@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap');
+
 .content {
     flex: 1;
     margin-left: 250px; 
@@ -60,11 +62,10 @@
     border-radius: 10px;
     position: relative;
     display: flex;
-    max-width: 333px;
-    max-height: 240px;
+    max-width: 405px;
     flex-direction: column;
     justify-content: flex-start;
-    padding: 60px 36px 31px;
+    padding: 91px 36px 31px;
     border: 1px solid rgba(143, 44, 90, 1);
     text-align: left;
     flex-shrink: 0; /* Prevent the card from shrinking */
@@ -72,24 +73,34 @@
   }
   
   .testimonialText {
-    width: 100%;
+    color: var(--rn-53-themes-net-west-coast, #66451C);
+
+    /* rn53themes.net/Poppins/Regular 15 */
+    font-family: Poppins;
     font-size: 15px;
-    line-height: 23px;
-    text-align: left;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 23px; /* 153.333% */
   }
   
   .authorName {
-    margin-top: 16px;
-    width: 100%;
-    padding-top: 15px;
-    font: 700 18px/1 'Cinzel Decorative', -apple-system, Roboto, Helvetica, sans-serif;
+    color: var(--rn-53-themes-net-west-coast, #66451C);
     text-align: left;
+    font-family: "Cinzel Decorative";
+    font-size: 17.719px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 21.6px; 
+    width: 100%;
+    margin-top: 16px;
   }
   
   .authorInfo {
     font-size: 16px;
     z-index: 0;
     margin-top: 16px;
+    text-align: left;
+    width: 100%;
   }
   
   .box1, .box2, .box3 {
@@ -129,6 +140,31 @@
     border-radius: 5px;
   }
   
+.box1, .box2, .box3 {
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  z-index: 10;
+}
+
+.box1 {
+  left: 17px;
+  top: 34px;
+  border: 2px solid var(--rn-53-themes-net-green, #FFC600);
+}
+
+.box2 {
+  left: 31px;
+  top: -67px;
+  border: 2px solid var(--rn-53-themes-net-geraldine, #FD8686);
+}
+
+.box3 {
+  left: 142px;
+  top: -55px;
+  border: 2px solid var(--rn-53-themes-net-rio-grande, #BDCCFF);
+}
+
   @media (max-width: 1024px) {
     .testimonialSection {
       zoom: 70%;

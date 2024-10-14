@@ -264,15 +264,15 @@ const Dashboard = ({ collapsed, data, profile }) => {
                     style={{
                       padding: 0,
                       cursor: "pointer",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      height: "40px",
-                      width: "40px",
-                      borderRadius: "50%",
-                      border: "1px solid rgba(0,0,0,.4)",
-                      backgroundColor: "white",
-                      margin: "-5px",
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      height: '30px', 
+                      width: '30px',  
+                      borderRadius: '50%', 
+                      border: "1px solid var(--rn-53-themes-net-silver, #C3C3C3)",
+                      backgroundColor: 'white', 
+                      margin:'-5px'
                     }}
                   >
                     <FaEllipsisH color="rgba(0,0,0,.5)" />
@@ -310,8 +310,7 @@ const styles1 = {
     height: "30px",
     width: "30px",
     borderRadius: "60px",
-    borderColor: "rgba(0,0,0,.4)",
-    border: "solid 1px",
+
     position: "relative",
   },
 

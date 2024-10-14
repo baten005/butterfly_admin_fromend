@@ -46,6 +46,11 @@ h1, h2, h3, h4, h5, h6 ,a, p, span ,div{
   border-radius: 30px !important;
   background: var(--rn-53-themes-net-zircon, #e0ebff) !important;
 }
+
+.dropdown-toggle::after {
+  display: none !important;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

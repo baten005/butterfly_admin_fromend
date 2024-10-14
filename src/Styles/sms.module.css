@@ -119,15 +119,18 @@
   .add {
     color: rgb(8, 159, 114);
     cursor: pointer;
+    margin-right: 20px;
   }
   
   .download {
     color: orange;
     cursor: pointer;
+    margin-right: 20px;
   }
   
   .delete {
     color: red;
     cursor: pointer;
+    margin-right: 20px;
   }
   

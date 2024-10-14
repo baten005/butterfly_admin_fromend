@@ -141,6 +141,7 @@ const TestimonialModal = ({ isOpen, onClose, existingTestimonial }) => {
         <form onSubmit={handleSubmit}>
           {!isCropping &&
             <>
+              <label style={{textAlign: "left"}}>Details:</label>
               <input
                 type="text"
                 name="content"
@@ -149,6 +150,7 @@ const TestimonialModal = ({ isOpen, onClose, existingTestimonial }) => {
                 placeholder="Content"
                 required
               />
+              <label style={{textAlign: "left"}}>Name</label>
               <input
                 type="text"
                 name="name"
@@ -157,6 +159,7 @@ const TestimonialModal = ({ isOpen, onClose, existingTestimonial }) => {
                 placeholder="Name"
                 required
               />
+              <label style={{textAlign: "left"}}>Designation:</label>
               <input
                 type="text"
                 name="designation"
@@ -165,6 +168,7 @@ const TestimonialModal = ({ isOpen, onClose, existingTestimonial }) => {
                 placeholder="Designation"
                 required
               />
+              <label style={{textAlign: "left"}}>Company:</label>
               <input
                 type="text"
                 name="company"

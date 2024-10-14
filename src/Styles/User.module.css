@@ -16,3 +16,27 @@
   border-radius: 5px;
 
 }
+
+
+.dateCell {
+  color: var(--rn-53-themes-net-dusty-gray, #979797);
+  word-break: break-all;
+  font-family: Inter;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 19.5px;
+  padding: 10px;
+  text-align: left;
+}
+.statusCell {
+  flex: 1 0 80px;
+  text-align: center;
+}
+
+.status {
+  padding: 4.25px 6px;
+  border-radius: 5px;
+  font-size: 12px;
+  display: inline-block;
+}
