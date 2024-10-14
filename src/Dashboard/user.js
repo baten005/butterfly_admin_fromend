@@ -16,10 +16,10 @@ function User({ collapsed, activeUsers, expiredUsers }) {
   const [showModal, setShowModal] = useState(false);
   const [showModal1, setShowModal1] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
-  const [CV,setCV]=useState();
+  const [CV, setCV] = useState();
   const [deleteId, setDeleteId] = useState();
   const [cvs, setCvs] = useState([]);
-  const [loading,setLoading]=useState(false)
+  const [loading, setLoading] = useState(false)
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -31,23 +31,24 @@ function User({ collapsed, activeUsers, expiredUsers }) {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-GB', options); // 'en-GB' for day-month-year format
   };
-  
-  useEffect(() => {
-    const filteredActive = activeUsers.filter(
-      (user) =>
-        user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        user.email.toLowerCase().includes(searchQuery.toLowerCase())
-    );
 
-    const filteredExpired = expiredUsers.filter(
+  useEffect(() => {
+    const filteredActive = activeUsers.length > 0 ? activeUsers.filter(
       (user) =>
-        user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        user.email.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+        (user.name && user.name.toLowerCase().includes(searchQuery.toLowerCase())) ||
+        (user.email && user.email.toLowerCase().includes(searchQuery.toLowerCase()))
+    ) : [];
+
+    const filteredExpired = expiredUsers.length > 0 ? expiredUsers.filter(
+      (user) =>
+        (user.name && user.name.toLowerCase().includes(searchQuery.toLowerCase())) ||
+        (user.email && user.email.toLowerCase().includes(searchQuery.toLowerCase()))
+    ) : [];
 
     setFilteredActiveUsers(filteredActive);
     setFilteredExpiredUsers(filteredExpired);
   }, [searchQuery, activeUsers, expiredUsers]);
+
 
   const handleUserExpire = async (id) => {
     try {
@@ -103,7 +104,7 @@ function User({ collapsed, activeUsers, expiredUsers }) {
   const fetchCvs = async () => {
     try {
       const response = await axiosInstance.get(`/getCvs`);
-      console.log(response,"this is cvs");
+      console.log(response, "this is cvs");
       setCvs(response.data);
       setShowModal1(true);
     } catch (error) {
@@ -116,12 +117,12 @@ function User({ collapsed, activeUsers, expiredUsers }) {
       (cv.fullname && cv.fullname.toLowerCase().includes(searchQuery1.toLowerCase())) ||
       (cv.phoneNumber && cv.phoneNumber.includes(searchQuery1))
   );
-  
+
   const handleCreateUser1 = async (user) => {
 
     setCV(user);
     setShowModal2(true);
-    
+
   }
   const handleCreateUser = async (user) => {
     try {
@@ -141,12 +142,12 @@ function User({ collapsed, activeUsers, expiredUsers }) {
       setShowModal2(false);
     } catch (error) {
       toast.error("Error occurred while Creating user.");
-    }finally{
+    } finally {
       setLoading(false)
     }
   };
-  
-  console.log(filteredActiveUsers, expiredUsers, "bal bal bal");
+
+  console.log(activeUsers, expiredUsers, "bal bal bal");
   return (
     <>
       <Sidebar />
@@ -166,7 +167,7 @@ function User({ collapsed, activeUsers, expiredUsers }) {
           />
 
           <button
-            style={{ float: "inline-start" , width: "118px", height: "43px" , background: "#3F3D56" , borderRadius : "10px", fontFamily: "Poppins",marginLeft: "5px", marginBottom: "5px", marginTop: "20px"}}
+            style={{ float: "inline-start", width: "118px", height: "43px", background: "#3F3D56", borderRadius: "10px", fontFamily: "Poppins", marginLeft: "5px", marginBottom: "5px", marginTop: "20px" }}
             onClick={() => handleModalOpen()}
           >
             Add User
@@ -212,18 +213,18 @@ function User({ collapsed, activeUsers, expiredUsers }) {
                       <span style={styles1.email}>{user.email}</span>
                     </div>
                   </td>
-            <td className={styles.dateCell}>{formatDate(user.date)}</td>
-            <td className={styles.statusCell}>
-              <span
-                className={styles.status}
-                style={{
-                  color: getStatusColor(user.status),
-                  background: getStatusBackground(user.status),
-                }}
-              >
-                {formatStatus(user.status)}
-              </span>
-            </td>
+                  <td className={styles.dateCell}>{formatDate(user.date)}</td>
+                  <td className={styles.statusCell}>
+                    <span
+                      className={styles.status}
+                      style={{
+                        color: getStatusColor(user.status),
+                        background: getStatusBackground(user.status),
+                      }}
+                    >
+                      {formatStatus(user.status)}
+                    </span>
+                  </td>
                   <td style={styles1.td}>
                     <Dropdown>
                       <Dropdown.Toggle
@@ -234,12 +235,12 @@ function User({ collapsed, activeUsers, expiredUsers }) {
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
-                          height: '30px', 
-                          width: '30px',  
-                          borderRadius: '50%', 
+                          height: '30px',
+                          width: '30px',
+                          borderRadius: '50%',
                           border: "1px solid var(--rn-53-themes-net-silver, #C3C3C3)",
-                          backgroundColor: 'white', 
-                          margin:'-5px'
+                          backgroundColor: 'white',
+                          margin: '-5px'
                         }}
                       >
                         <FaEllipsisH color="rgba(0,0,0,.5)" />
@@ -329,12 +330,12 @@ function User({ collapsed, activeUsers, expiredUsers }) {
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
-                          height: '30px', 
-                          width: '30px',  
-                          borderRadius: '50%', 
+                          height: '30px',
+                          width: '30px',
+                          borderRadius: '50%',
                           border: "1px solid var(--rn-53-themes-net-silver, #C3C3C3)",
-                          backgroundColor: 'white', 
-                          margin:'-5px'
+                          backgroundColor: 'white',
+                          margin: '-5px'
                         }}
                       >
                         <FaEllipsisH color="rgba(0,0,0,.5)" />
@@ -379,134 +380,134 @@ function User({ collapsed, activeUsers, expiredUsers }) {
           <button onClick={confirmDelete}>Okay</button>
         </Modal.Footer>
       </Modal>
-      <Modal show={showModal1} onHide={() => setShowModal1(false)} style={{position:'absolute'}}>
+      <Modal show={showModal1} onHide={() => setShowModal1(false)} style={{ position: 'absolute' }}>
         <Modal.Header closeButton>
           <Modal.Title>Add User</Modal.Title>
         </Modal.Header>
         <Modal.Body >
-        {/* Search bar */}
-        <a style={{color:'white',textDecoration:'none' }} href="https://user.butterfly.hurairaconsultancy.com/createCV"><button style={{marginBottom:'10px', width: "118px", height: "43px" , background: "#3F3D56" , borderRadius : "10px", fontFamily: "Poppins"}}>Create CV</button></a>
-         <br/>
-        <input
-          type="text"
-          className="form-control mb-4"
-          placeholder="Search by name or phone number"
-          value={searchQuery1}
-          onChange={(e) => setSearchQuery1(e.target.value)}
-          style={styles1.searchInput}
-        />
+          {/* Search bar */}
+          <a style={{ color: 'white', textDecoration: 'none' }} href="https://user.butterfly.hurairaconsultancy.com/createCV"><button style={{ marginBottom: '10px', width: "118px", height: "43px", background: "#3F3D56", borderRadius: "10px", fontFamily: "Poppins" }}>Create CV</button></a>
+          <br />
+          <input
+            type="text"
+            className="form-control mb-4"
+            placeholder="Search by name or phone number"
+            value={searchQuery1}
+            onChange={(e) => setSearchQuery1(e.target.value)}
+            style={styles1.searchInput}
+          />
 
-        <div style={{...styles1.cvContainer,overflow: 'auto', maxHeight: '70vh' }}>
-          {filteredCVs.length > 0 ? (
-            filteredCVs.map((cv, index) => (
-              <div key={index} style={styles1.cvCard}>
-                <img
-                  src={`https://backend.butterfly.hurairaconsultancy.com/${cv.path}`}
-                  alt={`${cv.fullname}'s profile`}
-                  style={styles1.profileImage}
-                />
-                <div style={styles1.cvDetails}>
-                  <p style={styles1.cvName}>{cv.fullname}</p>
-                  <p style={styles1.cvPhone}>{cv.phoneNumber}</p>
+          <div style={{ ...styles1.cvContainer, overflow: 'auto', maxHeight: '70vh' }}>
+            {filteredCVs.length > 0 ? (
+              filteredCVs.map((cv, index) => (
+                <div key={index} style={styles1.cvCard}>
+                  <img
+                    src={`https://backend.butterfly.hurairaconsultancy.com/${cv.path}`}
+                    alt={`${cv.fullname}'s profile`}
+                    style={styles1.profileImage}
+                  />
+                  <div style={styles1.cvDetails}>
+                    <p style={styles1.cvName}>{cv.fullname}</p>
+                    <p style={styles1.cvPhone}>{cv.phoneNumber}</p>
+                  </div>
+                  <Dropdown>
+                    <Dropdown.Toggle
+                      variant="button"
+                      style={{
+                        padding: 0,
+                        cursor: "pointer",
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        height: '30px',
+                        width: '30px',
+                        borderRadius: '50%',
+                        border: "1px solid var(--rn-53-themes-net-silver, #C3C3C3)",
+                        backgroundColor: 'white',
+                        margin: '-5px'
+
+                      }}
+                    >
+                      <FaEllipsisH color="rgba(0,0,0,.5)" />
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu style={{ left: '-80px' }}>
+                      <Dropdown.Item onClick={() => handleCreateUser1(cv)} style={{ color: 'green', fontSize: '18px' }}>
+                        Create User
+                      </Dropdown.Item>
+                      <Dropdown.Item
+                        onClick={() => handleUserDelete(cv.id)}
+                        style={{ color: "red", fontSize: "18px" }}
+                      >
+                        Delete User
+                      </Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
                 </div>
-                <Dropdown>
-                  <Dropdown.Toggle
-                    variant="button"
-                    style={{
-                      padding: 0,
-                      cursor: "pointer",
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      height: '30px', 
-                      width: '30px',  
-                      borderRadius: '50%', 
-                      border: "1px solid var(--rn-53-themes-net-silver, #C3C3C3)",
-                      backgroundColor: 'white', 
-                      margin:'-5px'
-                      
-                    }}
-                  >
-                    <FaEllipsisH color="rgba(0,0,0,.5)" />
-                  </Dropdown.Toggle>
-
-                  <Dropdown.Menu style={{left:'-80px'}}>
-                    <Dropdown.Item onClick={() => handleCreateUser1(cv)} style={{ color: 'green',fontSize:'18px'}}>
-                      Create User
-                    </Dropdown.Item>
-                    <Dropdown.Item
-                          onClick={() => handleUserDelete(cv.id)}
-                          style={{ color: "red", fontSize: "18px" }}
-                        >
-                          Delete User
-                        </Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
-              </div>
-            ))
-          ) : (
-            <div style={styles1.noCvs}>No CVs available</div>
-          )}
-        </div>
-      </Modal.Body>
+              ))
+            ) : (
+              <div style={styles1.noCvs}>No CVs available</div>
+            )}
+          </div>
+        </Modal.Body>
       </Modal>
       <Modal show={showModal2} onHide={() => setShowModal2(false)}>
-  <Modal.Header closeButton>
-    <Modal.Title>Confirm User Creation</Modal.Title>
-  </Modal.Header>
-  <Modal.Body>
-    <input
-      type="tel"
-      placeholder="Phone Number"
-      required
-      value={CV?.phoneNumber || ""}
-      onChange={(e) => setCV({ ...CV, phoneNumber: e.target.value })}
-      style={{
-        width: "100%",
-        padding: "12px 20px",
-        margin: "8px 0",
-        display: "inline-block",
-        border: "1px solid #ccc",
-        borderRadius: "4px",
-        boxSizing: "border-box",
-        fontSize: "16px",
-        background: "#f9f9f9",
-        transition: "border 0.3s ease",
-      }}
-      onFocus={(e) => (e.target.style.border = "1px solid #555")}
-      onBlur={(e) => (e.target.style.border = "1px solid #ccc")}
-    />
-  </Modal.Body>
-  <Modal.Footer>
-    <button
-      onClick={() => setShowModal2(false)}
-      style={{
-        padding: "10px 20px",
-        backgroundColor: "#f44336",
-        color: "white",
-        border: "none",
-        borderRadius: "5px",
-        cursor: "pointer",
-        fontSize: "16px",
-      }}
-    >
-      Cancel
-    </button>
-    <button
-      onClick={() => handleCreateUser(CV)}
-      style={{
-        padding: "10px 20px",
-        backgroundColor: "#4CAF50",
-        color: "white",
-        border: "none",
-        borderRadius: "5px",
-        cursor: "pointer",
-        fontSize: "16px",
-      }}
-    >{loading?'loading...':'Okay'}
-    </button>
-  </Modal.Footer>
-</Modal>
+        <Modal.Header closeButton>
+          <Modal.Title>Confirm User Creation</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <input
+            type="tel"
+            placeholder="Phone Number"
+            required
+            value={CV?.phoneNumber || ""}
+            onChange={(e) => setCV({ ...CV, phoneNumber: e.target.value })}
+            style={{
+              width: "100%",
+              padding: "12px 20px",
+              margin: "8px 0",
+              display: "inline-block",
+              border: "1px solid #ccc",
+              borderRadius: "4px",
+              boxSizing: "border-box",
+              fontSize: "16px",
+              background: "#f9f9f9",
+              transition: "border 0.3s ease",
+            }}
+            onFocus={(e) => (e.target.style.border = "1px solid #555")}
+            onBlur={(e) => (e.target.style.border = "1px solid #ccc")}
+          />
+        </Modal.Body>
+        <Modal.Footer>
+          <button
+            onClick={() => setShowModal2(false)}
+            style={{
+              padding: "10px 20px",
+              backgroundColor: "#f44336",
+              color: "white",
+              border: "none",
+              borderRadius: "5px",
+              cursor: "pointer",
+              fontSize: "16px",
+            }}
+          >
+            Cancel
+          </button>
+          <button
+            onClick={() => handleCreateUser(CV)}
+            style={{
+              padding: "10px 20px",
+              backgroundColor: "#4CAF50",
+              color: "white",
+              border: "none",
+              borderRadius: "5px",
+              cursor: "pointer",
+              fontSize: "16px",
+            }}
+          >{loading ? 'loading...' : 'Okay'}
+          </button>
+        </Modal.Footer>
+      </Modal>
 
       <ToastContainer />
     </>
@@ -577,7 +578,7 @@ const styles1 = {
   },
 
   modal: {
-    minWidth: '1500px', 
+    minWidth: '1500px',
   },
   searchContainer: {
     display: 'flex',
@@ -605,7 +606,7 @@ const styles1 = {
     flexWrap: 'nowrap',
   },
   profileImage: {
-    width: '60px', 
+    width: '60px',
     height: '60px',
     borderRadius: '50%',
     marginRight: '15px',

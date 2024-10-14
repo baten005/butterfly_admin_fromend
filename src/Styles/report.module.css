@@ -1,0 +1,72 @@
+.content {
+    flex: 1;
+    margin-left: 250px; 
+    transition: margin-left 0.3s ease;
+    padding: 20px;
+}
+
+.collapsed {
+    margin-left: 80px; 
+}
+
+.reportContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-gap: 20px;
+    margin-top: 20px;
+  }
+  
+  .reportBox {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+  }
+  
+  .reportBox:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .reportBox h2 {
+    margin-top: 0;
+    color: #333;
+    font-size: 1.5rem;
+  }
+  
+  .reportBox p {
+    color: #555;
+    margin: 10px 0;
+  }
+  
+  .reportBox strong {
+    color: #000;
+  }
+
+  .avatar img {
+    width: 40px; /* Adjust size as needed */
+    height: 40px; /* Adjust size as needed */
+    border-radius: 50%; /* Makes the image round */
+    object-fit: cover; /* Ensures the image covers the container */
+}
+
+.uploadedImage {
+    width: 100px; /* Adjust size as needed */
+    height: 100px; /* Adjust size as needed */
+    object-fit: cover; /* Ensures the image covers the container */
+    margin: 5px; /* Space between images */
+    cursor: pointer; /* Change cursor to pointer for better UX */
+}
+
+.imageGallery {
+    display: flex; /* Align images in a row */
+    flex-wrap: wrap; /* Allow wrapping to the next line if needed */
+    gap: 10px; /* Space between images */
+}
+
+.fullSizeImage {
+    width: 100%; /* Make the image full width in the modal */
+    height: auto; /* Keep aspect ratio */
+}
