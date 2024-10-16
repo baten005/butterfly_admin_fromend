@@ -43,7 +43,8 @@ function ChatRequests({ collapsed }) {
       });
       console.log("dekhajak", response);
       if (response.status === 200 && response.data) {
-         toast.success(response.data.message)
+         toast.success(response.data.message);
+         getChatReqs();
       } else {
         console.log("error");
         toast.success(response.data.message)
@@ -61,7 +62,8 @@ function ChatRequests({ collapsed }) {
       });
       console.log("dekhajak", response);
       if (response.status === 200 && response.data) {
-        toast.success(response.data.message)
+        toast.success(response.data.message);
+        getChatReqs();
       } else {
         console.log("error");
         toast.success(response.data.message)
@@ -71,6 +73,7 @@ function ChatRequests({ collapsed }) {
       toast.error('Failed to Update')
     }
   };
+  console.log(profileUsers)
 
   return (
     <>
@@ -78,7 +81,7 @@ function ChatRequests({ collapsed }) {
       <div className={`${styles.content} ${collapsed ? styles.collapsed : ""}`}>
         {profileUsers.length > 0 ? (
           profileUsers.map((profile, index) => (
-            <div style={styles1.row} key={index}>
+            <div style={{...styles1.row,background:profileUsers1[index].chatting_status=='1'?'rgba(205, 254, 194, 1)':'rgba(254, 121, 104, .5)'}} key={index}>
               {/* User One Details */}
               <div style={{...styles1.cell,justifyContent:'start'}}>
                 <img
@@ -87,9 +90,9 @@ function ChatRequests({ collapsed }) {
                   alt={profile.user_one.userId}
                 />
                 <div>
-                  <div>{profile.user_one.userId}</div>{" "}
+                  <div>{profile.user_one.name}</div>{" "}
                   {/* Assuming userId is the name for display */}
-                  <div>{profile.user_one.phone}</div>{" "}
+                  <div>{profile.user_one.number}</div>{" "}
                   {/* Replace with actual phone number field */}
                 </div>
               </div>
@@ -139,9 +142,9 @@ function ChatRequests({ collapsed }) {
                   alt={profile.user_two.userId}
                 />
                 <div>
-                  <div>{profile.user_two.userId}</div>{" "}
+                  <div>{profile.user_two.name}</div>{" "}
                   {/* Assuming userId is the name for display */}
-                  <div>{profile.user_two.phone}</div>{" "}
+                  <div>{profile.user_two.number}</div>{" "}
                   {/* Replace with actual phone number field */}
                 </div>
               </div>
