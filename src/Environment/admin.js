@@ -85,8 +85,8 @@ const Admin = ({
       <div className={`${styles.content} ${collapsed ? styles.collapsed : ''}`}>
         <div className={styles.permissionFormContainer}>
           <div className={styles.permissionLeftDiv}>
+                          <label>Create Account</label>
             <div className={styles.permissionAccount}>
-              <label>Create Account</label>
               <input
                 type="text"
                 placeholder="Username"

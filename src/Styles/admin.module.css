@@ -16,22 +16,26 @@
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0px 4px 250px 50px #172b85;
-    max-width: 900px;
+    width: fit-content;
     margin: 30px auto;
     border: 1px solid #555;
     text-align: left;
+    gap: 20px;
   }
-  
-  .permissionAccount {
-    margin-bottom: 50px;
-  }
-  
-  .permissionAccount label {
+    
+  .permissionLeftDiv label {
     display: block;
     margin-bottom: 10px;
     font-size: 18px;
   }
   
+  
+  .permissionAccount {
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+  }
+
   .permissionAccount input {
     width: 387px;
     height: 25px;

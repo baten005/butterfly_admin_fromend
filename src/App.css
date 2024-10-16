@@ -64,27 +64,3 @@ h1, h2, h3, h4, h5, h6 ,a, p, span ,div{
     zoom: 80%;
   }
 }
-
-@media (max-width: 1070px) {
-  body {
-    zoom: 70%;
-  }
-}
-
-@media (max-width: 870px) {
-  body {
-    zoom: 60%;
-  }
-}
-
-@media (max-width: 670px) {
-  body {
-    zoom: 50%;
-  }
-}
-
-@media (max-width: 470px) {
-  body {
-    zoom: 40%;
-  }
-}
