@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { connect, useDispatch } from "react-redux";
 import Sidebar from "../Components/sidebar";
 import styles from "../Styles/Dashboard.module.css";
-import { fetchProfileData,fetchUserJoinStats } from "../store/actions/dashboardActions";
+import { fetchProfileData, fetchUserJoinStats } from "../store/actions/dashboardActions";
 import { FaEllipsisH } from "react-icons/fa";
 import { Bar } from "react-chartjs-2";
 import { Dropdown } from "react-bootstrap";
@@ -71,7 +71,7 @@ const Dashboard = ({ collapsed, data, profile }) => {
   const fetchTextReq = async () => {
     try {
       const response = await axiosInstance.get(`/chatReqAvatars`);
-      //console.log(response, 'baler response dese');
+      console.log(response, 'baler response dese');
       if (response.status === 200 && response.data) {
         //console.log(response.data);
         setAvatar(response.data.finalResults);
@@ -118,7 +118,7 @@ const Dashboard = ({ collapsed, data, profile }) => {
       },
     },
   };
-  //console.log("theese are avatar", avatar);
+  console.log("theese are avatar", avatar);
   return (
     <div className={styles.dashboardContainer}>
       <Sidebar />
@@ -159,15 +159,20 @@ const Dashboard = ({ collapsed, data, profile }) => {
                   <p className={styles.number}>{avatar.length}</p>
                   <div className={styles.avatars}>
                     {/* Display first 8 avatars */}
-                    {avatar.map((profile, index) => (
-                      <div key={index}>
-                        <img
-                          src={`https://backend.butterfly.hurairaconsultancy.com/${profile.paths[0]}`}
-                          alt="User 1"
-                          className={styles.avatar}
-                        />
-                      </div>
-                    ))}
+                    {avatar && avatar.length > 0 ? (
+                      avatar.map((profile, index) => (
+                        <div key={index}>
+                          <img
+                            src={`https://backend.butterfly.hurairaconsultancy.com/${profile.paths[0]}`}
+                            alt={`User ${index + 1}`} // Updated alt text for better accessibility
+                            className={styles.avatar}
+                          />
+                        </div>
+                      ))
+                    ) : (
+                      <div></div> // Fallback content when there are no avatars
+                    )}
+
                     {/* Display "+X" for remaining avatars */}
                     <div className={styles.remainingAvatars}>+1</div>
                   </div>
@@ -205,7 +210,7 @@ const Dashboard = ({ collapsed, data, profile }) => {
 
 
                     {/* Display "+X" for remaining inquiries */}
-                    {lead>8?<div className={styles.remainingLeads}>{lead-8}</div>:''}
+                    {lead > 8 ? <div className={styles.remainingLeads}>{lead - 8}</div> : ''}
                   </div>
                 </div>
               </Link>

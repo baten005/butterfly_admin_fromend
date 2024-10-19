@@ -147,7 +147,7 @@ function User({ collapsed, activeUsers, expiredUsers }) {
     }
   };
 
-  //console.log(filteredActiveUsers,activeUsers, filteredExpiredUsers,expiredUsers, "bal bal bal");
+  console.log(filteredActiveUsers,activeUsers, filteredExpiredUsers,expiredUsers, "bal bal bal");
   return (
     <>
       <Sidebar />

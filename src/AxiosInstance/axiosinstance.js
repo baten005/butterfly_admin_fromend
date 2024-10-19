@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:3004/',
-  //baseURL: 'https://backend.butterfly.hurairaconsultancy.com/',
+  //baseURL: 'http://localhost:3004/',
+  baseURL: 'https://backend.butterfly.hurairaconsultancy.com/',
   withCredentials: true, 
 });
 //https://backend.butterfly.matrimony.admin.hurairaconsultancy.com/testimonials
