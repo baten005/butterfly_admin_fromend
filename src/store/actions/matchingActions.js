@@ -19,7 +19,7 @@ export const fetchMatchingUsers = () => async (dispatch) => {
     const response = await axiosInstance.get("/getUsers1");
     const users = response.data;
 
-    console.log('kaka match',users)
+    //console.log('kaka match',users)
     const maleUsers = users.filter(user => user.det === 'Male');
     const femaleUsers = users.filter(user => user.det === 'Female');
 

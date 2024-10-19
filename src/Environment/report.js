@@ -61,7 +61,7 @@ function Report({ collapsed }) {
     };
 
     const closeGallery = () => setShowGallery(false);
-console.log(selectedReport)
+//console.log(selectedReport)
     return (
         <>
             <Sidebar />

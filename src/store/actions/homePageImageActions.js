@@ -16,7 +16,7 @@ export const settext = (text) => ({
   export const getText = () => async (dispatch) => {
     try {
       const response = await axiosInstance.get("get_text");
-      console.log('this is response ttttt:',response)
+      //console.log('this is response ttttt:',response)
       dispatch({
         type: SET_TEXT,
         payload: response.data,
@@ -29,7 +29,7 @@ export const settext = (text) => ({
   export const updateText = (text) => async (dispatch) => {
     try {
       const response = await axiosInstance.post("update_text",{text});
-      console.log('this is response ttttt:',response)
+      //console.log('this is response ttttt:',response)
       dispatch(getText());
     } catch (error) {
       console.error("Error fetching social details", error);
@@ -40,9 +40,9 @@ export const settext = (text) => ({
   export const updateLandingImage = (image) => async (dispatch) => {
     const formData = new FormData();
     formData.append('image', image);
-    console.log(image,formData)
+    //console.log(image,formData)
     try {
-      console.log('Starting deleteTestimonials with id:', image); 
+      //console.log('Starting deleteTestimonials with id:', image); 
       const response = await axiosInstance.post('/update_landing_image', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',

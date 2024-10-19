@@ -38,13 +38,13 @@ function Sms({ collapsed }) {
     formData.append("file", file);
 
     axiosInstance.post(`/api/upload?fileName=${fileName}`, formData).then((res) => {
-      console.log("File uploaded successfully", res.data);
+      //console.log("File uploaded successfully", res.data);
       getGroups();
     });
   };
 
   const handleAddExcelFile = () => {
-    console.log("Button clicked!");
+    //console.log("Button clicked!");
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }
@@ -64,7 +64,7 @@ function Sms({ collapsed }) {
         message: inputValue,
       })
       .then((res) => {
-        console.log("SMS sent successfully", res.data);
+        //console.log("SMS sent successfully", res.data);
       });
   };
   const handleDownload = (fileName) => {
@@ -88,7 +88,7 @@ function Sms({ collapsed }) {
     axiosInstance
       .delete(`/delete/${fileName}`)
       .then((res) => {
-        console.log("File deleted successfully", res.data);
+        //console.log("File deleted successfully", res.data);
         // Refresh the group list after deletion
         getGroups();
       })
@@ -102,7 +102,7 @@ function Sms({ collapsed }) {
   const formatNumbersForDisplay = () => {
     return sms.join(",");
   };
-  console.log('theese are groups', groups)
+  //console.log('theese are groups', groups)
   return (
     <>
       <Sidebar />

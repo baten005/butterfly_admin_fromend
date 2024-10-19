@@ -13,6 +13,8 @@ import Admin from './Environment/admin';
 import SuccessList from './Settings/successList';
 import Blog from './Marketing/blog';
 import ChatRequests from './Dashboard/chatRequests';
+import leads_and_queries from './Dashboard/leads_and_queries';
+import Leads_and_queries from './Dashboard/leads_and_queries';
 
 const AllRoutes = () => {
   return (
@@ -29,6 +31,8 @@ const AllRoutes = () => {
       <Route path="admin" element={<Admin />} />
       <Route path="success-list" element={<SuccessList />} />
       <Route path="chat-requests" element={<ChatRequests />} />
+      <Route path="leads-and-enquries" element={<Leads_and_queries />} />
+      
     </Routes>
   );
 };

@@ -22,12 +22,12 @@ export const fetchUsers = () => {
       const response = await axiosInstance.get("/getUsers");
       const users = response.data;
 
-      console.log('Response data:', users); 
+      //console.log('Response data:', users); 
       const activeUsers = users.filter((user) => user.det === 'Active');
       const expiredUsers = users.filter((user) => user.det !== 'Active'); 
 
-      console.log('Active Users:', activeUsers); 
-      console.log('Expired Users:', expiredUsers); 
+      //console.log('Active Users:', activeUsers); 
+      //console.log('Expired Users:', expiredUsers); 
       dispatch(setActiveUsers(activeUsers));
       dispatch(setExpiredUsers(expiredUsers));
     } catch (error) {

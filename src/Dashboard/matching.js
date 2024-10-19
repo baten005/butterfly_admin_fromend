@@ -51,7 +51,7 @@ function Matching({ collapsed, profile, male, female }) {
   const handleCancelMatch = async (id) => {
     try {
       const response = await axiosInstance.post(`/cancelMatch`, { id });  
-      console.log(response) 
+      //console.log(response) 
       if (response.status === 200 && response.data.success) {
         toast.success("Match cancelled successfully!");
         dispatch(fetchProfileData());
