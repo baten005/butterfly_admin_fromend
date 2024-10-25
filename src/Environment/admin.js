@@ -148,7 +148,7 @@ const Admin = ({
                   <p
                     key={admin.id}
                     className={`${styles.pCard} ${
-                      (selectedAdmin && selectedAdmin.id == admin.id)
+                      (selectedAdmin && selectedAdmin.id === admin.id)
                         ? styles.selectedAdmin
                         : ''
                     }`}
