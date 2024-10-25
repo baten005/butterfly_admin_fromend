@@ -10,7 +10,7 @@ export const SET_SUCCESS = 'SET_SUCCESS';
 
 export const fetchContactDetails = () => async (dispatch) =>  {
     const data=await axiosInstance.get('/all_contacts_links');
-    console.log('this is contact',data.data.contactItem);
+    //console.log('this is contact',data.data.contactItem);
     dispatch({type:FETCH_CONTACT_DETAILS,payload:data.data})
 };
 
@@ -23,7 +23,7 @@ export const selectContact = (type, name) => {
 
 export const updateContact = (type, name, value) => async (dispatch) => {
   dispatch({ type: SET_LOADING_SOCIAL,payload:true });
-  console.log(type,name,value)
+  //console.log(type,name,value)
   try {
     const res=await axiosInstance.post('/update_links',{type,name,value});
     fetchContactDetails();

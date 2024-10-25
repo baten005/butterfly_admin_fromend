@@ -26,7 +26,7 @@ function HomePageImage({ collapsed, image, text }) {
 
   const scrollToFileInput = () => {
     if (fileInputRef.current) {
-      console.log("Scrolling to file input...");
+      //console.log("Scrolling to file input...");
       window.scrollTo({ top: 800, behavior: "smooth" });
     }
   };

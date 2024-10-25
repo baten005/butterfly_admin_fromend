@@ -53,7 +53,7 @@ function User({ collapsed, activeUsers, expiredUsers }) {
   const handleUserExpire = async (id) => {
     try {
       const response = await axiosInstance.post(`/userExpired`, { id });
-      console.log(response);
+      //console.log(response);
       if (response.status === 200 && response.data.success) {
         toast.success("Updated successfully!");
         dispatch(fetchUsers());
@@ -67,7 +67,7 @@ function User({ collapsed, activeUsers, expiredUsers }) {
   const handleUserActive = async (id) => {
     try {
       const response = await axiosInstance.post(`/userActivate`, { id });
-      console.log(response);
+      //console.log(response);
       if (response.status === 200 && response.data.success) {
         toast.success("Updated successfully!");
         dispatch(fetchUsers());
@@ -86,7 +86,7 @@ function User({ collapsed, activeUsers, expiredUsers }) {
   const confirmDelete = async () => {
     try {
       const response = await axiosInstance.post(`/deleteUser`, { deleteId });
-      console.log(response);
+      //console.log(response);
       if (response.status === 200 && response.data.success) {
         toast.success("Deleted User successfully!");
         dispatch(fetchUsers());
@@ -104,7 +104,7 @@ function User({ collapsed, activeUsers, expiredUsers }) {
   const fetchCvs = async () => {
     try {
       const response = await axiosInstance.get(`/getCvs`);
-      console.log(response, "this is cvs");
+      //console.log(response, "this is cvs");
       setCvs(response.data);
       setShowModal1(true);
     } catch (error) {
@@ -147,7 +147,7 @@ function User({ collapsed, activeUsers, expiredUsers }) {
     }
   };
 
-  console.log(activeUsers, expiredUsers, "bal bal bal");
+  console.log(filteredActiveUsers,activeUsers, filteredExpiredUsers,expiredUsers, "bal bal bal");
   return (
     <>
       <Sidebar />
@@ -293,7 +293,7 @@ function User({ collapsed, activeUsers, expiredUsers }) {
             </thead>
             <tbody>
               {filteredExpiredUsers.map((user, index) => (
-                <tr key={index} style={styles1.tr}>
+                <tr key={index} style={{...styles1.tr,background:user.blocked=='0'?'':'rgba(254, 121, 104, .5)'}}>
                   <td style={styles1.td}>{index + 1}</td>
                   <td style={styles1.td}>
                     <img

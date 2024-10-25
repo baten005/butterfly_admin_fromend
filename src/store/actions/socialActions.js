@@ -9,7 +9,7 @@ export const SET_UPDATE_STATUS = "SET_UPDATE_STATUS";
 export const fetchSocialDetails = () => async (dispatch) => {
   try {
     const response = await axiosInstance.get("all_contacts_links");
-    console.log('this is response:',response)
+    //console.log('this is response:',response)
     dispatch({
       type: FETCH_SOCIAL_DETAILS,
       payload: response.data,

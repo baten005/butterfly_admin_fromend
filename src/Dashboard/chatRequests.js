@@ -24,15 +24,15 @@ function ChatRequests({ collapsed }) {
   const getChatReqs = async () => {
     try {
       const response = await axiosInstance.get(`/getChatReqs`);
-      console.log("dekhajak", response);
+      //console.log("dekhajak", response);
       if (response.status === 200 && response.data) {
         setProfileUsers(response.data.finalResults);
         setProfileUsers1(response.data.chatReqResults);
       } else {
-        console.log("error");
+        //console.log("error");
       }
     } catch (error) {
-      console.log(error, "error");
+      //console.log(error, "error");
     }
   };
 
@@ -41,16 +41,16 @@ function ChatRequests({ collapsed }) {
       const response = await axiosInstance.post(`/acceptChatReqs`,{
         match_id
       });
-      console.log("dekhajak", response);
+      //console.log("dekhajak", response);
       if (response.status === 200 && response.data) {
          toast.success(response.data.message);
          getChatReqs();
       } else {
-        console.log("error");
+        //console.log("error");
         toast.success(response.data.message)
       }
     } catch (error) {
-      console.log(error, "error");
+      //console.log(error, "error");
       toast.error('Failed to Update')
     }
   };
@@ -60,20 +60,20 @@ function ChatRequests({ collapsed }) {
       const response = await axiosInstance.post(`/cancelChatReqs`,{
         match_id
       });
-      console.log("dekhajak", response);
+      //console.log("dekhajak", response);
       if (response.status === 200 && response.data) {
         toast.success(response.data.message);
         getChatReqs();
       } else {
-        console.log("error");
+        //console.log("error");
         toast.success(response.data.message)
       }
     } catch (error) {
-      console.log(error, "error");
+      //console.log(error, "error");
       toast.error('Failed to Update')
     }
   };
-  console.log(profileUsers)
+  //console.log(profileUsers)
 
   return (
     <>

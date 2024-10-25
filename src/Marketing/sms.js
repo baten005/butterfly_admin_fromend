@@ -3,20 +3,21 @@ import Sidebar from "../Components/sidebar";
 import { connect } from "react-redux";
 import styles from "../Styles/sms.module.css";
 import axiosInstance from "../AxiosInstance/axiosinstance";
+import { toast, ToastContainer } from "react-toastify";
 
 function Sms({ collapsed }) {
-  const [selectedNumbers, setSelectedNumbers] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [groups, setGroups] = useState([]);
   const [sms, setSms] = useState([]);
   const [fileName, setFileName] = useState('');
+  const [charCount, setCharCount] = useState(0);
 
   useEffect(() => {
-    getGroups()
+    getGroups();
   }, []);
 
   const getGroups = async () => {
-
     axiosInstance.get("/api/files").then((res) => {
       const files = res.data;
       const formattedGroups = files.map((file) => ({
@@ -26,11 +27,9 @@ function Sms({ collapsed }) {
       }));
       setGroups(formattedGroups);
     });
-
-  }
+  };
 
   const fileInputRef = useRef(null);
-
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
@@ -38,13 +37,11 @@ function Sms({ collapsed }) {
     formData.append("file", file);
 
     axiosInstance.post(`/api/upload?fileName=${fileName}`, formData).then((res) => {
-      console.log("File uploaded successfully", res.data);
       getGroups();
     });
   };
 
   const handleAddExcelFile = () => {
-    console.log("Button clicked!");
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }
@@ -58,17 +55,34 @@ function Sms({ collapsed }) {
   };
 
   const handleSendSms = () => {
+    setLoading(true);
     axiosInstance
       .post("/sendBulkSms", {
         numbers: sms,
         message: inputValue,
       })
       .then((res) => {
-        console.log("SMS sent successfully", res.data);
+        const { successCount, failedCount } = res.data;
+
+        if (successCount === 0) {
+          toast.error('0 SMS sent');
+        } else if (failedCount === 0) {
+          toast.success('All SMS are sent');
+        } else {
+          toast.warning(`${successCount} SMS sent, ${failedCount} SMS failed to send`);
+        }
+      })
+      .catch((error) => {
+        console.error("Error sending SMS:", error);
+        toast.error('Error sending SMS');
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
+
+
   const handleDownload = (fileName) => {
-    //const url = `/download/${fileName}`; 
     axiosInstance
       .get(`/downloadFiles?fileName=${fileName}`, { responseType: 'blob' })
       .then((response) => {
@@ -84,12 +98,11 @@ function Sms({ collapsed }) {
         console.error("Download error:", error);
       });
   };
+
   const handleDeleteFile = (fileName) => {
     axiosInstance
       .delete(`/delete/${fileName}`)
       .then((res) => {
-        console.log("File deleted successfully", res.data);
-        // Refresh the group list after deletion
         getGroups();
       })
       .catch((error) => {
@@ -97,12 +110,19 @@ function Sms({ collapsed }) {
       });
   };
 
-
-
   const formatNumbersForDisplay = () => {
     return sms.join(",");
   };
-  console.log('theese are groups', groups)
+
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+    setInputValue(value);
+    setCharCount(value.length);
+  };
+  const calculateMessageCount = () => {
+    return Math.ceil(charCount / 160);
+  };
+
   return (
     <>
       <Sidebar />
@@ -123,9 +143,16 @@ function Sms({ collapsed }) {
                 />
                 <span>Selected: {sms.length === 0 ? sms.length : sms.length - 1} Numbers</span>
               </div>
-              <textarea placeholder="Text" onChange={(e) => setInputValue(e.target.value)}></textarea>
+              <textarea
+                placeholder="Text"
+                onChange={handleInputChange}
+                value={inputValue}
+              ></textarea>
+              <span className={styles.charCount}>
+                {charCount}/{calculateMessageCount()} messages
+              </span>
               <button className={styles.sendBtn} onClick={handleSendSms}>
-                Send
+                {loading?'Loading...':'Send'}
               </button>
             </div>
           </div>
@@ -183,6 +210,7 @@ function Sms({ collapsed }) {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 }
