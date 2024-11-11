@@ -62,11 +62,22 @@ const Dashboard = ({ collapsed, data, profile }) => {
   const [avatar, setAvatar] = useState([]);
   const [lead, setLead] = useState([]);
   const [activeUsers, setActiveUsers] = useState([]);
+  const [matchStat,setMatchStat]=useState('loading...');
+
+  const [liveUsers, setLiveUsers] = useState(0);
+
+  useEffect(() => {
+    axiosInstance.get('/active-users')
+      .then(response => setLiveUsers(response.data.count))
+      .catch(error => console.error('Error fetching active users:', error));
+  }, []);
+
 
   useEffect(() => {
     fetchTextReq();
     dispatch(fetchUserJoinStats());
   }, []);
+
 
   const fetchTextReq = async () => {
     try {
@@ -103,6 +114,20 @@ const Dashboard = ({ collapsed, data, profile }) => {
       toast.error("Error occurred while cancelling match.");
     }
   };
+  const formatMatchStat=(profile)=>{
+
+    if(profile){
+      if(profile.chatting_status=='1')
+        return 'Chatting Stage'
+      else if(profile.user_one_view=='1')
+        return `${profile.name} viewed`
+      else if(profile.user_two_view=='1')
+        return `${profile.matchName} viewed`
+      else if(profile.user_one_view == '0' && profile.user_two_view=='0')
+        return `None Viewed`
+      else return `Both Viewed`
+    }
+  }
 
   const options = {
     responsive: true,
@@ -118,7 +143,7 @@ const Dashboard = ({ collapsed, data, profile }) => {
       },
     },
   };
-  console.log("theese are avatar", avatar);
+  console.log("theese are avatar", profile);
   return (
     <div className={styles.dashboardContainer}>
       <Sidebar />
@@ -140,9 +165,9 @@ const Dashboard = ({ collapsed, data, profile }) => {
                   </div>
                 </div>
                 <h2>Currently Active Users</h2>
-                <p className={styles.number}>7</p>
+                <p className={styles.number}>{liveUsers}</p>
                 <p className={styles.cardBottomText}>
-                  Currently 7 visitors survey in your website including you
+                  Currently {liveUsers} visitors survey in your website including you
                 </p>
               </div>
 
@@ -294,7 +319,7 @@ const Dashboard = ({ collapsed, data, profile }) => {
 
 
 
-              <div className={styles.daysCell}>{profile.days}</div>
+              <div className={styles.daysCell}>{profile.days} <br/><span>{formatMatchStat(profile)}</span></div>
 
               <div style={styles1.cell1}>
                 {/* Dropdown for options */}

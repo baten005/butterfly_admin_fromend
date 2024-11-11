@@ -63,6 +63,21 @@ function Matching({ collapsed, profile, male, female }) {
     }
   };
 
+  const formatMatchStat=(profile)=>{
+
+    if(profile){
+      if(profile.chatting_status=='1')
+        return 'Chatting Stage'
+      else if(profile.user_one_view=='1')
+        return `${profile.name} viewed`
+      else if(profile.user_two_view=='1')
+        return `${profile.matchName} viewed`
+      else if(profile.user_one_view == '0' && profile.user_two_view=='0')
+        return `None Viewed`
+      else return `Both Viewed`
+    }
+  }
+
   const handleMatchUser = (user) => {
     setSelectedUser(user);
     const oppositeUsers = user.det === "male" ? femaleUsers : maleUsers;
@@ -186,7 +201,7 @@ function Matching({ collapsed, profile, male, female }) {
 
 
           
-            <div className={styles.daysCell}>{profile.days}</div>
+            <div className={styles.daysCell}>{profile.days} <br/><span>{formatMatchStat(profile)}</span></div>
 
               <div style={styles1.cell1}>
                 {/* Dropdown for options */}
