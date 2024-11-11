@@ -70,7 +70,7 @@ function SuccessList({ collapsed, fetchSuccessList, updateSuccessList, successLi
           />
         </div>
 
-        <button className="btn btn-primary" onClick={handleUpdate} disabled={loading}>
+        <button style={{background: "rgb(63, 61, 86)", border: "rgb(63, 61, 86)"}} className="btn btn-primary" onClick={handleUpdate} disabled={loading}>
           {loading ? "Updating..." : "Update"}
         </button>
       </div>

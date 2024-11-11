@@ -85,8 +85,8 @@ const Admin = ({
       <div className={`${styles.content} ${collapsed ? styles.collapsed : ''}`}>
         <div className={styles.permissionFormContainer}>
           <div className={styles.permissionLeftDiv}>
+                          <label>Create Account</label>
             <div className={styles.permissionAccount}>
-              <label>Create Account</label>
               <input
                 type="text"
                 placeholder="Username"
@@ -148,7 +148,7 @@ const Admin = ({
                   <p
                     key={admin.id}
                     className={`${styles.pCard} ${
-                      (selectedAdmin && selectedAdmin.id == admin.id)
+                      (selectedAdmin && selectedAdmin.id === admin.id)
                         ? styles.selectedAdmin
                         : ''
                     }`}
