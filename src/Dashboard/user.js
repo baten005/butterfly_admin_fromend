@@ -293,7 +293,7 @@ function User({ collapsed, activeUsers, expiredUsers }) {
             </thead>
             <tbody>
               {filteredExpiredUsers.map((user, index) => (
-                <tr key={index} style={{...styles1.tr,background:user.blocked=='0'?'':'rgba(254, 121, 104, .5)'}}>
+                <tr key={index} style={{...styles1.tr,background:user.blocked==null||user.blocked=='0'?'':'rgba(254, 121, 104, .5)'}}>
                   <td style={styles1.td}>{index + 1}</td>
                   <td style={styles1.td}>
                     <img

@@ -80,7 +80,7 @@ function Matching({ collapsed, profile, male, female }) {
 
   const handleMatchUser = (user) => {
     setSelectedUser(user);
-    const oppositeUsers = user.det === "male" ? femaleUsers : maleUsers;
+    const oppositeUsers = user.det.toLowerCase() === "male" ? femaleUsers : maleUsers;
     const filteredOppositeUsers = oppositeUsers.filter(oppositeUser => {
       return !profileUsers.some(profile => 
         (profile.one === user.id && profile.two === oppositeUser.id) || 

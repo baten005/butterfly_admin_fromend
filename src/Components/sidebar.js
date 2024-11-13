@@ -265,6 +265,18 @@ const Sidebar = ({
             </Link>
           </li>
         )}
+        {admin.admin === 1 && (
+          <li className="nav-item">
+            <Link
+              to="/support_chat"
+              className={`nav-link ${pathname === "/admin" ? "active" : ""}`}
+              style={style1.kala}
+            >
+              <FaEye className="menu-icon" />
+              {!collapsed && <span className={styles.navText}>Support Chat</span>}
+            </Link>
+          </li>
+        )}
         <br />
         {!collapsed ? (
           <div>
