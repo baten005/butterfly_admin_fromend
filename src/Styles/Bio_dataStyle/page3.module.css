@@ -1,0 +1,119 @@
+
+@media (max-width: 768px) {
+  .card{
+    transform: scale(0.7); /* scales content without affecting PDF output */
+    transform-origin: top center;
+  }
+  }
+.card {
+    background-color: #fff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  width: 595px;
+  height: 842px;
+    overflow: hidden;
+    position: relative;
+  }
+  .personName{
+    color: #0B1165;
+    font-family: Prata;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  .content {
+    display: flex;
+    margin-top: 88px;
+  }
+  .sectionContent {
+    display: grid;
+    grid-template-columns: 150px auto; /* Adjust the width of the label column as needed */
+    gap: 1px;
+
+    color: #000;
+    font-family: Prata;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  .address{
+    margin-bottom: 2px;
+  }
+  
+  .detailItem {
+    display: contents;
+    color: #000;
+    font-family: Prata;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-bottom: 3px;
+  }
+  
+  
+  .value {
+    text-align: left; 
+    color: #000;
+font-family: Prata;
+font-size: 10px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+margin-bottom: 5px;
+max-width: 500px;
+padding-right: 20px;
+  }
+  
+  @media (max-width: 991px) {
+    .content {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+    }
+  }
+  
+  .mainInfo {
+    display: flex;
+    flex-direction: column;
+    line-height: normal;
+    padding-left: 45px;
+    text-align: left;
+  }
+  
+  
+  .sectionTitle {
+    color: #132A7B;
+    font-family: Prata;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-bottom: 5px;
+    margin-top: 10px;
+  }
+  
+
+  
+  @media (max-width: 991px) {
+    .sectionContent {
+      margin-right: 10px;
+    }
+  }
+  @media (max-width: 768px) {
+
+  }
+  
+  .extraItem{
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+    margin-top: 10px;
+  }
+  .extraImages{
+    height: 60px;
+    width: 60px;
+    object-fit: cover;
+
+  }

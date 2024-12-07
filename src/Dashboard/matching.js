@@ -8,6 +8,8 @@ import { fetchProfileData } from "../store/actions/dashboardActions";
 import { Dropdown,Modal } from "react-bootstrap";
 import { ToastContainer, toast } from 'react-toastify';
 import axiosInstance from "../AxiosInstance/axiosinstance";
+import { Link, useLocation } from "react-router-dom";
+
 
 const formatDate = (dateString) => {
   const options = { day: 'numeric', month: 'short', year: 'numeric' };
@@ -314,6 +316,15 @@ function Matching({ collapsed, profile, male, female }) {
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu style={{left:'-80px'}}>
+                  <Dropdown.Item
+                          style={{
+                            color: "green",
+                            fontSize: "18px",
+                            marginBottom: "10px",
+                          }}
+                        ><Link to="/user_profile" state={{ userId: user.id }} >View Profile</Link>
+                          
+                        </Dropdown.Item>
                     <Dropdown.Item onClick={() => handleMatchUser(user)} style={{ color: 'green',fontSize:'18px'}}>
                       Match User
                     </Dropdown.Item>
@@ -401,6 +412,15 @@ function Matching({ collapsed, profile, male, female }) {
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu style={{left:'-80px'}}>
+                  <Dropdown.Item
+                          style={{
+                            color: "green",
+                            fontSize: "18px",
+                            marginBottom: "10px",
+                          }}
+                        ><Link to="/user_profile" state={{ userId: user.id }} >View Profile</Link>
+                          
+                        </Dropdown.Item>
                     <Dropdown.Item onClick={() => handleMatchUser(user)} style={{ color: 'green',fontSize:'18px'}}>
                       Match User
                     </Dropdown.Item>

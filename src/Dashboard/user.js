@@ -7,6 +7,8 @@ import { fetchUsers } from "../store/actions/userActions";
 import { Dropdown, Modal } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
 import axiosInstance from "../AxiosInstance/axiosinstance";
+import { Link, useLocation } from "react-router-dom";
+
 
 function User({ collapsed, activeUsers, expiredUsers }) {
   const [searchQuery, setSearchQuery] = useState("");
@@ -247,6 +249,15 @@ function User({ collapsed, activeUsers, expiredUsers }) {
                       </Dropdown.Toggle>
 
                       <Dropdown.Menu style={{ left: "-80px" }}>
+                      <Dropdown.Item
+                          style={{
+                            color: "green",
+                            fontSize: "18px",
+                            marginBottom: "10px",
+                          }}
+                        ><Link to="/user_profile" state={{ userId: user.id }} >View Profile</Link>
+                          
+                        </Dropdown.Item>
                         <Dropdown.Item
                           onClick={() => handleUserExpire(user.id)}
                           style={{
@@ -342,6 +353,15 @@ function User({ collapsed, activeUsers, expiredUsers }) {
                       </Dropdown.Toggle>
 
                       <Dropdown.Menu style={{ left: "-80px" }}>
+                      <Dropdown.Item
+                          style={{
+                            color: "green",
+                            fontSize: "18px",
+                            marginBottom: "10px",
+                          }}
+                        ><Link to="/user_profile" state={{ userId: user.id }} >View Profile</Link>
+                          
+                        </Dropdown.Item>
                         <Dropdown.Item
                           onClick={() => handleUserActive(user.id)}
                           style={{

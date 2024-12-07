@@ -15,6 +15,7 @@ import Blog from './Marketing/blog';
 import ChatRequests from './Dashboard/chatRequests';
 import Leads_and_queries from './Dashboard/leads_and_queries';
 import Chat from './Environment/support_chat';
+import ProfileView from './AUser/profilePreview';
 
 const AllRoutes = () => {
   return (
@@ -33,6 +34,7 @@ const AllRoutes = () => {
       <Route path="chat-requests" element={<ChatRequests />} />
       <Route path="leads-and-enquries" element={<Leads_and_queries />} />
       <Route path="support_chat" element={<Chat/>} />
+      <Route path="user_profile" element={<ProfileView/>} />
       
     </Routes>
   );

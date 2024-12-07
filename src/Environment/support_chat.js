@@ -3,19 +3,18 @@ import "../Styles/chatUi.css";
 import { FaArrowLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import axiosinstance from "../AxiosInstance/axiosinstance";
+import "react-toastify/dist/ReactToastify.css";
+import { BiSupport } from "react-icons/bi";
 
 const Chat = () => {
   const [selectedChat, setSelectedChat] = useState(null);
   const [showSidebar, setShowSidebar] = useState(true);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
-  const [isTyping, setIsTyping] = useState(false);
-  const [dummyChats, setDummyChats] = useState([
-    { id: 1, name: "John Doe", lastMessage: "Hello!", peerId: "1", avatar: "https://via.placeholder.com/40" },
-    { id: 2, name: "Jane Smith", lastMessage: "See you soon!", peerId: "2", avatar: "https://via.placeholder.com/40" },
-  ]);
+  const [dummyChats, setDummyChats] = useState([]);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 1270);
+  const [unreadCounts, setUnreadCounts] = useState([]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -32,36 +31,56 @@ const Chat = () => {
       overflowX: isMobile ? "auto" : "initial",
       zoom: isMobile ? "100%" : "initial",
     },
-    // other styles
   };
 
-  useEffect(() => {
-    scrollToBottom();
-  }, [isTyping]);
-
-  const handleChatClick = (chat) => {
-    setSelectedChat(chat);
-    setShowSidebar(false);
-    setMessages([
-      { sender_id: "1", message: "Hello there!", avatar: "https://via.placeholder.com/40" },
-      { sender_id: "2", message: "Hi, how are you?", avatar: "https://via.placeholder.com/40" },
-    ]);
+  const fetchChatUsers = async () => {
+    try {
+      const { data } = await axiosinstance.get("/support/chats");
+      console.log(data,"k k chat sup")
+      setDummyChats(data);
+    } catch (error) {
+      console.error("Error fetching chat users", error);
+      toast.error("Failed to fetch chat users.");
+    }
   };
 
-  const handleBackButtonClick = () => {
-    setSelectedChat(null);
-    setShowSidebar(true);
+  const fetchMessages = async (userId) => {
+    try {
+      const { data } = await axiosinstance.get(`/admin/support_chat/${userId}`);
+      setMessages(data);
+    } catch (error) {
+      console.error("Error fetching messages", error);
+      toast.error("Failed to fetch messages.");
+    }
   };
 
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     if (newMessage.trim() === "") return;
 
-    setMessages((prevMessages) => [
-      ...prevMessages,
-      { sender_id: "1", message: newMessage, avatar: "https://via.placeholder.com/40" },
-    ]);
-    setTimeout(() => scrollToBottom(), 0);
-    setNewMessage("");
+    try {
+      const messagePayload = {
+        message: newMessage,
+        receiver: selectedChat.userId,
+      };
+
+      const { data } = await axiosinstance.post("/admin/support_chat", messagePayload);
+
+      setMessages((prevMessages) => [...prevMessages, data]);
+      setNewMessage("");
+      scrollToBottom();
+    } catch (error) {
+      console.error("Error sending message", error);
+      toast.error("Failed to send message.");
+    }
+  };
+ 
+  const markMessagesAsRead = async (userId) => {
+    try {
+      await axiosinstance.put(`/mark-read`, { userId });
+      fetchChatUsers(); 
+    } catch (error) {
+      console.error("Error marking messages as read", error);
+    }
   };
 
   const scrollToBottom = () => {
@@ -70,6 +89,29 @@ const Chat = () => {
       chatBody.scrollTop = chatBody.scrollHeight + 10;
     }
   };
+
+
+  const handleChatClick = (chat) => {
+    console.log(chat,"dekhi ki ase")
+    setSelectedChat(chat);
+    setShowSidebar(false);
+    fetchMessages(chat.userId);
+    markMessagesAsRead(chat.userId);
+  };
+
+  const handleBackButtonClick = () => {
+    setSelectedChat(null);
+    setShowSidebar(true);
+  };
+
+  useEffect(() => {
+    console.log("call ki hoi?");
+    fetchChatUsers();
+    const interval = setInterval(fetchChatUsers, 25000);
+    return () => clearInterval(interval);
+  }, []);
+
+  console.log(unreadCounts,"theese are");
 
   return (
     <div className={`messenger-container`}>
@@ -81,11 +123,12 @@ const Chat = () => {
           <h3 style={{ marginBottom: "0", width: "85%" }}>Chats</h3>
         </div>
         <ul>
-          {dummyChats.map((chat) => (
+          {dummyChats!=null && dummyChats.map((chat) => (
             <li key={chat.id} onClick={() => handleChatClick(chat)}>
-              <img src={chat.avatar} alt={`${chat.name} avatar`} className="chat-avatar" />
+              <img src={`https://backend.butterfly.hurairaconsultancy.com/${chat.avatar}`} alt={`${chat.fullName} avatar`} className="chat-avatar" />
               <div className="chat-info">
-                <span className="chat-name">{chat.name}</span>
+                <span className="chat-name">{chat.fullName}</span>
+                {chat.unreadCount>0?<span style={{color:"Red",fontWeight:"bolder"}}>{chat.unreadCount}</span>:''}
                 <br />
                 <span className="chat-last-message">{chat.lastMessage}</span>
               </div>
@@ -104,23 +147,16 @@ const Chat = () => {
                     &#8592;
                   </button>
                 </span>
-                {selectedChat.name}
+                {selectedChat.fullName}
               </h3>
             </div>
             <div className="chat-body">
               {messages.map((message, index) => (
-                <div key={index} className={`message ${message.sender_id === "1" ? "user" : "bot"}`}>
-                  <img src={message.avatar} alt="avatar" className="message-avatar" />
+                <div key={index} className={`message ${message.sender === "admin" ? "user" : "bot"}`}>
+                  {message.sender==='admin'?<BiSupport/>:<img src={`https://backend.butterfly.hurairaconsultancy.com/${selectedChat.avatar}`} alt="avatar" className="message-avatar" />}
                   <p className="message-text">{message.message}</p>
                 </div>
               ))}
-
-              {isTyping && (
-                <div className={`message bot`}>
-                  <img src="https://via.placeholder.com/40" alt="avatar" className="message-avatar" />
-                  <p className="message-text">Typing...</p>
-                </div>
-              )}
             </div>
             <div className="chat-footer">
               <input
@@ -141,7 +177,5 @@ const Chat = () => {
     </div>
   );
 };
-
-
 
 export default Chat;

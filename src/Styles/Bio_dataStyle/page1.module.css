@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Playball:wght@400&display=swap');
+
+.container {
+    display: flex;
+  width: 595px;
+  height: 842px;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    background: #FFF;
+    box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.25);
+  }
+  
+  
+  .profileSection {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .imageColumn {
+    display: flex;
+    flex-direction: column;
+    line-height: normal;
+  }
+  
+  .profileImage {
+    aspect-ratio: 1.28;
+    object-fit: contain;
+    object-position: center;
+    width: 100%;
+    flex-grow: 1;
+  }
+  
+  
+  .logo {
+    aspect-ratio: 2.5;
+    object-fit: contain;
+    object-position: center;
+    width: 100px;
+    max-width: 100%;
+    padding: 1rem;
+  }
+  
+  .bioSection {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .bioTitle {
+    color: #000;
+    font: 500 25px 'Playfair Display', -apple-system, Roboto, Helvetica, sans-serif;
+  }
+  
+  .name {
+    color: #0a1f67;
+    text-align: center;
+    margin-top: 70px;
+    font: 500 25px 'Playfair Display', -apple-system, Roboto, Helvetica, sans-serif;
+  }
+  
+  .details {
+    margin-top: 20px;
+    color: #0B1165;
+    text-align: center;
+    font-family: Playball, sans-serif;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  
+  .decorativeElement {
+    aspect-ratio: 0.67;
+    object-fit: contain;
+    object-position: center;
+    width: 2px;
+    align-self: flex-end;
+    margin-top: 28px;
+  }
+  
+  .decorativeWrapper {
+    align-self: flex-end;
+    display: flex;
+    gap: 2px;
+  }
+  
+  .decorativeImage {
+    aspect-ratio: 1.2;
+    object-fit: contain;
+    object-position: center;
+    width: 6px;
+    margin: auto 0;
+  }
+  
+  .decorativeColumn {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .decorativeBar {
+    aspect-ratio: 0.5;
+    object-fit: contain;
+    object-position: center;
+  }
+  
+  .decorativeEnd {
+    aspect-ratio: 0.5;
+    object-fit: contain;
+    object-position: center;
+    width: 3px;
+    align-self: flex-end;
+  }
+  
+  @media (max-width: 768px) {
+  .container{
+    transform: scale(0.7); /* scales content without affecting PDF output */
+    transform-origin: top center;
+  }
+  }
+  

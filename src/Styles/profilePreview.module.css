@@ -1,0 +1,144 @@
+
+.userDashboard {
+    background-color: #211d18;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    align-items: center;
+  }
+  .profileViewContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 40px;
+    width: 80%;
+  }
+  
+  .headerSection {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-bottom: 20px;
+    align-items: flex-start;
+  }
+  
+  .profileViewingText {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: #000;
+    text-align: left;
+    width: 100%;
+    text-decoration: none;
+  }
+  
+  .actionIcons {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+  }
+  
+  .iconButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .iconButton img {
+    width: 24px;
+    height: 24px;
+  }
+  
+
+  
+  .actionsContainer {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .print, .share {
+    border: none;
+    padding: 12px 12px;
+    border-radius: 15px;
+    display: inline-flex;
+    align-items: center;
+    font-family: Poppins, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  .print{
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), #BDCCFF;
+  }
+.share{
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), #C0FFBD;
+}
+  .requestChat {
+    color: #fff;
+    display: inline-flex;
+    padding: 7px 18px 8px 12px;
+    align-items: center;
+    gap: 13px;
+    border-radius: 10px;
+    background: #211D18;
+    border: none;
+  }
+  
+  .interested {
+    background: #211D18;
+    color: #fff;
+    display: inline-flex;
+    padding: 7px 18px 8px 12px;
+    align-items: center;
+    gap: 13px;
+    border-radius: 10px;
+    border: none;
+  }
+  
+  .notInterested {
+    background: #211D18;
+    color: #fff;
+    display: inline-flex;
+    padding: 7px 18px 8px 12px;
+    align-items: center;
+    gap: 13px;
+    border-radius: 10px;
+    border: none;
+  }
+  .biopreview{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    width: 100%;
+  }
+    
+  @media (max-width: 768px) {
+    .profileViewContainer{
+      width: 100%;
+    }
+    .profileViewingText{
+      text-align: center;
+    }
+    .headerSection {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      width: 100%;
+      margin-bottom: 20px;
+      align-items: flex-start;
+    }
+
+    .actionIcons{
+      flex-direction: row;
+      justify-content: center;
+      width: 100%;
+    }
+    }

@@ -1,0 +1,62 @@
+.header {
+    display: flex;
+    flex-direction: column;
+    font-family: Prata, sans-serif;
+    font-weight: 400;
+    position: absolute;
+    top: 0px;
+    width: 100%;
+  }
+
+  
+  .headerContent {
+    justify-content: space-between;
+    display: flex;
+  }
+  
+  .nameSection {
+    display: flex;
+    font-size: 16px;
+    color: #0b1165;
+  }
+  
+  .logo {
+    aspect-ratio: 1;
+    object-fit: contain;
+    object-position: center;
+    width: 100px;
+    max-width: 100%;
+  }
+  
+  .name {
+    align-self: flex-start;
+    margin-top: 78px;
+    flex-basis: auto;
+  }
+  
+  @media (max-width: 991px) {
+    .name {
+      margin-top: 40px;
+    }
+  }
+  
+  .bioDataSection {
+    align-self: flex-start;
+    display: flex;
+    margin-top: 4px;
+    flex-direction: column;
+    font-size: 12px;
+    color: #000;
+  }
+  
+  .bioDataLogo {
+    aspect-ratio: 6.67;
+    object-fit: contain;
+    object-position: center;
+    width: 100px;
+  }
+  
+  .bioDataText {
+    align-self: center;
+    margin-top: 20px;
+  }

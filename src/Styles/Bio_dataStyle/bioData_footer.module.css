@@ -1,0 +1,68 @@
+
+.footer {
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+  }
+  
+  .footerContent {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .footerImage {
+    display: flex;
+    flex-direction: column;
+    line-height: normal;
+  }
+  
+  .footerLogo {
+    aspect-ratio: 1.01;
+    object-fit: contain;
+    object-position: center;
+    width: 100px;
+    max-width: 100%;
+    flex-grow: 1;
+  }
+  
+  .footerText {
+    display: flex;
+    flex-direction: column;
+    line-height: normal;
+    width: 53%;
+  }
+  
+  .poweredBy {
+    display: flex;
+    margin-top: 57px;
+    flex-direction: column;
+    color: #000;
+    text-align: center;
+    text-transform: uppercase;
+    font: 300 6px/17px Poppins, -apple-system, Roboto, Helvetica, sans-serif;
+  }
+  
+  .butterflyLogo {
+    aspect-ratio: 2.5;
+    object-fit: contain;
+    object-position: center;
+    width: 40px;
+    align-self: center;
+  }
+  @media (max-width: 991px) {
+    .footer {
+        max-width: 100%;
+      }
+    
+      .footerLogo {
+        margin-top: 40px;
+      }
+    
+      .footerText {
+        width: 100%;
+      }
+    
+      .poweredBy {
+        margin-top: 40px;
+      }
+    }
