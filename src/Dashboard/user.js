@@ -458,7 +458,7 @@ function User({ collapsed, activeUsers, expiredUsers }) {
                             fontSize: "18px",
                             marginBottom: "10px",
                           }}
-                        ><Link to="/user_profile" state={{ userId: cv.id }} >View Profile</Link>
+                        ><Link to="/user_profile" state={{ userId: cv.id }} style={{ textDecoration: 'none !important' }} >View Profile</Link>
                           
                         </Dropdown.Item>
                       <Dropdown.Item onClick={() => handleCreateUser1(cv)} style={{ color: 'green', fontSize: '18px' }}>

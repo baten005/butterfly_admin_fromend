@@ -1,11 +1,8 @@
-// src/Components/Login.js
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../store/actions/authActions';
 import 'bootstrap/dist/css/bootstrap.min.css';
-//import '../Styles/login.css';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -22,41 +19,99 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container d-flex align-items-center justify-content-center">
-      <div className="login-form card p-4">
-        <img src={`${process.env.PUBLIC_URL}/logo192.png`} alt="Huraira Consultancy" />
+    <div
+      className="d-flex align-items-center justify-content-center vh-100"
+      style={{
+        background: 'linear-gradient(to bottom right, #43cea2, #185a9d)'
+      }}
+    >
+      <div
+        className="card p-4 shadow-lg"
+        style={{
+          width: '100%',
+          maxWidth: '400px',
+          borderRadius: '10px',
+          backgroundColor: '#fff',
+        }}
+      >
+        <div className="text-center mb-4">
+          <img
+            src={`${process.env.PUBLIC_URL}/assets/butterfly_matrimony.png`}
+            alt="Huraira Consultancy"
+            style={{ maxWidth: '150px' }}
+          />
+        </div>
+        <h3 className="text-center mb-4" style={{ color: '#43cea2' }}>
+          Welcome Back!
+        </h3>
         <form onSubmit={handleLogin}>
           <div className="form-group mb-3">
             <input
               type="text"
-              className="form-control"
+              className="form-control form-control-lg"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              placeholder="Username"
+              placeholder="Enter your username"
+              style={{
+                borderRadius: '5px',
+                border: '1px solid #ced4da',
+                padding: '10px 15px',
+              }}
               required
             />
           </div>
           <div className="form-group mb-3">
             <input
               type="password"
-              className="form-control"
+              className="form-control form-control-lg"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Password"
+              placeholder="Enter your password"
+              style={{
+                borderRadius: '5px',
+                border: '1px solid #ced4da',
+                padding: '10px 15px',
+              }}
               required
             />
           </div>
-          <br />
-          {!isLoading ? (
-            <button type="submit" className="btn btn-primary w-100">Login</button>
-          ) : (
-            <button type="button" className="btn btn-primary w-100" disabled>
-              <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
-              Loading...
-            </button>
-          )}
+          <div className="d-grid mb-3">
+            {!isLoading ? (
+              <button
+                type="submit"
+                className="btn btn-primary btn-lg"
+                style={{
+                  backgroundColor: '#009688',
+                  border: 'none',
+                  borderRadius: '5px',
+                }}
+              >
+                Login
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="btn btn-primary btn-lg"
+                style={{
+                  backgroundColor: '#6a11cb',
+                  border: 'none',
+                  borderRadius: '5px',
+                }}
+                disabled
+              >
+                <span
+                  className="spinner-border spinner-border-sm me-2"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+                Loading...
+              </button>
+            )}
+          </div>
         </form>
-        {error && <p className="text-danger mt-3 text-center">{error}</p>}
+        {error && (
+          <p className="text-danger mt-3 text-center">{error}</p>
+        )}
       </div>
     </div>
   );
