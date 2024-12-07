@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { connect, useDispatch, useSelector } from "react-redux";
 import Sidebar from "../Components/sidebar";
 import styles from "../Styles/matching.module.css";
-import { FaEllipsisH} from "react-icons/fa";
+import { FaEllipsisH } from "react-icons/fa";
 import { fetchMatchingUsers } from "../store/actions/matchingActions";
 import { fetchProfileData } from "../store/actions/dashboardActions";
-import { Dropdown,Modal } from "react-bootstrap";
+import { Dropdown, Modal } from "react-bootstrap";
 import { ToastContainer, toast } from 'react-toastify';
 import axiosInstance from "../AxiosInstance/axiosinstance";
 import { Link, useLocation } from "react-router-dom";
@@ -52,7 +52,7 @@ function Matching({ collapsed, profile, male, female }) {
 
   const handleCancelMatch = async (id) => {
     try {
-      const response = await axiosInstance.post(`/cancelMatch`, { id });  
+      const response = await axiosInstance.post(`/cancelMatch`, { id });
       //console.log(response) 
       if (response.status === 200 && response.data.success) {
         toast.success("Match cancelled successfully!");
@@ -65,16 +65,16 @@ function Matching({ collapsed, profile, male, female }) {
     }
   };
 
-  const formatMatchStat=(profile)=>{
+  const formatMatchStat = (profile) => {
 
-    if(profile){
-      if(profile.chatting_status=='1')
+    if (profile) {
+      if (profile.chatting_status == '1')
         return 'Chatting Stage'
-      else if(profile.user_one_view=='1')
+      else if (profile.user_one_view == '1')
         return `${profile.name} viewed`
-      else if(profile.user_two_view=='1')
+      else if (profile.user_two_view == '1')
         return `${profile.matchName} viewed`
-      else if(profile.user_one_view == '0' && profile.user_two_view=='0')
+      else if (profile.user_one_view == '0' && profile.user_two_view == '0')
         return `None Viewed`
       else return `Both Viewed`
     }
@@ -84,15 +84,15 @@ function Matching({ collapsed, profile, male, female }) {
     setSelectedUser(user);
     const oppositeUsers = user.det.toLowerCase() === "male" ? femaleUsers : maleUsers;
     const filteredOppositeUsers = oppositeUsers.filter(oppositeUser => {
-      return !profileUsers.some(profile => 
-        (profile.one === user.id && profile.two === oppositeUser.id) || 
+      return !profileUsers.some(profile =>
+        (profile.one === user.id && profile.two === oppositeUser.id) ||
         (profile.two === user.id && profile.one === oppositeUser.id)
       );
     });
     setModalUsers(filteredOppositeUsers);
     setShowModal(true);
   };
-  
+
   const [searchQuery1, setSearchQuery1] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
@@ -141,70 +141,85 @@ function Matching({ collapsed, profile, male, female }) {
         {filteredProfiles.length > 0 ? (
           filteredProfiles.map((profile, index) => (
             <div className={styles.row} key={index}>
-            <div className={styles.idCell}>{profile.id}</div>
-            <div className={styles.imageCell}>
-              <img
-                className={styles.personImage}
-                src={"https://backend.butterfly.hurairaconsultancy.com/" + profile.image1}
-                alt="Profile"
-              />
-            </div>
-          
-            <div className={styles.infoCell}>
-              <div className={styles.name}>{profile.name}</div>
-              <div className={styles.email}>{profile.email}</div>
-            </div>
-          
-            <div className={styles.phoneCell}>{profile.phone}</div>
-            <div className={styles.dateCell}>{formatDate(profile.date)}</div>
-
-            <div className={styles.statusCell}>
-              <span
-                className={styles.status}
+              <div
                 style={{
-                  color: getStatusColor(profile.status),
-                  background: getStatusBackground(profile.status),
+                  display: "flex",
+                  alignItems: "center",
+                  background: profile.interested == profile.one ? 'rgba(254, 121, 104, .5)' : 'transparent'
                 }}
               >
-                {formatStatus(profile.status)}
-              </span>
-            </div>
 
-            <div className={styles.iconCell}>
-              <img src={`${process.env.PUBLIC_URL}/send.svg`} style={{ cursor: "pointer" }} alt="send" />
-            </div>
-          
-            <div className={styles.imageCell}>
-              <img
-                className={styles.personImage}
-                src={"https://backend.butterfly.hurairaconsultancy.com/" + profile.image2}
-                alt="Match"
-              />
-            </div>
-            
-            <div className={styles.matchInfoCell}>
-              <div className={styles.name}>{profile.matchName}</div>
-              <div className={styles.email}>{profile.matchEmail}</div>
-            </div>
-          
-            <div className={styles.phoneCell}>{profile.matchPhone}</div>
-            <div className={styles.dateCell}>{formatDate(profile.matchDate)}</div>
-            <div className={styles.statusCell}>
-              <span
-                className={styles.status}
+                <div className={styles.idCell}>{profile.id}</div>
+                <div className={styles.imageCell}>
+                  <img
+                    className={styles.personImage}
+                    src={"https://backend.butterfly.hurairaconsultancy.com/" + profile.image1}
+                    alt="Profile"
+                  />
+                </div>
+
+                <div className={styles.infoCell}>
+                  <div className={styles.name}>{profile.name}</div>
+                  <div className={styles.email}>{profile.email}</div>
+                </div>
+
+                <div className={styles.phoneCell}>{profile.phone}</div>
+                <div className={styles.dateCell}>{formatDate(profile.date)}</div>
+
+                <div className={styles.statusCell}>
+                  <span
+                    className={styles.status}
+                    style={{
+                      color: getStatusColor(profile.status),
+                      background: getStatusBackground(profile.status),
+                    }}
+                  >
+                    {formatStatus(profile.status)}
+                  </span>
+                </div>
+              </div>
+              <div className={styles.iconCell}>
+                <img src={`${process.env.PUBLIC_URL}/send.svg`} style={{ cursor: "pointer" }} alt="send" />
+              </div>
+              <div
                 style={{
-                  color: getStatusColor(profile.matchStatus),
-                  background: getStatusBackground(profile.matchStatus),
+                  display: "flex",
+                  alignItems: "center",
+                  background: profile.interested == profile.two ? 'rgba(254, 121, 104, .5)' : 'transparent'
                 }}
               >
-                {formatStatus(profile.matchStatus)}
-              </span>
-            </div>
+
+                <div className={styles.imageCell}>
+                  <img
+                    className={styles.personImage}
+                    src={"https://backend.butterfly.hurairaconsultancy.com/" + profile.image2}
+                    alt="Match"
+                  />
+                </div>
+
+                <div className={styles.matchInfoCell}>
+                  <div className={styles.name}>{profile.matchName}</div>
+                  <div className={styles.email}>{profile.matchEmail}</div>
+                </div>
+
+                <div className={styles.phoneCell}>{profile.matchPhone}</div>
+                <div className={styles.dateCell}>{formatDate(profile.matchDate)}</div>
+                <div className={styles.statusCell}>
+                  <span
+                    className={styles.status}
+                    style={{
+                      color: getStatusColor(profile.matchStatus),
+                      background: getStatusBackground(profile.matchStatus),
+                    }}
+                  >
+                    {formatStatus(profile.matchStatus)}
+                  </span>
+                </div>
 
 
-          
-            <div className={styles.daysCell}>{profile.days} <br/><span>{formatMatchStat(profile)}</span></div>
 
+                <div className={styles.daysCell}>{profile.days} <br /><span>{formatMatchStat(profile)}</span></div>
+              </div>
               <div style={styles1.cell1}>
                 {/* Dropdown for options */}
                 <Dropdown>
@@ -216,12 +231,12 @@ function Matching({ collapsed, profile, male, female }) {
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      height: '30px', 
-                      width: '30px',  
-                      borderRadius: '50%', 
+                      height: '30px',
+                      width: '30px',
+                      borderRadius: '50%',
                       border: "1px solid var(--rn-53-themes-net-silver, #C3C3C3)",
-                      backgroundColor: 'white', 
-                      margin:'-5px'
+                      backgroundColor: 'white',
+                      margin: '-5px'
                     }}
                   >
                     <FaEllipsisH color="rgba(0,0,0,.5)" />
@@ -230,7 +245,7 @@ function Matching({ collapsed, profile, male, female }) {
                   <Dropdown.Menu style={{ left: "-80px" }}>
                     <Dropdown.Item
                       onClick={() => handleCancelMatch(profile.id)}
-                      style={{ color: "red", fontSize: "18px" }}
+                      style={{ color: "rgba(254, 121, 104, .5)", fontSize: "18px" }}
                     >
                       Cancel Match
                     </Dropdown.Item>
@@ -238,16 +253,16 @@ function Matching({ collapsed, profile, male, female }) {
                 </Dropdown>
               </div>
             </div>
-        ))
-      ) : (
-        <p>No matching profiles found</p>
-      )}
+          ))
+        ) : (
+          <p>No matching profiles found</p>
+        )}
 
         <br />
         <br />
         <div style={styles1.matchContainer}>
           <div style={styles1.activeMembersContainer}>
-            <h2 style={{ textAlign: "left", fontSize: "25px" , marginBottom: "10px"}}>Male</h2>
+            <h2 style={{ textAlign: "left", fontSize: "25px", marginBottom: "10px" }}>Male</h2>
             <p style={{ textAlign: "left", fontSize: "15px" }}>
               Unmatched Profile will be sorted first
             </p>
@@ -285,51 +300,51 @@ function Matching({ collapsed, profile, male, female }) {
                       <td className={styles.dateCell}>{formatDate(user.date)}</td>
                       <td>
                         <span
-                            className={styles.status}
-                            style={{
-                              color: getStatusColor(user.status),
-                              background: getStatusBackground(user.status),
-                            }}
-                          >
-                            {formatStatus(user.status)}
-                          </span>
+                          className={styles.status}
+                          style={{
+                            color: getStatusColor(user.status),
+                            background: getStatusBackground(user.status),
+                          }}
+                        >
+                          {formatStatus(user.status)}
+                        </span>
                       </td>
                       <td style={styles1.td}>
-                      <Dropdown>
-                  <Dropdown.Toggle
-                    variant="button"
-                    style={{
-                      padding: 0,
-                      cursor: "pointer",
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      height: '30px', 
-                      width: '30px',  
-                      borderRadius: '50%', 
-                      border: "1px solid var(--rn-53-themes-net-silver, #C3C3C3)",
-                      backgroundColor: 'white', 
-                      margin:'-5px'
-                    }}
-                  >
-                    <FaEllipsisH color="rgba(0,0,0,.5)" />
-                  </Dropdown.Toggle>
+                        <Dropdown>
+                          <Dropdown.Toggle
+                            variant="button"
+                            style={{
+                              padding: 0,
+                              cursor: "pointer",
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              height: '30px',
+                              width: '30px',
+                              borderRadius: '50%',
+                              border: "1px solid var(--rn-53-themes-net-silver, #C3C3C3)",
+                              backgroundColor: 'white',
+                              margin: '-5px'
+                            }}
+                          >
+                            <FaEllipsisH color="rgba(0,0,0,.5)" />
+                          </Dropdown.Toggle>
 
-                  <Dropdown.Menu style={{left:'-80px'}}>
-                  <Dropdown.Item
-                          style={{
-                            color: "green",
-                            fontSize: "18px",
-                            marginBottom: "10px",
-                          }}
-                        ><Link to="/user_profile" state={{ userId: user.id }} >View Profile</Link>
-                          
-                        </Dropdown.Item>
-                    <Dropdown.Item onClick={() => handleMatchUser(user)} style={{ color: 'green',fontSize:'18px'}}>
-                      Match User
-                    </Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
+                          <Dropdown.Menu style={{ left: '-80px' }}>
+                            <Dropdown.Item
+                              style={{
+                                color: "green",
+                                fontSize: "18px",
+                                marginBottom: "10px",
+                              }}
+                            ><Link to="/user_profile" state={{ userId: user.id }} >View Profile</Link>
+
+                            </Dropdown.Item>
+                            <Dropdown.Item onClick={() => handleMatchUser(user)} style={{ color: 'green', fontSize: '18px' }}>
+                              Match User
+                            </Dropdown.Item>
+                          </Dropdown.Menu>
+                        </Dropdown>
                       </td>
                     </tr>
                   ))}
@@ -343,7 +358,7 @@ function Matching({ collapsed, profile, male, female }) {
           <br />
 
           <div style={styles1.activeMembersContainer}>
-            <h2 style={{ textAlign: "left", fontSize: "25px" , marginBottom: "10px"}}>Female</h2>
+            <h2 style={{ textAlign: "left", fontSize: "25px", marginBottom: "10px" }}>Female</h2>
             <p style={{ textAlign: "left", fontSize: "15px" }}>
               Unmatched Profile will be sorted first
             </p>
@@ -381,51 +396,51 @@ function Matching({ collapsed, profile, male, female }) {
                       <td className={styles.dateCell} >{formatDate(user.date)}</td>
                       <td>
                         <span
-                            className={styles.status}
-                            style={{
-                              color: getStatusColor(user.status),
-                              background: getStatusBackground(user.status),
-                            }}
-                          >
-                            {formatStatus(user.status)}
-                          </span>
+                          className={styles.status}
+                          style={{
+                            color: getStatusColor(user.status),
+                            background: getStatusBackground(user.status),
+                          }}
+                        >
+                          {formatStatus(user.status)}
+                        </span>
                       </td>
                       <td style={styles1.td}>
-                      <Dropdown>
-                  <Dropdown.Toggle
-                    variant="button"
-                    style={{
-                      padding: 0,
-                      cursor: "pointer",
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      height: '30px', 
-                      width: '30px',  
-                      borderRadius: '50%', 
-                      border: "1px solid var(--rn-53-themes-net-silver, #C3C3C3)",
-                      backgroundColor: 'white', 
-                      margin:'-5px'
-                    }}
-                  >
-                    <FaEllipsisH color="rgba(0,0,0,.5)" />
-                  </Dropdown.Toggle>
+                        <Dropdown>
+                          <Dropdown.Toggle
+                            variant="button"
+                            style={{
+                              padding: 0,
+                              cursor: "pointer",
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              height: '30px',
+                              width: '30px',
+                              borderRadius: '50%',
+                              border: "1px solid var(--rn-53-themes-net-silver, #C3C3C3)",
+                              backgroundColor: 'white',
+                              margin: '-5px'
+                            }}
+                          >
+                            <FaEllipsisH color="rgba(0,0,0,.5)" />
+                          </Dropdown.Toggle>
 
-                  <Dropdown.Menu style={{left:'-80px'}}>
-                  <Dropdown.Item
-                          style={{
-                            color: "green",
-                            fontSize: "18px",
-                            marginBottom: "10px",
-                          }}
-                        ><Link to="/user_profile" state={{ userId: user.id }} >View Profile</Link>
-                          
-                        </Dropdown.Item>
-                    <Dropdown.Item onClick={() => handleMatchUser(user)} style={{ color: 'green',fontSize:'18px'}}>
-                      Match User
-                    </Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
+                          <Dropdown.Menu style={{ left: '-80px' }}>
+                            <Dropdown.Item
+                              style={{
+                                color: "green",
+                                fontSize: "18px",
+                                marginBottom: "10px",
+                              }}
+                            ><Link to="/user_profile" state={{ userId: user.id }} >View Profile</Link>
+
+                            </Dropdown.Item>
+                            <Dropdown.Item onClick={() => handleMatchUser(user)} style={{ color: 'green', fontSize: '18px' }}>
+                              Match User
+                            </Dropdown.Item>
+                          </Dropdown.Menu>
+                        </Dropdown>
                       </td>
                     </tr>
                   ))}
@@ -440,29 +455,29 @@ function Matching({ collapsed, profile, male, female }) {
         <br />
       </div>
       <Modal show={showModal} onHide={() => setShowModal(false)}>
-          <Modal.Header closeButton>
-            <Modal.Title>Select a User to Match</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <input
-              type="text"
-              className="form-control mb-3"
-              placeholder="Search Here"
-              value={searchQuery1}
-              onChange={(e) => setSearchQuery1(e.target.value)}
-            />
-            {modalUsers.filter(user => user.name.toLowerCase().includes(searchQuery1.toLowerCase())).map((user, index) => (
-              <div key={index} style={styles1.modalUser} onClick={() => handleUserSelect(user)}>
-               <div> <img
-                  style={styles1.personImage}
-                  src={"https://backend.butterfly.hurairaconsultancy.com/" + user.image1}
-                  alt={user.name}
-                />
-                {user.name}</div><br/>
-              </div>
-            ))}
-          </Modal.Body>
-        </Modal>
+        <Modal.Header closeButton>
+          <Modal.Title>Select a User to Match</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <input
+            type="text"
+            className="form-control mb-3"
+            placeholder="Search Here"
+            value={searchQuery1}
+            onChange={(e) => setSearchQuery1(e.target.value)}
+          />
+          {modalUsers.filter(user => user.name.toLowerCase().includes(searchQuery1.toLowerCase())).map((user, index) => (
+            <div key={index} style={styles1.modalUser} onClick={() => handleUserSelect(user)}>
+              <div> <img
+                style={styles1.personImage}
+                src={"https://backend.butterfly.hurairaconsultancy.com/" + user.image1}
+                alt={user.name}
+              />
+                {user.name}</div><br />
+            </div>
+          ))}
+        </Modal.Body>
+      </Modal>
       <ToastContainer />
     </>
   );

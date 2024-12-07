@@ -43,10 +43,8 @@ export const fetchUserJoinStats = () => {
 
       // Fill the array with actual data
       userJoinData.forEach((item) => {
-        monthlyUserData[item.month - 1] = item.total; // Subtract 1 for 0-indexed array
+        monthlyUserData[item.month - 1] = item.total; 
       });
-
-      // Prepare the updated chart data
       const updatedData = {
         labels: [
           "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"

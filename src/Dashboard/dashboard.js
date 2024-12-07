@@ -62,7 +62,7 @@ const Dashboard = ({ collapsed, data, profile }) => {
   const [avatar, setAvatar] = useState([]);
   const [lead, setLead] = useState([]);
   const [activeUsers, setActiveUsers] = useState([]);
-  const [matchStat,setMatchStat]=useState('loading...');
+  const [matchStat, setMatchStat] = useState('loading...');
 
   const [liveUsers, setLiveUsers] = useState(0);
 
@@ -114,16 +114,16 @@ const Dashboard = ({ collapsed, data, profile }) => {
       toast.error("Error occurred while cancelling match.");
     }
   };
-  const formatMatchStat=(profile)=>{
+  const formatMatchStat = (profile) => {
 
-    if(profile){
-      if(profile.chatting_status=='1')
+    if (profile) {
+      if (profile.chatting_status == '1')
         return 'Chatting Stage'
-      else if(profile.user_one_view=='1')
+      else if (profile.user_one_view == '1')
         return `${profile.name} viewed`
-      else if(profile.user_two_view=='1')
+      else if (profile.user_two_view == '1')
         return `${profile.matchName} viewed`
-      else if(profile.user_one_view == '0' && profile.user_two_view=='0')
+      else if (profile.user_one_view == '0' && profile.user_two_view == '0')
         return `None Viewed`
       else return `Both Viewed`
     }
@@ -256,7 +256,7 @@ const Dashboard = ({ collapsed, data, profile }) => {
         <p className={styles.activeMatchSubtitle}>Ongoing match</p>
         {profile.map((profile, index) => {
           return (
-            <div className={styles.row} key={index}>
+          profile.interested=='0'? (<div className={styles.row} key={index}>
               <div className={styles.idCell}>{profile.id}</div>
               <div className={styles.imageCell}>
                 <img
@@ -319,7 +319,7 @@ const Dashboard = ({ collapsed, data, profile }) => {
 
 
 
-              <div className={styles.daysCell}>{profile.days} <br/><span>{formatMatchStat(profile)}</span></div>
+              <div className={styles.daysCell}>{profile.days} <br /><span>{formatMatchStat(profile)}</span></div>
 
               <div style={styles1.cell1}>
                 {/* Dropdown for options */}
@@ -353,7 +353,7 @@ const Dashboard = ({ collapsed, data, profile }) => {
                   </Dropdown.Menu>
                 </Dropdown>
               </div>
-            </div>
+            </div>):''
           );
         })}
         <br />

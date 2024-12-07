@@ -13,7 +13,7 @@ const Chat = () => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [dummyChats, setDummyChats] = useState([]);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 1270);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 1170);
   const [unreadCounts, setUnreadCounts] = useState([]);
 
   useEffect(() => {
