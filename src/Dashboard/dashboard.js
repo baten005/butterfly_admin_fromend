@@ -10,6 +10,7 @@ import { Dropdown } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
 import axiosInstance from "../AxiosInstance/axiosinstance";
 import "react-toastify/dist/ReactToastify.css";
+import { Modal, Button } from "react-bootstrap";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -35,34 +36,15 @@ const formatDate = (dateString) => {
   return date.toLocaleDateString('en-GB', options); // 'en-GB' for day-month-year format
 };
 
-const chartoptions = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: 'top',
-    },
-    title: {
-      display: true,
-      text: 'Monthly Data',
-    },
-  },
-  scales: {
-    y: {
-      ticks: {
-        stepSize: 100, // Increment by 100
-        callback: function (value) {
-          return value;
-        },
-      },
-    },
-  },
-};
 const Dashboard = ({ collapsed, data, profile }) => {
   const dispatch = useDispatch();
   const [avatar, setAvatar] = useState([]);
   const [lead, setLead] = useState([]);
   const [activeUsers, setActiveUsers] = useState([]);
   const [matchStat, setMatchStat] = useState('loading...');
+  const [selectedMonth, setSelectedMonth] = useState(null);
+  const [userList, setUserList] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   const [liveUsers, setLiveUsers] = useState(0);
 
@@ -143,6 +125,52 @@ const Dashboard = ({ collapsed, data, profile }) => {
       },
     },
   };
+  const handleBarClick = (event, elements) => {
+    if (elements.length > 0) {
+      const clickedElementIndex = elements[0].index;
+      const month = clickedElementIndex;
+      setSelectedMonth(month);
+      fetchUserList(month);
+    }
+  };
+  const chartoptions = {
+    onClick: handleBarClick,
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'Monthly Data',
+      },
+    },
+    scales: {
+      y: {
+        ticks: {
+          stepSize: 100,
+          callback: function (value) {
+            return value;
+          },
+        },
+      },
+    },
+  };
+
+  const fetchUserList = async (month) => {
+    console.log(month, "this is the month");
+    try {
+      const response = await axiosInstance.get(`/usersByMonth?month=${month + 1}`);
+      if (response.status === 200 && response.data) {
+        setUserList(response.data.users);
+        setShowModal(true);
+      }
+    } catch (error) {
+      console.error("Error fetching user list:", error);
+    }
+  };
+
+
   console.log("theese are avatar", profile);
   return (
     <div className={styles.dashboardContainer}>
@@ -256,7 +284,7 @@ const Dashboard = ({ collapsed, data, profile }) => {
         <p className={styles.activeMatchSubtitle}>Ongoing match</p>
         {profile.map((profile, index) => {
           return (
-          profile.interested=='0'? (<div className={styles.row} key={index}>
+            profile.interested == '0' ? (<div className={styles.row} key={index}>
               <div className={styles.idCell}>{profile.id}</div>
               <div className={styles.imageCell}>
                 <img
@@ -353,11 +381,37 @@ const Dashboard = ({ collapsed, data, profile }) => {
                   </Dropdown.Menu>
                 </Dropdown>
               </div>
-            </div>):''
+            </div>) : ''
           );
         })}
         <br />
         <br />
+        <Modal show={showModal} onHide={() => setShowModal(false)}>
+          <Modal.Header closeButton>
+            <Modal.Title>Users Signed Up in {data.labels[selectedMonth]}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {userList.length > 0 ? (
+              <ul style={{listStyle:'none'}}>
+                {userList.map((user, index) => (
+                  <li key={index}>
+
+                    <div><img style={{ width: '50px', borderRadius: '25px' }} src={`https://backend.butterfly.hurairaconsultancy.com/${user.path}`}></img> <strong>{user.fullName}</strong></div>
+                    <br />
+                  </li>
+
+                ))}
+              </ul>
+            ) : (
+              <p>No users signed up in this month.</p>
+            )}
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={() => setShowModal(false)}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </div>
       <ToastContainer />
     </div>

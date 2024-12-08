@@ -79,7 +79,7 @@ function ChatRequests({ collapsed }) {
     <>
       <Sidebar />
       <div className={`${styles.content} ${collapsed ? styles.collapsed : ""}`}>
-        {profileUsers.length > 0 ? (
+        {profileUsers && profileUsers.length > 0 ? (
           profileUsers.map((profile, index) => (
             <div style={{...styles1.row,background:profileUsers1[index].chatting_status=='1'?'rgba(205, 254, 194, 1)':'rgba(254, 121, 104, .5)'}} key={index}>
               {/* User One Details */}

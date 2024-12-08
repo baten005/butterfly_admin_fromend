@@ -17,8 +17,10 @@ export const login = (username, password) => async (dispatch) => {
     dispatch({ type: SET_ID, payload: id });
     dispatch({ type: SET_PERMISSIONS_FIRST, payload: permissions });
     dispatch({ type: LOGIN_SUCCESS, payload: response.data });
+    return Promise.resolve(response.data);
   } catch (error) {
     dispatch({ type: SET_ERROR, payload: 'Invalid credentials' });
+    return Promise.reject(error);
   } finally {
     dispatch({ type: SET_LOADING, payload: false });
   }

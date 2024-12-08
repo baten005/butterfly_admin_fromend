@@ -43,6 +43,7 @@ const Admin = ({
     'blog',
     'report',
     'admin_permission',
+    'support_chat'
   ];
 
   const handleAdminClick = (admin) => {

@@ -42,6 +42,7 @@ const Sidebar = ({
     report: permissions[0].report,
     admin: permissions[0].admin_permission,
     SuccessList: permissions[0].success_list,
+    support_chat:permissions[0].support_chat
   };
 
   const handleLogout = () => {
@@ -265,7 +266,7 @@ const Sidebar = ({
             </Link>
           </li>
         )}
-        {admin.admin === 1 && (
+        {admin.support_chat === 1 && (
           <li className="nav-item">
             <Link
               to="/support_chat"

@@ -145,7 +145,8 @@ function Matching({ collapsed, profile, male, female }) {
                 style={{
                   display: "flex",
                   alignItems: "center",
-                  background: profile.interested == profile.one ? 'rgba(254, 121, 104, .5)' : 'transparent'
+                  background: profile.interested == profile.one ? 'rgba(254, 121, 104, .5)' : 'transparent',
+                  borderRadius:'20px'
                 }}
               >
 
@@ -185,7 +186,8 @@ function Matching({ collapsed, profile, male, female }) {
                 style={{
                   display: "flex",
                   alignItems: "center",
-                  background: profile.interested == profile.two ? 'rgba(254, 121, 104, .5)' : 'transparent'
+                  background: profile.interested == profile.two ? 'rgba(254, 121, 104, .5)' : 'transparent',
+                  borderRadius:'20px'
                 }}
               >
 
