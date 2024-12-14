@@ -149,7 +149,7 @@ function SocialLinkUpdate({
         ? "#007BFF"
         : "#FFF",
   });
- //console.log(loading_social,"jsnhxshxn")
+ console.log(contactItem,"jsnhxshxn")
   return (
     <>
       <Sidebar />
@@ -171,13 +171,13 @@ function SocialLinkUpdate({
               <div style={styles1.contactText}>{contactItem.Telephone}</div>
             </div>
             <div
-              style={renderContactStyle("Whatsapp")}
-              onClick={() => handleIconClick("contactItem", "Whatsapp")}
+              style={renderContactStyle("Whatsapp1")}
+              onClick={() => handleIconClick("contactItem", "Whatsapp1")}
             >
               <div style={styles1.iconWrapper}>
                 <Whatsapp color="white" size={18} />
               </div>
-              <div style={styles1.contactText}>{contactItem.Whatsapp}</div>
+              <div style={styles1.contactText}>{contactItem.Whatsapp1}</div>
             </div>
             <div
               style={renderContactStyle("Email")}

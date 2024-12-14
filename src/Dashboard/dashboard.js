@@ -78,14 +78,10 @@ const Dashboard = ({ collapsed, data, profile }) => {
     }
   };
 
-  useEffect(() => {
-    dispatch(fetchProfileData());
-  }, [dispatch]);
-
   const handleCancelMatch = async (id) => {
     try {
       const response = await axiosInstance.post(`/cancelMatch`, { id });
-      //console.log(response);
+      //console.log(response) 
       if (response.status === 200 && response.data.success) {
         toast.success("Match cancelled successfully!");
         dispatch(fetchProfileData());
@@ -96,6 +92,26 @@ const Dashboard = ({ collapsed, data, profile }) => {
       toast.error("Error occurred while cancelling match.");
     }
   };
+
+  const handleDeleteMatch = async (id) => {
+    try {
+      const response = await axiosInstance.post(`/deleteMatch`, { id });
+      //console.log(response) 
+      if (response.status === 200 && response.data.success) {
+        toast.success("Match cancelled successfully!");
+        dispatch(fetchProfileData());
+      } else {
+        toast.error("Failed to cancel match.");
+      }
+    } catch (error) {
+      toast.error("Error occurred while cancelling match.");
+    }
+  };
+
+  useEffect(() => {
+    dispatch(fetchProfileData());
+  }, [dispatch]);
+
   const formatMatchStat = (profile) => {
 
     if (profile) {
@@ -284,7 +300,7 @@ const Dashboard = ({ collapsed, data, profile }) => {
         <p className={styles.activeMatchSubtitle}>Ongoing match</p>
         {profile.map((profile, index) => {
           return (
-            profile.interested == '0' ? (<div className={styles.row} key={index}>
+            (profile.interested == '0' && profile.admin_block=='0' )? (<div className={styles.row} key={index}>
               <div className={styles.idCell}>{profile.id}</div>
               <div className={styles.imageCell}>
                 <img
@@ -372,11 +388,17 @@ const Dashboard = ({ collapsed, data, profile }) => {
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu style={{ left: "-80px" }}>
-                    <Dropdown.Item
+                  <Dropdown.Item
                       onClick={() => handleCancelMatch(profile.id)}
-                      style={{ color: "red", fontSize: "18px" }}
+                      style={{ color: profile.admin_block == '0' ? "rgba(255, 240, 0)" : "#2ecc71", fontSize: "18px" }}
                     >
-                      Cancel Match
+                      {profile.admin_block == '0' ? 'Block Match' : 'Unblock Match'}
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      onClick={() => handleDeleteMatch(profile.id)}
+                      style={{ color: "rgba(254, 121, 104, 1)", fontSize: "18px" }}
+                    >
+                      Delete Match
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>

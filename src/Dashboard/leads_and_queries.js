@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import axiosInstance from "../AxiosInstance/axiosinstance";
 import { Modal, Button, Dropdown } from "react-bootstrap";
 import { toast, ToastContainer } from "react-toastify";
+import { ImBin } from "react-icons/im";
 
 function Leads_and_queries({ collapsed }) {
     const [leads, setLeads] = useState([]);
@@ -19,7 +20,8 @@ function Leads_and_queries({ collapsed }) {
     const fetchLeads = async () => {
         try {
             const response = await axiosInstance.get("/getLeadsAndQueries");
-            setLeads(response.data);
+            setLeads([...response.data].reverse());
+
         } catch (error) {
             console.error("Error fetching leads:", error);
         }
@@ -30,12 +32,24 @@ function Leads_and_queries({ collapsed }) {
         setShowModal(true);
     };
 
+    const handleDelete = async (lead) => {
+        try {
+            await axiosInstance.post("/delete_query", {
+                id: lead.id,
+            });
+            toast.success("Deleted successfully!");
+            fetchLeads();
+        } catch (error) {
+            toast.error("Failed to Delete");
+        }
+    };
+
     const handleSubmit = async () => {
         try {
             await axiosInstance.post("/send_query_response", {
                 phoneNumber: selectedLead.phoneNumber,
                 message,
-                id:selectedLead.id,
+                id: selectedLead.id,
             });
             toast.success("Response sent successfully!");
             fetchLeads();
@@ -47,11 +61,11 @@ function Leads_and_queries({ collapsed }) {
             setMessage("");
         }
     };
-//console.log(selectedLead,'etai lead')
     return (
         <>
             <Sidebar />
             <div className={`${styles.content} ${collapsed ? styles.collapsed : ""}`}>
+
                 <h1 className={styles.title}>Leads and Queries</h1>
                 <div className={styles.leadContainer}>
                     {leads.length > 0 ? (
@@ -61,10 +75,17 @@ function Leads_and_queries({ collapsed }) {
                                 className={styles.leadBox}
                                 onClick={() => handleLeadClick(lead)}
                             >
+                                <div onClick={(e) => {
+                                    e.stopPropagation(); 
+                                    handleDelete(lead); 
+                                }} className={styles.binIcon}>
+                                    <ImBin color="red" />
+                                </div>
                                 <h2>{lead.name}</h2>
                                 <p><strong>Phone:</strong> {lead.phoneNumber}</p>
                                 <p><strong>Query:</strong> {lead.query}</p>
                             </div>
+
                         ))
                     ) : (
                         <p>No leads or queries available</p>

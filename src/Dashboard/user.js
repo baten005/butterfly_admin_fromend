@@ -83,6 +83,7 @@ function User({ collapsed, activeUsers, expiredUsers }) {
   const handleUserDelete = (id) => {
     setShowModal(true);
     setDeleteId(id);
+    fetchCvs();
   };
 
   const confirmDelete = async () => {

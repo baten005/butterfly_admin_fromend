@@ -23,7 +23,7 @@ export const fetchProfileData = () => {
   return async (dispatch) => {
     try {
       const response = await axiosInstance.get("/getMatches");
-
+      console.log(response.data,"ki re vai kam kor na ")
       dispatch(setProfile(response.data));
     } catch (error) {
       console.error("Error fetching profile data:", error);

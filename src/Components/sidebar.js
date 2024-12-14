@@ -41,6 +41,7 @@ const Sidebar = ({
     blog: permissions[0].blog,
     report: permissions[0].report,
     admin: permissions[0].admin_permission,
+    support_chat:permissions[0].support_chat,
     SuccessList: permissions[0].success_list,
     support_chat:permissions[0].support_chat
   };
@@ -270,7 +271,7 @@ const Sidebar = ({
           <li className="nav-item">
             <Link
               to="/support_chat"
-              className={`nav-link ${pathname === "/admin" ? "active" : ""}`}
+              className={`nav-link ${pathname === "/support_chat" ? "active" : ""}`}
               style={style1.kala}
             >
               <FaEye className="menu-icon" />

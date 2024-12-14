@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import axiosInstance from "../AxiosInstance/axiosinstance";
 import { Modal, Button, Dropdown, Toast } from "react-bootstrap";
 import { toast, ToastContainer } from "react-toastify";
+import { ImBin } from "react-icons/im";
 
 function Report({ collapsed }) {
     const [reports, setReports] = useState([]);
@@ -15,35 +16,52 @@ function Report({ collapsed }) {
     const [currentImage, setCurrentImage] = useState('');
 
     useEffect(() => {
-
-
         fetchReports();
     }, []);
     const fetchReports = async () => {
+        console.log('dhoke')
         try {
-            const response = await axiosInstance.get('reports');
-            setReports(response.data);
+            const response = await axiosInstance.get('/reports');
+            setReports([...response.data].reverse());
         } catch (error) {
+            setReports([])
             console.error('Error fetching reports:', error);
         }
     };
     const handleReportClick = (report) => {
         setSelectedReport(report);
         setShowModal(true);
-        setAction(''); // Reset action when opening modal
+        setAction('');
     };
 
     const handleActionSelect = (eventKey) => {
         setAction(eventKey);
     };
+    const handleDelete = async (report) => {
+        console.log(report,"theese are report to be deleted")
+        try {
+            await axiosInstance.post('/deleteReport', {
+                reportId: report.id,
+                files: report.files
+            });
+            fetchReports();
+            toast.success('Updated Successfully')
+            
+        } catch (error) {
+            toast.error('Update Failed')
+        } finally {
+            setShowModal(false);
+            setAction('');
+        }
+        
+    };
 
     const handleSubmit = async () => {
         try {
-            // Send request to the backend
             await axiosInstance.post('/handleReport', {
                 action,
                 reportId: selectedReport.id,
-                reportedId:selectedReport.reported
+                reportedId: selectedReport.reported
             });
             toast.success('Updated Successfully')
             fetchReports();
@@ -61,7 +79,6 @@ function Report({ collapsed }) {
     };
 
     const closeGallery = () => setShowGallery(false);
-//console.log(selectedReport)
     return (
         <>
             <Sidebar />
@@ -70,19 +87,44 @@ function Report({ collapsed }) {
                 <div className={styles.reportContainer}>
                     {reports.length > 0 ? (
                         reports.map((report) => (
-                            <div key={report.id} className={styles.reportBox} onClick={() => handleReportClick(report)} style={{background:report.action_taken=='1'?'rgba(205, 254, 194, 1)':'rgba(254, 121, 104, .5)'}}>
+                            <div
+                                key={report.id}
+                                className={styles.reportBox}
+                                onClick={() => handleReportClick(report)}
+                                style={{
+                                    background: report.action_taken == '1' ? 'rgba(205, 254, 194, 1)' : 'rgba(254, 121, 104, .5)'
+                                }}
+                            >
+                                {/* Delete Button */}
+                                <div
+                                    className={styles.deleteIcon}
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        handleDelete(report);
+                                    }}
+                                >
+                                    <ImBin color="black" size={20} />
+                                </div>
+                                <br/>
+                                {/* Report Content */}
                                 <h2>{report.violenceType}</h2>
                                 <p><strong>Details:</strong> {report.details}</p>
                                 <p><strong>Actions Taken:</strong> {report.actions}</p>
                                 <p><strong>Reported By:</strong>
                                     <span className={styles.avatar}>
-                                        <img src={`https://backend.butterfly.hurairaconsultancy.com/${report.reporterImage}`} alt={report.reporterName} />
+                                        <img
+                                            src={`https://backend.butterfly.hurairaconsultancy.com/${report.reporterImage}`}
+                                            alt={report.reporterName}
+                                        />
                                     </span>
                                     {report.reporterName}
                                 </p>
                                 <p><strong>Reported Against:</strong>
                                     <span className={styles.avatar}>
-                                        <img src={`https://backend.butterfly.hurairaconsultancy.com/${report.reportedImage}`} alt={report.reportedName} />
+                                        <img
+                                            src={`https://backend.butterfly.hurairaconsultancy.com/${report.reportedImage}`}
+                                            alt={report.reportedName}
+                                        />
                                     </span>
                                     {report.reportedName}
                                 </p>

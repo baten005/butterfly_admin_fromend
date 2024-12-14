@@ -10,11 +10,12 @@ export const SET_SUCCESS = 'SET_SUCCESS';
 
 export const fetchContactDetails = () => async (dispatch) =>  {
     const data=await axiosInstance.get('/all_contacts_links');
-    //console.log('this is contact',data.data.contactItem);
+    console.log('this is contact',data.data.contactItem);
     dispatch({type:FETCH_CONTACT_DETAILS,payload:data.data})
 };
 
 export const selectContact = (type, name) => {
+  console.log(type,name,"dekhi ei tay ase naki");
   return {
     type: SELECT_CONTACT,
     payload: { type, name },

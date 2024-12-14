@@ -65,6 +65,21 @@ function Matching({ collapsed, profile, male, female }) {
     }
   };
 
+  const handleDeleteMatch = async (id) => {
+    try {
+      const response = await axiosInstance.post(`/deleteMatch`, { id });
+      //console.log(response) 
+      if (response.status === 200 && response.data.success) {
+        toast.success("Match cancelled successfully!");
+        dispatch(fetchProfileData());
+      } else {
+        toast.error("Failed to cancel match.");
+      }
+    } catch (error) {
+      toast.error("Error occurred while cancelling match.");
+    }
+  };
+
   const formatMatchStat = (profile) => {
 
     if (profile) {
@@ -114,7 +129,7 @@ function Matching({ collapsed, profile, male, female }) {
       toast.error("Error occurred while matching user.");
     }
   };
-
+  console.log(filteredProfiles, "ki re vai hudai");
   return (
     <>
       <Sidebar />
@@ -140,13 +155,17 @@ function Matching({ collapsed, profile, male, female }) {
         {/* Display Filtered Profile Matches */}
         {filteredProfiles.length > 0 ? (
           filteredProfiles.map((profile, index) => (
-            <div className={styles.row} key={index}>
+            <div
+              className={`${styles.row}`}
+              key={index}
+            >
               <div
+              className={`${profile.admin_block != '0' ? styles.blocked : ''}`}
                 style={{
                   display: "flex",
                   alignItems: "center",
-                  background: profile.interested == profile.one ? 'rgba(254, 121, 104, .5)' : 'transparent',
-                  borderRadius:'20px'
+                  background: profile.interested == profile.one ? 'rgba(254, 121, 104, .6)' : 'transparent',
+                  borderRadius: '20px'
                 }}
               >
 
@@ -179,15 +198,16 @@ function Matching({ collapsed, profile, male, female }) {
                   </span>
                 </div>
               </div>
-              <div className={styles.iconCell}>
+              <div className={`${styles.iconCell} ${profile.admin_block != '0' ? styles.blocked : ''}`}>
                 <img src={`${process.env.PUBLIC_URL}/send.svg`} style={{ cursor: "pointer" }} alt="send" />
               </div>
               <div
+              className={`${profile.admin_block != '0' ? styles.blocked : ''}`}
                 style={{
                   display: "flex",
                   alignItems: "center",
                   background: profile.interested == profile.two ? 'rgba(254, 121, 104, .5)' : 'transparent',
-                  borderRadius:'20px'
+                  borderRadius: '20px'
                 }}
               >
 
@@ -222,9 +242,9 @@ function Matching({ collapsed, profile, male, female }) {
 
                 <div className={styles.daysCell}>{profile.days} <br /><span>{formatMatchStat(profile)}</span></div>
               </div>
-              <div style={styles1.cell1}>
+              <div style={styles1.cell1} >
                 {/* Dropdown for options */}
-                <Dropdown>
+                <Dropdown className={styles.neverBlock}>
                   <Dropdown.Toggle
                     variant="button"
                     style={{
@@ -238,7 +258,8 @@ function Matching({ collapsed, profile, male, female }) {
                       borderRadius: '50%',
                       border: "1px solid var(--rn-53-themes-net-silver, #C3C3C3)",
                       backgroundColor: 'white',
-                      margin: '-5px'
+                      margin: '-5px',
+                      filter:'none'
                     }}
                   >
                     <FaEllipsisH color="rgba(0,0,0,.5)" />
@@ -247,9 +268,17 @@ function Matching({ collapsed, profile, male, female }) {
                   <Dropdown.Menu style={{ left: "-80px" }}>
                     <Dropdown.Item
                       onClick={() => handleCancelMatch(profile.id)}
-                      style={{ color: "rgba(254, 121, 104, .5)", fontSize: "18px" }}
+                      className={styles.neverBlock}
+                      style={{ color: profile.admin_block == '0' ? "rgba(255, 240, 0)" : "#2ecc71", fontSize: "18px" }}
                     >
-                      Cancel Match
+                      {profile.admin_block == '0' ? 'Block Match' : 'Unblock Match'}
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      onClick={() => handleDeleteMatch(profile.id)}
+                      className={styles.neverBlock}
+                      style={{ color: "rgba(254, 121, 104, 1)", fontSize: "18px" }}
+                    >
+                      Delete Match
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
@@ -554,6 +583,11 @@ const styles1 = {
   activeMembersContainer: {
     width: "100%",
   },
+
+  blocked:{
+    filter: 'grayscale(1)',
+    opacity: .7
+  }
 };
 
 const formatStatus = (status) => {

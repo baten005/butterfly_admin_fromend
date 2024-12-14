@@ -70,3 +70,23 @@
     width: 100%; /* Make the image full width in the modal */
     height: auto; /* Keep aspect ratio */
 }
+
+.reportBox {
+  position: relative; 
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.deleteIcon {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  cursor: pointer; 
+  border-radius: 50%;
+  padding: 10px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+}
+

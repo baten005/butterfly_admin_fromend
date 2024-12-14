@@ -451,3 +451,13 @@ small {
 }
 
 
+.blocked *:not(.neverBlock) {
+  filter: grayscale(100%);
+  opacity: 0.7;
+}
+
+.neverBlock {
+  filter: none;
+  opacity: 1;
+}
+

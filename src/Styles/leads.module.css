@@ -1,4 +1,4 @@
-/* Container for the main content */
+
 .content {
     margin-left: 250px;
     padding: 20px;
@@ -6,12 +6,10 @@
     min-height: 100vh;
 }
 
-/* Collapsed sidebar adjustment */
 .collapsed {
     margin-left: 80px;
 }
 
-/* Title styling */
 .title {
     font-size: 2rem;
     color: #333;
@@ -20,14 +18,12 @@
     font-weight: 600;
 }
 
-/* Container for the lead cards */
 .leadContainer {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
 }
 
-/* Lead Box - card style */
 .leadBox {
     background-color: #ffffff;
     border-radius: 8px;
@@ -42,21 +38,18 @@
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
 }
 
-/* Lead name */
 .leadBox h2 {
     font-size: 1.5rem;
     color: #1a73e8;
     margin-bottom: 10px;
 }
 
-/* Lead details */
 .leadBox p {
     margin: 5px 0;
     font-size: 1rem;
     color: #555;
 }
 
-/* Modal TextArea Input for messages */
 .messageInput {
     width: 100%;
     height: 120px;
@@ -75,9 +68,25 @@
     border-color: #1a73e8;
 }
 
-/* Responsive design adjustments */
 @media (max-width: 768px) {
     .leadContainer {
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     }
 }
+
+
+.leadBox {
+    position: relative; 
+    padding: 20px;
+    border: 1px solid #ccc; 
+    border-radius: 10px;
+    background-color: #f9f9f9;
+  }
+  
+  .binIcon {
+    position: absolute;
+    top: 10px; 
+    right: 10px;
+    cursor: pointer;
+  }
+  

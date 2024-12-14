@@ -7,14 +7,16 @@ import BioDataPage2 from '../Bio_data/page2';
 import BioDataPage3 from '../Bio_data/page3';
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import { DNA } from 'react-loader-spinner';
 
 function ProfileView() {
     const location = useLocation();
-    const { userId } = location.state || {}; 
+    const { userId } = location.state || {};
     const id = userId;
     const [userData, setUserData] = useState(null);
     const [marginBottomStyle, setMarginBottomStyle] = useState({});
     const biodataRef = useRef(null);  // Reference for the biodata pages
+    const [loading, setLoading] = useState(false);
 
     // Fetch user data from API
     useEffect(() => {
@@ -46,7 +48,7 @@ function ProfileView() {
     // Generate PDF on Print Button Click
     const handlePrint = async () => {
         if (!biodataRef.current) return;
-
+        setLoading(true);
         const pdf = new jsPDF("p", "mm", "a4");
         const pages = biodataRef.current.children;
 
@@ -60,8 +62,9 @@ function ProfileView() {
             if (i > 0) pdf.addPage();
             pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
         }
-
+        setLoading(false);
         pdf.save(`${userData?.user?.fullName || 'Profile'}.pdf`);
+        
     };
 
     return (
@@ -81,6 +84,12 @@ function ProfileView() {
                     </div>
                 </div>
             </div>
+            {loading && (
+                <div className={styles.loaderOverlay}>
+                    <div className={styles.loaderContainer}>
+                        <DNA color="#00BFFF" height={80} width={80} />
+                    </div>
+                </div>)}
         </main>
     );
 }
