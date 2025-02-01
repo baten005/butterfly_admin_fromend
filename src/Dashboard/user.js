@@ -8,6 +8,7 @@ import { Dropdown, Modal } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
 import axiosInstance from "../AxiosInstance/axiosinstance";
 import { Link, useLocation } from "react-router-dom";
+import Note from "./note";
 
 
 function User({ collapsed, activeUsers, expiredUsers }) {
@@ -18,10 +19,12 @@ function User({ collapsed, activeUsers, expiredUsers }) {
   const [showModal, setShowModal] = useState(false);
   const [showModal1, setShowModal1] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
+  const [showNote, setShoNote] = useState(false);
   const [CV, setCV] = useState();
   const [deleteId, setDeleteId] = useState();
   const [cvs, setCvs] = useState([]);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
+  const [userId,setUserId]=useState('');
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -55,7 +58,7 @@ function User({ collapsed, activeUsers, expiredUsers }) {
   const handleUserExpire = async (id) => {
     try {
       const response = await axiosInstance.post(`/userExpired`, { id });
-      //console.log(response);
+      ////console.log(response);
       if (response.status === 200 && response.data.success) {
         toast.success("Updated successfully!");
         dispatch(fetchUsers());
@@ -69,7 +72,7 @@ function User({ collapsed, activeUsers, expiredUsers }) {
   const handleUserActive = async (id) => {
     try {
       const response = await axiosInstance.post(`/userActivate`, { id });
-      //console.log(response);
+      ////console.log(response);
       if (response.status === 200 && response.data.success) {
         toast.success("Updated successfully!");
         dispatch(fetchUsers());
@@ -89,7 +92,7 @@ function User({ collapsed, activeUsers, expiredUsers }) {
   const confirmDelete = async () => {
     try {
       const response = await axiosInstance.post(`/deleteUser`, { deleteId });
-      //console.log(response);
+      ////console.log(response);
       if (response.status === 200 && response.data.success) {
         toast.success("Deleted User successfully!");
         dispatch(fetchUsers());
@@ -108,12 +111,15 @@ function User({ collapsed, activeUsers, expiredUsers }) {
     try {
       const response = await axiosInstance.get(`/getCvs`);
       //console.log(response, "this is cvs");
-      setCvs(response.data);
+      const cvsData = Array.isArray(response.data) ? response.data.reverse() : [response.data];
+      setCvs(cvsData);
       setShowModal1(true);
     } catch (error) {
-      toast.error("Error occurred while Deleting User.");
+      console.error(error);
+      toast.error("Error occurred while fetching CVs.");
     }
-  }
+  };
+
 
   const filteredCVs = cvs.filter(
     (cv) =>
@@ -150,7 +156,14 @@ function User({ collapsed, activeUsers, expiredUsers }) {
     }
   };
 
-  console.log(filteredActiveUsers,activeUsers, filteredExpiredUsers,expiredUsers, "bal bal bal");
+  const handleClick=(id)=>{
+
+    setShoNote(true);
+    setUserId(id);
+
+  }
+
+  //console.log(filteredActiveUsers, activeUsers, filteredExpiredUsers, expiredUsers, "bal bal bal");
   return (
     <>
       <Sidebar />
@@ -250,15 +263,18 @@ function User({ collapsed, activeUsers, expiredUsers }) {
                       </Dropdown.Toggle>
 
                       <Dropdown.Menu style={{ left: "-80px" }}>
-                      <Dropdown.Item
+                        <Dropdown.Item
                           style={{
                             color: "green",
                             fontSize: "18px",
                             marginBottom: "10px",
                           }}
                         ><Link to="/user_profile" state={{ userId: user.id }} >View Profile</Link>
-                          
+
                         </Dropdown.Item>
+                        <Dropdown.Item onClick={() => handleClick(user.id)} style={{ color: 'green', fontSize: '18px' }}>
+                        Note
+                      </Dropdown.Item>
                         <Dropdown.Item
                           onClick={() => handleUserExpire(user.id)}
                           style={{
@@ -305,7 +321,7 @@ function User({ collapsed, activeUsers, expiredUsers }) {
             </thead>
             <tbody>
               {filteredExpiredUsers.map((user, index) => (
-                <tr key={index} style={{...styles1.tr,background:user.blocked==null||user.blocked=='0'?'':'rgba(254, 121, 104, .5)'}}>
+                <tr key={index} style={{ ...styles1.tr, background: user.blocked == null || user.blocked == '0' ? '' : 'rgba(254, 121, 104, .5)' }}>
                   <td style={styles1.td}>{index + 1}</td>
                   <td style={styles1.td}>
                     <img
@@ -354,15 +370,18 @@ function User({ collapsed, activeUsers, expiredUsers }) {
                       </Dropdown.Toggle>
 
                       <Dropdown.Menu style={{ left: "-80px" }}>
-                      <Dropdown.Item
+                        <Dropdown.Item
                           style={{
                             color: "green",
                             fontSize: "18px",
                             marginBottom: "10px",
                           }}
                         ><Link to="/user_profile" state={{ userId: user.id }} >View Profile</Link>
-                          
+
                         </Dropdown.Item>
+                        <Dropdown.Item onClick={() => handleClick(user.id)} style={{ color: 'green', fontSize: '18px' }}>
+                        Note
+                      </Dropdown.Item>
                         <Dropdown.Item
                           onClick={() => handleUserActive(user.id)}
                           style={{
@@ -453,15 +472,16 @@ function User({ collapsed, activeUsers, expiredUsers }) {
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu style={{ left: '-80px' }}>
-                    <Dropdown.Item
-                          style={{
-                            color: "green",
-                            fontSize: "18px",
-                            marginBottom: "10px",
-                          }}
-                        ><Link to="/user_profile" state={{ userId: cv.id }} style={{ textDecoration: 'none !important' }} >View Profile</Link>
-                          
-                        </Dropdown.Item>
+                      <Dropdown.Item
+                        style={{
+                          color: "green",
+                          fontSize: "18px",
+                          marginBottom: "10px",
+                        }}
+                      ><Link to="/user_profile" state={{ userId: cv.id }} style={{ textDecoration: 'none !important' }} >View Profile</Link>
+
+                      </Dropdown.Item>
+
                       <Dropdown.Item onClick={() => handleCreateUser1(cv)} style={{ color: 'green', fontSize: '18px' }}>
                         Create User
                       </Dropdown.Item>
@@ -540,6 +560,7 @@ function User({ collapsed, activeUsers, expiredUsers }) {
       </Modal>
 
       <ToastContainer />
+      { <Note setShowNote={setShoNote} showNote={showNote} userId={userId} />}
     </>
   );
 }

@@ -128,7 +128,7 @@ function SocialLinkUpdate({
     if (selected.type && selected.name) {
       const newValue =
         section === "company" ? companyInputValue : founderInputValue;
-        //console.log('dhoka')
+        ////console.log('dhoka')
         selected.type=='companySocial'?setdet('1'):setdet('2');
       updateContact(selected.type, selected.name, newValue);
     }
@@ -149,7 +149,7 @@ function SocialLinkUpdate({
         ? "#007BFF"
         : "#FFF",
   });
- console.log(contactItem,"jsnhxshxn")
+ //console.log(contactItem,"jsnhxshxn")
   return (
     <>
       <Sidebar />

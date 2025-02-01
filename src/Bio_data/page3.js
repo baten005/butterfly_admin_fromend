@@ -45,7 +45,7 @@ function BioDataPage3({ userData, style }) {
     preferredAgeLimit
   } = userData.user;
 
-  console.log(images,userData,"this is the kakaest data")
+  //console.log(images,userData,"this is the kakaest data")
   return (
     <div className={styles.card} data-component style={style}>
       <BioHeader />

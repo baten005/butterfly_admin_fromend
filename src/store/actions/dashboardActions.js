@@ -23,7 +23,7 @@ export const fetchProfileData = () => {
   return async (dispatch) => {
     try {
       const response = await axiosInstance.get("/getMatches");
-      console.log(response.data,"ki re vai kam kor na ")
+      //console.log(response.data,"ki re vai kam kor na ")
       dispatch(setProfile(response.data));
     } catch (error) {
       console.error("Error fetching profile data:", error);
@@ -38,7 +38,7 @@ export const fetchUserJoinStats = () => {
 
       const userJoinData = response.data;
       // Initialize an array with 12 zero values, one for each month
-      //console.log(userJoinData, 'asolei ki data asse re vai')
+      ////console.log(userJoinData, 'asolei ki data asse re vai')
       const monthlyUserData = Array(12).fill(0);
 
       // Fill the array with actual data

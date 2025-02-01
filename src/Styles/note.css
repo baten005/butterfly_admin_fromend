@@ -1,0 +1,107 @@
+.quill {
+    min-height: 300px; /* Ensure a taller editor */
+    background-color: #ffffff; /* Word-like white background */
+    border-radius: 4px; /* Rounded edges */
+    font-family: 'Calibri', sans-serif; /* Calibri for Word-like feel */
+    padding: 15px; /* Add padding */
+  }
+  
+ .ql-toolbar {
+    position: absolute;
+    top: 0;
+    z-index: 1000; 
+    width: 89.3%;
+    background: #fff; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  }
+  
+  .quill-editor .ql-container {
+    margin-top: 60px; 
+  }
+  .ql-container{
+    margin-top: 1.5rem;
+  }
+
+  /* Modal overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    animation: fadeIn 0.3s forwards;
+  }
+  
+  /* Modal content */
+  .modal-content {
+    background: white;
+    width: 60%;
+    max-width: 800px;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transform: translateY(-50px);
+    animation: slideIn 0.3s forwards;
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Animation for closing */
+  .animated-overlay.closing {
+    animation: fadeOut 0.3s forwards;
+  }
+  
+  .animated-modal.closing {
+    animation: slideOut 0.3s forwards;
+  }
+  
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+  
+  @keyframes slideOut {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(-50px);
+    }
+  }
+
+  .loading-cursor {
+    cursor: progress !important;
+  }
+    
+  

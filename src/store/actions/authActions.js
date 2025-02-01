@@ -10,7 +10,7 @@ export const login = (username, password) => async (dispatch) => {
   try {
     const response = await axiosInstance.post('/login', { username, password });
     const { authorization,id,permissions } = response.data;
-    //console.log('kaka:', permissions)
+    ////console.log('kaka:', permissions)
 
     localStorage.setItem('Butterfly_matrimony_token', authorization);
 

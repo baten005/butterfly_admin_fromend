@@ -49,7 +49,7 @@ const Sidebar = ({
   const handleLogout = () => {
     logout();
   };
-  //console.log(admin, id, permissions);
+  ////console.log(admin, id, permissions);
   return (
     <div
       className={`${styles.sidebar} ${collapsed ? styles.collapsed : ""}`}

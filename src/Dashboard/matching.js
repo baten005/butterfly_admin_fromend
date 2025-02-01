@@ -53,7 +53,7 @@ function Matching({ collapsed, profile, male, female }) {
   const handleCancelMatch = async (id) => {
     try {
       const response = await axiosInstance.post(`/cancelMatch`, { id });
-      //console.log(response) 
+      ////console.log(response) 
       if (response.status === 200 && response.data.success) {
         toast.success("Match cancelled successfully!");
         dispatch(fetchProfileData());
@@ -68,7 +68,7 @@ function Matching({ collapsed, profile, male, female }) {
   const handleDeleteMatch = async (id) => {
     try {
       const response = await axiosInstance.post(`/deleteMatch`, { id });
-      //console.log(response) 
+      ////console.log(response) 
       if (response.status === 200 && response.data.success) {
         toast.success("Match cancelled successfully!");
         dispatch(fetchProfileData());
@@ -129,7 +129,7 @@ function Matching({ collapsed, profile, male, female }) {
       toast.error("Error occurred while matching user.");
     }
   };
-  console.log(filteredProfiles, "ki re vai hudai");
+  //console.log(filteredProfiles, "ki re vai hudai");
   return (
     <>
       <Sidebar />

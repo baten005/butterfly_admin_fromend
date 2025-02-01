@@ -54,7 +54,7 @@ function Leads_and_queries({ collapsed }) {
             toast.success("Response sent successfully!");
             fetchLeads();
         } catch (error) {
-            //console.log('eita')
+            ////console.log('eita')
             toast.error("Failed to send response");
         } finally {
             setShowModal(false);

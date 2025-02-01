@@ -19,7 +19,7 @@ function Report({ collapsed }) {
         fetchReports();
     }, []);
     const fetchReports = async () => {
-        console.log('dhoke')
+        //console.log('dhoke')
         try {
             const response = await axiosInstance.get('/reports');
             setReports([...response.data].reverse());
@@ -38,7 +38,7 @@ function Report({ collapsed }) {
         setAction(eventKey);
     };
     const handleDelete = async (report) => {
-        console.log(report,"theese are report to be deleted")
+        //console.log(report,"theese are report to be deleted")
         try {
             await axiosInstance.post('/deleteReport', {
                 reportId: report.id,

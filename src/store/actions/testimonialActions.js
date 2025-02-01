@@ -82,7 +82,7 @@ export const updateTestimonial = (testimonial) => async (dispatch) => {
     formData.append('designation', testimonial.designation);
     formData.append('company', testimonial.company);
 
-    //console.log(formData,testimonial)
+    ////console.log(formData,testimonial)
     if (testimonial.image) {
       formData.append('image', testimonial.image); // Append image if it exists
     }
@@ -105,11 +105,11 @@ export const updateTestimonial = (testimonial) => async (dispatch) => {
 
 export const deleteTestimonials = (id) => async (dispatch) => {
   try {
-    //console.log('Starting deleteTestimonials with id:', id);
+    ////console.log('Starting deleteTestimonials with id:', id);
     const response = await axiosInstance.post('/delete_testimonials', { id });
-    //console.log('Delete response:', response);
+    ////console.log('Delete response:', response);
     dispatch(fetchTestimonials());
-    //console.log('Dispatching fetchTestimonials');
+    ////console.log('Dispatching fetchTestimonials');
   } catch (error) {
     console.error("Error deleting testimonial:", error);
   }

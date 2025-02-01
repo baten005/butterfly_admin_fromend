@@ -20,11 +20,11 @@ function ProfileView() {
 
     // Fetch user data from API
     useEffect(() => {
-        console.log("Fetching data for id:", id);
+        //console.log("Fetching data for id:", id);
         const fetchData = async () => {
             try {
                 const response = await axiosInstance.get(`/users/${userId}`);
-                console.log(response.data, "User data fetched");
+                //console.log(response.data, "User data fetched");
                 setUserData(response.data);
             } catch (error) {
                 console.error('Error fetching user data:', error);

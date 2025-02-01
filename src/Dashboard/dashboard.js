@@ -64,24 +64,24 @@ const Dashboard = ({ collapsed, data, profile }) => {
   const fetchTextReq = async () => {
     try {
       const response = await axiosInstance.get(`/chatReqAvatars`);
-      console.log(response, 'baler response dese');
+      //console.log(response, 'baler response dese');
       if (response.status === 200 && response.data) {
-        //console.log(response.data);
+        ////console.log(response.data);
         setAvatar(response.data.finalResults);
         setActiveUsers(response.data.totalUsers[0].total);
         setLead(response.data.totalqueries[0].total)
       } else {
-        //console.log("error");
+        ////console.log("error");
       }
     } catch (error) {
-      //console.log(error, "Error occurred while cancelling match.");
+      ////console.log(error, "Error occurred while cancelling match.");
     }
   };
 
   const handleCancelMatch = async (id) => {
     try {
       const response = await axiosInstance.post(`/cancelMatch`, { id });
-      //console.log(response) 
+      ////console.log(response) 
       if (response.status === 200 && response.data.success) {
         toast.success("Match cancelled successfully!");
         dispatch(fetchProfileData());
@@ -96,7 +96,7 @@ const Dashboard = ({ collapsed, data, profile }) => {
   const handleDeleteMatch = async (id) => {
     try {
       const response = await axiosInstance.post(`/deleteMatch`, { id });
-      //console.log(response) 
+      ////console.log(response) 
       if (response.status === 200 && response.data.success) {
         toast.success("Match cancelled successfully!");
         dispatch(fetchProfileData());
@@ -174,7 +174,7 @@ const Dashboard = ({ collapsed, data, profile }) => {
   };
 
   const fetchUserList = async (month) => {
-    console.log(month, "this is the month");
+    //console.log(month, "this is the month");
     try {
       const response = await axiosInstance.get(`/usersByMonth?month=${month + 1}`);
       if (response.status === 200 && response.data) {
@@ -187,7 +187,7 @@ const Dashboard = ({ collapsed, data, profile }) => {
   };
 
 
-  console.log("theese are avatar", profile);
+  //console.log("theese are avatar", profile);
   return (
     <div className={styles.dashboardContainer}>
       <Sidebar />

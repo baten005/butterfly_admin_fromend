@@ -36,7 +36,7 @@ const Chat = () => {
   const fetchChatUsers = async () => {
     try {
       const { data } = await axiosinstance.get("/support/chats");
-      console.log(data,"k k chat sup")
+      //console.log(data,"k k chat sup")
       setDummyChats(data);
     } catch (error) {
       console.error("Error fetching chat users", error);
@@ -92,7 +92,7 @@ const Chat = () => {
 
 
   const handleChatClick = (chat) => {
-    console.log(chat,"dekhi ki ase")
+    //console.log(chat,"dekhi ki ase")
     setSelectedChat(chat);
     setShowSidebar(false);
     fetchMessages(chat.userId);
@@ -105,13 +105,13 @@ const Chat = () => {
   };
 
   useEffect(() => {
-    console.log("call ki hoi?");
+    //console.log("call ki hoi?");
     fetchChatUsers();
     const interval = setInterval(fetchChatUsers, 25000);
     return () => clearInterval(interval);
   }, []);
 
-  console.log(unreadCounts,"theese are");
+  //console.log(unreadCounts,"theese are");
 
   return (
     <div className={`messenger-container`}>

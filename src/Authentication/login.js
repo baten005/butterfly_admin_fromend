@@ -71,7 +71,7 @@ const Login = () => {
         navigate('/dashboard');
       })
       .catch(() => {
-        console.log('here')
+        //console.log('here')
         const attempts = JSON.parse(localStorage.getItem(ATTEMPT_STORAGE_KEY)) || 0;
         const newAttempts = attempts + 1;
         localStorage.setItem(ATTEMPT_STORAGE_KEY, JSON.stringify(newAttempts));
