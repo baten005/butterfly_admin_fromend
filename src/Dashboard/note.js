@@ -21,7 +21,7 @@ const Note = (props) => {
       fetchSuggestion(props.userId);
     }
   }, [props.userId]);
-
+//gg
   const fetchSuggestion = async (userId) => {
     try {
       const response = await axiosInstance.get(`/suggestions/${userId}`);
