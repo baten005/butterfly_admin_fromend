@@ -44,12 +44,17 @@ function BioDataPage2({ userData, style ,permission}) {
             <section className={styles.container}>
               <h2 className={styles.sectionTitle}>Personal Details:</h2>
               <div className={styles.sectionContent}>
-                <div className={styles.detailItem}>
-                  <span className={styles.label}>Date of Birth:</span>
-                  <span className={styles.value}>
-                    {`${userData.user.dobDay}-${userData.user.dobMonth}-${userData.user.dobYear}`}
-                  </span>
-                </div>
+              <div className={styles.detailItem}>
+                <span className={styles.label}>Date of Birth:</span>
+                <span className={styles.value}>
+                  {new Date(userData.user.dobYear, userData.user.dobMonth - 1, userData.user.dobDay).toLocaleDateString('en-GB', {
+                    day: 'numeric',
+                    month: 'short',
+                    year: 'numeric'
+                  })}
+                </span>
+              </div>
+
                 <div className={styles.detailItem}>
                   <span className={styles.label}>Height:</span>
                   <span className={styles.value}>
