@@ -157,7 +157,7 @@ function User({ collapsed, activeUsers, expiredUsers }) {
   };
 
   const handleClick=(id)=>{
-
+    setShowModal1(false);
     setShoNote(true);
     setUserId(id);
 
@@ -267,7 +267,7 @@ function User({ collapsed, activeUsers, expiredUsers }) {
                           style={{
                             color: "green",
                             fontSize: "18px",
-                            marginBottom: "10px",
+                      
                           }}
                         ><Link to="/user_profile" state={{ userId: user.id }} >View Profile</Link>
 
@@ -280,7 +280,7 @@ function User({ collapsed, activeUsers, expiredUsers }) {
                           style={{
                             color: "orange",
                             fontSize: "18px",
-                            marginBottom: "10px",
+                            
                           }}
                         >
                           Expired
@@ -374,7 +374,7 @@ function User({ collapsed, activeUsers, expiredUsers }) {
                           style={{
                             color: "green",
                             fontSize: "18px",
-                            marginBottom: "10px",
+                
                           }}
                         ><Link to="/user_profile" state={{ userId: user.id }} >View Profile</Link>
 
@@ -387,7 +387,7 @@ function User({ collapsed, activeUsers, expiredUsers }) {
                           style={{
                             color: "green",
                             fontSize: "18px",
-                            marginBottom: "10px",
+                            
                           }}
                         >
                           Activate
@@ -476,11 +476,14 @@ function User({ collapsed, activeUsers, expiredUsers }) {
                         style={{
                           color: "green",
                           fontSize: "18px",
-                          marginBottom: "10px",
+                    
                         }}
                       ><Link to="/user_profile" state={{ userId: cv.id }} style={{ textDecoration: 'none !important' }} >View Profile</Link>
 
                       </Dropdown.Item>
+                      <Dropdown.Item onClick={() => handleClick(cv.id)} style={{ color: 'green', fontSize: '18px' }}>
+                      Note
+                    </Dropdown.Item>
 
                       <Dropdown.Item onClick={() => handleCreateUser1(cv)} style={{ color: 'green', fontSize: '18px' }}>
                         Create User
@@ -690,7 +693,6 @@ const formatStatus = (status) => {
   // Normalize the status to lowercase for comparison
   const normalizedStatus = status.toLowerCase();
 
-  // Map statuses to their display values
   switch (normalizedStatus) {
     case 'unmarried':
       return 'Single';
@@ -700,6 +702,12 @@ const formatStatus = (status) => {
       return 'Married';
     case 'gold':
       return 'Gold';
+    case 'separated':
+      return 'Separated';
+    case 'widow':
+      return 'Widow';
+    case 'divorced':
+      return 'Divorced';
     default:
       return status.charAt(0).toUpperCase() + status.slice(1); // Capitalize first letter for any other statuses
   }
@@ -716,6 +724,10 @@ const getStatusColor = (status) => {
       return '#FFECEC';
     case 'gold':
       return '#000';
+    case 'separated':
+    case 'widow':
+    case 'divorced':
+      return '#FF0000'; // Red for separated, widow, and divorced
     default:
       return '#000'; // Default text color if none of the conditions match
   }
@@ -730,6 +742,10 @@ const getStatusBackground = (status) => {
       return '#4452FF';
     case 'gold':
       return '#FFDFA7';
+    case 'separated':
+    case 'widow':
+    case 'divorced':
+      return '#FFCCCC'; // Light red background for separated, widow, and divorced
     default:
       return '#fff'; // Default background color if none of the conditions match
   }

@@ -3,8 +3,9 @@ import BioHeader from './biodata_header';
 import BioFooter from './biodata_footer';
 import styles from '../Styles/Bio_dataStyle/page2.module.css';
 
-function BioDataPage2({ userData, style }) {
+function BioDataPage2({ userData, style ,permission}) {
   const [images,setImages]=useState([]);
+  const det=permission?false:true;
 
   useEffect(() => {
     if (userData?.dpImage) {
@@ -46,7 +47,7 @@ function BioDataPage2({ userData, style }) {
                 <div className={styles.detailItem}>
                   <span className={styles.label}>Date of Birth:</span>
                   <span className={styles.value}>
-                    {`${userData.user.dobDay} ${userData.user.dobMonth} ${userData.user.dobYear}`}
+                    {`${userData.user.dobDay}-${userData.user.dobMonth}-${userData.user.dobYear}`}
                   </span>
                 </div>
                 <div className={styles.detailItem}>
@@ -73,8 +74,18 @@ function BioDataPage2({ userData, style }) {
                 </div>
                 <div className={styles.detailItem}>
                   <span className={styles.label}>Marital Status:</span>
-                  <span className={styles.value}>{userData.user.maritalStatus}</span>
+                  <span className={styles.value}>
+                    {userData.user.maritalStatus.charAt(0).toUpperCase() + userData.user.maritalStatus.slice(1)}
+                    {userData.user.hasBaby === 'With Baby'
+                      ? ` with ${userData.user.numOfBabies} ${userData.user.numOfBabies === '1' ? 'baby' : 'babies'}`
+                      : userData.user.hasBaby === 'No Baby'
+                      ? ' with No baby'
+                      : ''}
+                  </span>
                 </div>
+
+
+
                 <div className={styles.detailItem}>
                   <span className={styles.label}>NID Number:</span>
                   <span className={styles.value}>{userData.user.nidNumber}</span>
@@ -87,7 +98,7 @@ function BioDataPage2({ userData, style }) {
             </section>
 
             {/* Contact info */}
-            <section className={styles.container}>
+          { det&& <section className={styles.container}>
               <h2 className={styles.sectionTitle}>Contact Information:</h2>
               <div className={styles.sectionContent}>
                 <p className={styles.detailItem}>
@@ -99,12 +110,12 @@ function BioDataPage2({ userData, style }) {
                   <span className={styles.value}>{userData.user.email}</span>
                 </p>
               </div>
-            </section>
+            </section>}
 
             {/* Address */}
             <section className={styles.container}>
               <h2 className={styles.sectionTitle}>Present Address</h2>
-              <div className={styles.address}>{userData.user.presentAddress}</div>
+              {det?<div className={styles.address}>{userData.user.presentAddress}</div>:''}
               <div className={styles.sectionContent}>
                 <div className={styles.detailItem}>
                   <span className={styles.label}>City:</span>
@@ -121,7 +132,7 @@ function BioDataPage2({ userData, style }) {
               </div>
 
               <h2 className={styles.sectionTitle}>Permanent Address</h2>
-              <div className={styles.address}>{userData.user.permanentAddress}</div>
+              {det?<div className={styles.address}>{userData.user.permanentAddress}</div>:''}
               <div className={styles.sectionContent}>
                 <div className={styles.detailItem}>
                   <span className={styles.label}>City:</span>

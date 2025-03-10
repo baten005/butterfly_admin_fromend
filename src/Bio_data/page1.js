@@ -1,10 +1,19 @@
 import React from "react";
 import styles from '../Styles/Bio_dataStyle/page1.module.css';
 
-function BioDataPage1({ userData, style }) {
+function BioDataPage1({ userData, style ,permission}) {
+  const det=permission?false:true;
   if (!userData) {
     return <p>Loading...</p>; // Show a loading message or spinner while data is being fetched
   }
+
+  const monthNames = [
+    'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+  ];
+  
+  const formattedDOB = `${userData.user.dobDay} ${monthNames[parseInt(userData.user.dobMonth) - 1]} ${userData.user.dobYear}`;
+  
 
   return (
     <main className={styles.container} data-component style={style}>
@@ -15,7 +24,7 @@ function BioDataPage1({ userData, style }) {
               loading="lazy" 
               src="/assets/bio_designTop.svg" 
               className={styles.profileImage} 
-              alt="Profile of Tanvir Ahmed Tamim"
+              alt="Profile of Name"
             />
           </div>
           <div className={styles.logoColumn}>
@@ -32,8 +41,8 @@ function BioDataPage1({ userData, style }) {
         <h1 className={styles.bioTitle}>Bio-Data</h1>
         <h2 className={styles.name}>{userData.user.fullName}</h2>
         <p className={styles.details}>
-          Date of Birth : {userData.user.dobDay} / {userData.user.dobMonth} / {userData.user.dobYear} <br />
-          {userData.user.city} , {userData.user.country}
+          Date of Birth: {formattedDOB} <br />
+          {userData.user.city}, {userData.user.country}
         </p>
       </section>
       <div className={styles.decorativeColumn}>

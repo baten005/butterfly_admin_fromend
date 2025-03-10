@@ -7,10 +7,10 @@
   }
   
  .ql-toolbar {
-    position: absolute;
-    top: 0;
+    position: fixed;
+    top: 8px;
     z-index: 1000; 
-    width: 89.3%;
+    width: 87%;
     background: #fff; 
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
   }
@@ -40,7 +40,6 @@
   /* Modal content */
   .modal-content {
     background: white;
-    width: 60%;
     max-width: 800px;
     border-radius: 10px;
     padding: 20px;
